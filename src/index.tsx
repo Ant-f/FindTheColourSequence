@@ -1,9 +1,15 @@
 import * as React from "react"
 import * as ReactDOM from "react-dom"
+import ContentRoot from "./components/content-root"
+import reducer from "./reducers/reducer"
+import { createStore } from "redux"
+import { Provider } from "react-redux"
 
-import ContentRoot from "./components/ContentRoot"
+const store = createStore(reducer)
 
 ReactDOM.render(
-    <ContentRoot/>,
-    document.getElementById("app-content")
+  <Provider store={store}>
+    <ContentRoot/>
+  </Provider>,
+  document.getElementById("app-content")
 );
