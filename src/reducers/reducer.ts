@@ -1,8 +1,8 @@
-import { Map } from "immutable"
-import { Action } from "../actions/action-interfaces"
+import AppState from "../model/app-state";
+import { Action } from "../actions/action-interfaces";
 
-const reducer = (state: Map<object, object>, action: Action) => {
-  return state
+const reducer = (state: AppState = new AppState(), action: Action) => {
+  return state;
 }
 
-export default reducer
+export default reducer;
