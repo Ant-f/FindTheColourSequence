@@ -1,3 +1,3 @@
-export default interface ContentRootStateProps {
+export default interface IContentRootStateProps {
   totalRowCount: number;
 }

@@ -1,17 +1,17 @@
-import { Colour } from "./colour";
 import { fromJS, List, Map } from "immutable";
+import { Colour } from "./colour";
 
 const colourRowsKey = "colourRowsKey";
 const totalRowCountKey = "totalRowCountKey";
 
 const stateMap = Map<string, any>({
-  "colourRowsKey": fromJS([[Colour.Red, Colour.Blue, Colour.Yellow, Colour.Orange]]),
-  "totalRowCountKey": 7
+  colourRowsKey: fromJS([[Colour.Red, Colour.Blue, Colour.Yellow, Colour.Orange]]),
+  totalRowCountKey: 7,
 });
 
 export default class AppState {
   get colourRows(): List<List<Colour>> {
-    return <List<List<Colour>>> stateMap.get(colourRowsKey);
+    return stateMap.get(colourRowsKey) as List<List<Colour>>;
   }
 
   set colourRows(value: List<List<Colour>>) {
@@ -19,7 +19,7 @@ export default class AppState {
   }
 
   get totalRowCount(): number {
-    return <number> stateMap.get(totalRowCountKey);
+    return stateMap.get(totalRowCountKey) as number;
   }
 
   set totalRowCount(value: number) {

@@ -1,12 +1,12 @@
-import * as Props from "../props/colour-row-props";
-import AppState from "../model/app-state";
-import ColourRow from "../components/colour-row";
 import { connect, Dispatch } from "react-redux";
+import ColourRow from "../components/colour-row";
+import AppState from "../model/app-state";
+import * as Props from "../props/colour-row-props";
 
 const mapStateToProps = (state: AppState) => {
-  return <Props.ColourRowStateProps> {
-    colours: state.colourRows.get(0)
-  };
+  return {
+    colours: state.colourRows.get(0),
+  } as Props.IColourRowStateProps;
 };
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>) => {
@@ -14,7 +14,7 @@ const mapDispatchToProps = (dispatch: Dispatch<AppState>) => {
   };
 };
 
-export default connect<Props.ColourRowStateProps, any, Props.ColourRowOwnProps>(
+export default connect<Props.IColourRowStateProps, any, Props.IColourRowOwnProps>(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(ColourRow);

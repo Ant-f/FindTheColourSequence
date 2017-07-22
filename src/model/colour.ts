@@ -7,5 +7,5 @@ export enum Colour {
   Purple = "purple",
   Red = "red",
   White = "white",
-  Yellow = "yellow"
+  Yellow = "yellow",
 }

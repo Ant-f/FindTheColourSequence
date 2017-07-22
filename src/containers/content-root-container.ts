@@ -1,15 +1,15 @@
-import * as React from "react";
-import AppState from "../model/app-state";
-import ContentRoot from "../components/content-root";
-import ContentRootProps from "../props/content-root-props";
-import { Colour } from "../model/colour";
-import { connect, Dispatch } from "react-redux";
 import { fromJS } from "immutable";
+import * as React from "react";
+import { connect, Dispatch } from "react-redux";
+import ContentRoot from "../components/content-root";
+import AppState from "../model/app-state";
+import { Colour } from "../model/colour";
+import ContentRootProps from "../props/content-root-props";
 
 const mapStateToProps = (state: AppState) => {
-  return <ContentRootProps> {
-    totalRowCount: state.totalRowCount
-  };
+  return {
+    totalRowCount: state.totalRowCount,
+  } as ContentRootProps;
 };
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>) => {
@@ -19,5 +19,5 @@ const mapDispatchToProps = (dispatch: Dispatch<AppState>) => {
 
 export default connect<ContentRootProps, any, any>(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(ContentRoot);
