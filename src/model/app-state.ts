@@ -4,7 +4,7 @@ import { Colour } from "./colour";
 const colourRowsKey = "colourRowsKey";
 const totalRowCountKey = "totalRowCountKey";
 
-const stateMap = Map<string, any>({
+let stateMap = Map<string, any>({
   colourRowsKey: fromJS([[Colour.Red, Colour.Blue, Colour.Yellow, Colour.Orange]]),
   totalRowCountKey: 7,
 });
@@ -15,7 +15,7 @@ export default class AppState {
   }
 
   set colourRows(value: List<List<Colour>>) {
-    stateMap.set(colourRowsKey, value);
+    stateMap = stateMap.set(colourRowsKey, value);
   }
 
   get totalRowCount(): number {
@@ -23,6 +23,6 @@ export default class AppState {
   }
 
   set totalRowCount(value: number) {
-    stateMap.set(totalRowCountKey, value);
+    stateMap = stateMap.set(totalRowCountKey, value);
   }
 }
