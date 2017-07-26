@@ -1,9 +1,6 @@
-import { fromJS } from "immutable";
-import * as React from "react";
 import { connect, Dispatch } from "react-redux";
 import ContentRoot from "../components/content-root";
 import AppState from "../model/app-state";
-import { Colour } from "../model/colour";
 import ContentRootProps from "../props/content-root-props";
 
 const mapStateToProps = (state: AppState) => {

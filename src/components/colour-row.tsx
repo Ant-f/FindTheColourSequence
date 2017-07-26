@@ -1,7 +1,9 @@
 import * as React from "react";
-import { ColourRowProps } from "../props/colour-row-props";
+import { IOwnProps, IStateProps } from "../props/colour-row-props";
 
-export default class ColourRow extends React.Component<ColourRowProps> {
+type CombinedProps = IOwnProps & IStateProps;
+
+export default class ColourRow extends React.Component<CombinedProps> {
   public render() {
     return (
       <div>

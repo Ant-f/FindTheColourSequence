@@ -1,12 +1,10 @@
 import { List } from "immutable";
 import { Colour } from "../model/colour";
 
-export interface IColourRowOwnProps {
+export interface IOwnProps {
   rowId: number;
 }
 
-export interface IColourRowStateProps {
+export interface IStateProps {
   colours: List<Colour>;
 }
-
-export type ColourRowProps = IColourRowOwnProps & IColourRowStateProps;

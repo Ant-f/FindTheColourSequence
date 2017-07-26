@@ -4,6 +4,7 @@
   "description": "Game based on a popular code breaking board game",
   "main": "index.js",
   "scripts": {
+    "lint": "node_modules\\.bin\\tslint --config tslint.json --type-check --project tsconfig.json",
     "start": "node_modules\\.bin\\webpack-dev-server --open",
     "test": "node_modules\\.bin\\karma start"
   },
@@ -13,11 +14,13 @@
     "@types/react": "^15.0.38",
     "@types/react-dom": "^15.5.1",
     "@types/react-redux": "^4.4.46",
+    "@types/redux-actions": "^1.2.7",
     "immutable": "^3.8.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.5",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "redux-actions": "^2.2.1"
   },
   "devDependencies": {
     "@types/chai": "^4.0.1",

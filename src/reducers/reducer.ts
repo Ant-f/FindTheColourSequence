@@ -1,8 +1,12 @@
-import { IAction } from "../actions/action-interfaces";
+import { Action, handleActions } from "redux-actions";
+import * as actionTypes from "../action/action-types";
+import { IColourSelected } from "../action/actions";
 import AppState from "../model/app-state";
 
-const reducer = (state: AppState = new AppState(), action: IAction) => {
-  return state;
-};
+const reducer = handleActions({
+  [actionTypes.ColourSelected](state: AppState, action: Action<IColourSelected>) {
+    return state;
+  },
+}, new AppState());
 
 export default reducer;
