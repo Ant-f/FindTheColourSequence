@@ -1,13 +1,6 @@
 const webpack = require('webpack');
 const webpackConfig = require('./webpack.config');
 
-const sourceMapPlugin = new webpack.SourceMapDevToolPlugin({
-  filename: null, // inline sourcemap
-  test: /\.(ts|js)($|\?)/i // case-insensitive match for ts/js files
-});
-
-webpackConfig.plugins.push(sourceMapPlugin);
-
 // Karma configuration 
 module.exports = function(config) {
   config.set({
