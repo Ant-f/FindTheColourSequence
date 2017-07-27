@@ -1,6 +1,6 @@
 {
   "name": "find-the-colour-sequence",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Game based on a popular code breaking board game",
   "main": "index.js",
   "scripts": {
@@ -37,5 +37,9 @@
     "typescript": "^2.4.2",
     "webpack": "^3.3.0",
     "webpack-dev-server": "^2.5.1"
+  },
+  "repository": {
+    "type" : "git",
+    "url" : "git+https://github.com/Ant-f/FindTheColourSequence.git"
   }
 }
