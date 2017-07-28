@@ -5,7 +5,7 @@ import ContentRootProps from "../props/content-root-props";
 
 const mapStateToProps = (state: AppState) => {
   return {
-    totalRowCount: state.totalRowCount,
+    gameState: state.gameState,
   } as ContentRootProps;
 };
 

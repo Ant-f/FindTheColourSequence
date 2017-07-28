@@ -6,30 +6,30 @@ import AppState from "../../src/model/app-state";
 import { Colour } from "../../src/model/colour";
 
 describe("AppState", function() {
-  it("Should allow total row count to be saved", function() {
+  it("Should allow maxAttemptsCount to be saved", function() {
     // Arrange
-    const totalRowCount = 8;
+    const newMaxAttemptsCount = 8;
     const appState = new AppState();
 
     // Act
-    appState.totalRowCount = totalRowCount;
+    appState.maxAttemptsCount = newMaxAttemptsCount;
 
     // Assert
-    expect(appState.totalRowCount).to.equal(totalRowCount);
+    expect(appState.maxAttemptsCount).to.equal(newMaxAttemptsCount);
   });
 
-  it("Should allow colour rows to be saved", function() {
+  it("Should allow game state to be saved", function() {
     // Arrange
-    const colourRows = fromJS([
+    const newGameState = fromJS([
       [ Colour.None ],
     ]);
 
     const appState = new AppState();
 
     // Act
-    appState.colourRows = colourRows;
+    appState.gameState = newGameState;
 
     // Assert
-    expect(appState.colourRows).to.equal(colourRows);
+    expect(appState.gameState).to.equal(newGameState);
   });
 });

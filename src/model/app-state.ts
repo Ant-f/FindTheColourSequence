@@ -1,28 +1,38 @@
-import { fromJS, List, Map } from "immutable";
+import { List, Map, Range } from "immutable";
 import { Colour } from "./colour";
 
-const colourRowsKey = "colourRowsKey";
-const totalRowCountKey = "totalRowCountKey";
+const gameStateKey = "gameStateKey";
 
-let stateMap = Map<string, any>({
-  colourRowsKey: fromJS([[Colour.Red, Colour.Blue, Colour.Yellow, Colour.Orange]]),
-  totalRowCountKey: 7,
-});
+const initializeGameState = (maxAttemptsCount: number = 8, coloursInSequenceCount: number = 4): List<List<Colour>> => {
+  const gameState = Range(0, maxAttemptsCount)
+    .map((rowIndex) => Range(0, coloursInSequenceCount)
+      .map((columnIndex) => Colour.None).toList())
+    .toList();
+
+  return gameState;
+};
+
+let stateMap = Map<string, any>();
 
 export default class AppState {
-  get colourRows(): List<List<Colour>> {
-    return stateMap.get(colourRowsKey) as List<List<Colour>>;
+  constructor() {
+    stateMap = stateMap.set(gameStateKey, initializeGameState());
   }
 
-  set colourRows(value: List<List<Colour>>) {
-    stateMap = stateMap.set(colourRowsKey, value);
+  get gameState(): List<List<Colour>> {
+    return stateMap.get(gameStateKey) as List<List<Colour>>;
   }
 
-  get totalRowCount(): number {
-    return stateMap.get(totalRowCountKey) as number;
+  set gameState(value: List<List<Colour>>) {
+    stateMap = stateMap.set(gameStateKey, value);
   }
 
-  set totalRowCount(value: number) {
-    stateMap = stateMap.set(totalRowCountKey, value);
+  get maxAttemptsCount(): number {
+    const gameState = stateMap.get(gameStateKey) as List<List<Colour>>;
+    return gameState.count();
+  }
+
+  set maxAttemptsCount(value: number) {
+    stateMap = stateMap.set(gameStateKey, initializeGameState(value));
   }
 }

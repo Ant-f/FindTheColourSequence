@@ -3,7 +3,7 @@ import { IDispatchProps, IStateProps } from "../props/colour-select-props";
 
 type CombinedProps = IDispatchProps & IStateProps;
 
-export default class ColourRow extends React.Component<CombinedProps> {
+export default class ColourSelect extends React.Component<CombinedProps> {
   public render() {
     return (
       <div>

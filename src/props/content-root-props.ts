@@ -1,3 +1,6 @@
+import { List } from "immutable";
+import { Colour } from "../model/colour";
+
 export default interface IContentRootStateProps {
-  totalRowCount: number;
+  gameState: List<List<Colour>>;
 }

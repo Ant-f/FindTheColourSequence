@@ -1,9 +1,9 @@
 import * as React from "react";
-import { IOwnProps, IStateProps } from "../props/colour-row-props";
+import { IOwnProps } from "../props/sequence-attempt-props";
 
-type CombinedProps = IOwnProps & IStateProps;
+type CombinedProps = IOwnProps;
 
-export default class ColourRow extends React.Component<CombinedProps> {
+export default class SequenceAttempt extends React.Component<CombinedProps> {
   public render() {
     return (
       <div>
