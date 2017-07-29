@@ -1,6 +1,8 @@
 import { List, Map, Range } from "immutable";
 import { Colour } from "./colour";
 
+const currentAttemptKey = "currentAttemptKey";
+const currentAttemptSegmentKey = "currentAttemptSegmentKey";
 const gameStateKey = "gameStateKey";
 
 const initializeGameState = (maxAttemptsCount: number = 8, coloursInSequenceCount: number = 4): List<List<Colour>> => {
@@ -27,7 +29,23 @@ export default class AppState {
     stateMap = stateMap.set(gameStateKey, value);
   }
 
-  get maxAttemptsCount(): number {
+  get currentAttempt(): number {
+    return stateMap.get(currentAttemptKey);
+  }
+
+  set currentAttempt(value: number) {
+    stateMap = stateMap.set(currentAttemptKey, value);
+  }
+
+  get currentAttemptSegment(): number {
+    return stateMap.get(currentAttemptSegmentKey);
+  }
+
+  set currentAttemptSegment(value: number) {
+    stateMap = stateMap.set(currentAttemptSegmentKey, value);
+  }
+
+  get maxAttemptsCount() {
     return this.gameState.count();
   }
 
