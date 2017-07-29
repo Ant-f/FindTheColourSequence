@@ -1,7 +1,7 @@
 import { Map } from "immutable";
 import { connect, Dispatch } from "react-redux";
 import { bindActionCreators } from "redux";
-import * as Actions from "../action/action-creators";
+import * as actions from "../action/action-creators";
 import ColourSelect from "../components/colour-select";
 import AppState from "../model/app-state";
 import { Colour } from "../model/colour";
@@ -17,7 +17,7 @@ const mapStateToProps = (state: AppState) => {
 };
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>) => {
-  return bindActionCreators({...Actions}, dispatch);
+  return bindActionCreators({...actions}, dispatch);
 };
 
 export default connect<IStateProps, IDispatchProps, any>(

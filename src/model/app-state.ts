@@ -1,48 +1,54 @@
-import { List, Map, Range } from "immutable";
+import { fromJS, List, Map, Range } from "immutable";
 import { Colour } from "./colour";
 
 const currentAttemptKey = "currentAttemptKey";
 const currentAttemptSegmentKey = "currentAttemptSegmentKey";
 const gameStateKey = "gameStateKey";
 
-const initializeGameState = (maxAttemptsCount: number = 8, coloursInSequenceCount: number = 4): List<List<Colour>> => {
+const defaultMaxAttemptsCount = 8;
+const defaultSequenceColourCount = 4;
+
+const initializeGameState = (maxAttemptsCount: number, sequenceColourCount: number): List<List<Colour>> => {
   const gameState = Range(0, maxAttemptsCount)
-    .map((rowIndex) => Range(0, coloursInSequenceCount)
+    .map((rowIndex) => Range(0, sequenceColourCount)
       .map((columnIndex) => Colour.None).toList())
     .toList();
 
   return gameState;
 };
 
-let stateMap = Map<string, any>();
-
 export default class AppState {
+  private stateMap = Map<string, any>();
+
   constructor() {
-    stateMap = stateMap.set(gameStateKey, initializeGameState());
+    this.stateMap = fromJS({
+      gameStateKey: initializeGameState(defaultMaxAttemptsCount, defaultSequenceColourCount),
+      sequenceColourCountKey: defaultSequenceColourCount,
+    });
   }
 
   get gameState(): List<List<Colour>> {
-    return stateMap.get(gameStateKey);
+    return this.stateMap.get(gameStateKey);
   }
 
   set gameState(value: List<List<Colour>>) {
-    stateMap = stateMap.set(gameStateKey, value);
+    this.stateMap = this.stateMap.set(gameStateKey, value);
   }
 
   get currentAttempt(): number {
-    return stateMap.get(currentAttemptKey);
+    return this.stateMap.get(currentAttemptKey);
   }
 
   set currentAttempt(value: number) {
-    stateMap = stateMap.set(currentAttemptKey, value);
+    this.stateMap = this.stateMap.set(currentAttemptKey, value);
   }
 
   get currentAttemptSegment(): number {
-    return stateMap.get(currentAttemptSegmentKey);
+    return this.stateMap.get(currentAttemptSegmentKey);
   }
 
   set currentAttemptSegment(value: number) {
-    stateMap = stateMap.set(currentAttemptSegmentKey, value);
+    this.stateMap = this.stateMap.set(currentAttemptSegmentKey, value);
   }
 
   get maxAttemptsCount() {
@@ -50,6 +56,14 @@ export default class AppState {
   }
 
   set maxAttemptsCount(value: number) {
-    this.gameState = initializeGameState(value);
+    this.gameState = initializeGameState(value, this.sequenceColourCount);
+  }
+
+  get sequenceColourCount() {
+    return this.gameState.first().count();
+  }
+
+  set sequenceColourCount(value: number) {
+    this.gameState = initializeGameState(this.maxAttemptsCount, value);
   }
 }
