@@ -1,5 +1,6 @@
 import * as React from "react";
 import { IOwnProps } from "../props/sequence-attempt-props";
+import SequenceSegment from "./sequence-segment";
 
 type CombinedProps = IOwnProps;
 
@@ -9,7 +10,7 @@ export default class SequenceAttempt extends React.Component<CombinedProps> {
       <div>
         {
           this.props.colours.map((colour, key) =>
-            <button key={key}>{colour}</button>,
+            <SequenceSegment colour={colour} id={key} key={key}/>,
           )
         }
       </div>);

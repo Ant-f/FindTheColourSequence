@@ -8,7 +8,7 @@ import { Colour } from "../../src/model/colour";
 describe("AppState", function() {
   it("Should allow maxAttemptsCount to be saved", function() {
     // Arrange
-    const newMaxAttemptsCount = 8;
+    const newMaxAttemptsCount = 3;
     const appState = new AppState();
 
     // Act

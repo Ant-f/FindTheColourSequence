@@ -20,7 +20,7 @@ export default class AppState {
   }
 
   get gameState(): List<List<Colour>> {
-    return stateMap.get(gameStateKey) as List<List<Colour>>;
+    return stateMap.get(gameStateKey);
   }
 
   set gameState(value: List<List<Colour>>) {
@@ -28,11 +28,10 @@ export default class AppState {
   }
 
   get maxAttemptsCount(): number {
-    const gameState = stateMap.get(gameStateKey) as List<List<Colour>>;
-    return gameState.count();
+    return this.gameState.count();
   }
 
   set maxAttemptsCount(value: number) {
-    stateMap = stateMap.set(gameStateKey, initializeGameState(value));
+    this.gameState = initializeGameState(value);
   }
 }
