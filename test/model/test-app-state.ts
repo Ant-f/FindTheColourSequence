@@ -88,4 +88,25 @@ describe("AppState", function() {
 
     expect(appState.currentAttemptSegment).to.equal(newValue);
   });
+
+  it("allows multiple properties to be set as a single operation", function() {
+
+    // Arrange
+
+    const newCurrentAttempt = 7;
+    const newCurrentAttemptSegment = 3;
+    const appState = new AppState();
+
+    // Act
+
+    appState.setProperties((state: AppState) => {
+      state.currentAttempt = newCurrentAttempt;
+      state.currentAttemptSegment = newCurrentAttemptSegment;
+    });
+
+    // Assert
+
+    expect(appState.currentAttempt).to.equal(newCurrentAttempt);
+    expect(appState.currentAttemptSegment).to.equal(newCurrentAttemptSegment);
+  });
 });

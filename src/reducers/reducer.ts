@@ -14,8 +14,10 @@ const reducer = handleActions({
       attempt++;
     }
 
-    state.currentAttempt = attempt;
-    state.currentAttemptSegment = nextSegment;
+    state.setProperties((appState: AppState) => {
+      appState.currentAttempt = attempt;
+      appState.currentAttemptSegment = nextSegment;
+    });
 
     return state;
   },

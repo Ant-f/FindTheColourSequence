@@ -8,7 +8,10 @@ const gameStateKey = "gameStateKey";
 const defaultMaxAttemptsCount = 8;
 const defaultSequenceColourCount = 4;
 
-const initializeGameState = (maxAttemptsCount: number, sequenceColourCount: number): List<List<Colour>> => {
+type GameState = List<List<Colour>>;
+type StateMap = Map<string, any>;
+
+const initializeGameState = (maxAttemptsCount: number, sequenceColourCount: number): GameState => {
   const gameState = Range(0, maxAttemptsCount)
     .map((rowIndex) => Range(0, sequenceColourCount)
       .map((columnIndex) => Colour.None).toList())
@@ -20,18 +23,23 @@ const initializeGameState = (maxAttemptsCount: number, sequenceColourCount: numb
 export default class AppState {
   private stateMap = Map<string, any>();
 
-  constructor() {
-    this.stateMap = fromJS({
-      gameStateKey: initializeGameState(defaultMaxAttemptsCount, defaultSequenceColourCount),
-      sequenceColourCountKey: defaultSequenceColourCount,
-    });
+  constructor(rawState: StateMap = null) {
+    if (rawState) {
+      this.stateMap = rawState;
+    }
+    else {
+      this.stateMap = fromJS({
+        gameStateKey: initializeGameState(defaultMaxAttemptsCount, defaultSequenceColourCount),
+        sequenceColourCountKey: defaultSequenceColourCount,
+      });
+    }
   }
 
-  get gameState(): List<List<Colour>> {
+  get gameState(): GameState {
     return this.stateMap.get(gameStateKey);
   }
 
-  set gameState(value: List<List<Colour>>) {
+  set gameState(value: GameState) {
     this.stateMap = this.stateMap.set(gameStateKey, value);
   }
 
@@ -51,7 +59,7 @@ export default class AppState {
     this.stateMap = this.stateMap.set(currentAttemptSegmentKey, value);
   }
 
-  get maxAttemptsCount() {
+  get maxAttemptsCount(): number {
     return this.gameState.count();
   }
 
@@ -59,11 +67,22 @@ export default class AppState {
     this.gameState = initializeGameState(value, this.sequenceColourCount);
   }
 
-  get sequenceColourCount() {
+  get sequenceColourCount(): number {
     return this.gameState.first().count();
   }
 
   set sequenceColourCount(value: number) {
     this.gameState = initializeGameState(this.maxAttemptsCount, value);
+  }
+
+  /**
+   * Sets multiple properties as a single operation
+   * @param update Function for updating properties
+   */
+  public setProperties(update: (appState: AppState) => void) {
+    this.stateMap = this.stateMap.withMutations((rawState) => {
+      const tempAppState = new AppState(rawState);
+      update(tempAppState);
+    });
   }
 }
