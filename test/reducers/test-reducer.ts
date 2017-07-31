@@ -34,7 +34,7 @@ describe("Reducer", function() {
       // Arrange
 
       const state = new AppState()
-        .setCurrentAttempt(1)
+        .setCurrentAttempt(2)
         .setCurrentAttemptSegment(3);
 
       const action = actionCreators.onColourSelected(Colour.Black);
@@ -45,7 +45,7 @@ describe("Reducer", function() {
 
       // Assert
 
-      expect(updatedState.currentAttempt).to.equal(2);
+      expect(updatedState.currentAttempt).to.equal(1);
       expect(updatedState.currentAttemptSegment).to.equal(0);
     });
 

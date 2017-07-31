@@ -11,7 +11,7 @@ const reducer = handleActions({
 
     if (nextSegment >= state.sequenceColourCount) {
       nextSegment = 0;
-      attempt++;
+      attempt--;
     }
 
     const updatedState = state

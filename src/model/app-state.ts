@@ -36,8 +36,11 @@ export default class AppState {
       this.stateMap = rawState;
     }
     else {
+      // Start at max value and decrement to move upwards
+      const initialCurrentAttempt = defaultMaxAttemptsCount - 1;
+
       this.stateMap = fromJS({
-        currentAttempt: 0,
+        currentAttempt: initialCurrentAttempt,
         currentAttemptSegment: 0,
         gameState: initializeGameState(defaultMaxAttemptsCount, defaultSequenceColourCount),
         sequenceColourCountKey: defaultSequenceColourCount,
