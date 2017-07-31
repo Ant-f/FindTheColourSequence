@@ -1,9 +1,9 @@
 import { fromJS, List, Map, Range } from "immutable";
 import { Colour } from "./colour";
 
-const currentAttemptKey = "currentAttemptKey";
-const currentAttemptSegmentKey = "currentAttemptSegmentKey";
-const gameStateKey = "gameStateKey";
+const currentAttemptKey = "currentAttempt";
+const currentAttemptSegmentKey = "currentAttemptSegment";
+const gameStateKey = "gameState";
 
 const defaultMaxAttemptsCount = 8;
 const defaultSequenceColourCount = 4;
@@ -12,6 +12,14 @@ type GameState = List<List<Colour>>;
 type StateMap = Map<string, any>;
 
 const initializeGameState = (maxAttemptsCount: number, sequenceColourCount: number): GameState => {
+  if (maxAttemptsCount < 1) {
+    throw new Error(`Invalid maxAttemptsCount value: ${maxAttemptsCount}`);
+  }
+
+  if (sequenceColourCount < 1) {
+    throw new Error(`Invalid sequenceColourCount value: ${maxAttemptsCount}`);
+  }
+
   const gameState = Range(0, maxAttemptsCount)
     .map((rowIndex) => Range(0, sequenceColourCount)
       .map((columnIndex) => Colour.None).toList())
@@ -29,7 +37,9 @@ export default class AppState {
     }
     else {
       this.stateMap = fromJS({
-        gameStateKey: initializeGameState(defaultMaxAttemptsCount, defaultSequenceColourCount),
+        currentAttempt: 0,
+        currentAttemptSegment: 0,
+        gameState: initializeGameState(defaultMaxAttemptsCount, defaultSequenceColourCount),
         sequenceColourCountKey: defaultSequenceColourCount,
       });
     }
@@ -84,5 +94,16 @@ export default class AppState {
       const tempAppState = new AppState(rawState);
       update(tempAppState);
     });
+  }
+
+  public setColourAtCurrentPosition(colour: Colour) {
+    this.gameState = this.gameState.setIn([
+      this.currentAttempt,
+      this.currentAttemptSegment,
+    ], colour);
+  }
+
+  public createNewAppState(s: AppState): AppState {
+    return new AppState(s.stateMap);
   }
 }

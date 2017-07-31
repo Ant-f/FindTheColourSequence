@@ -6,6 +6,8 @@ import AppState from "../model/app-state";
 const reducer = handleActions({
   [actionTypes.ColourSelected](state: AppState, action: Action<Colour>) {
 
+    state.setColourAtCurrentPosition(action.payload);
+
     let nextSegment = state.currentAttemptSegment + 1;
     let attempt = state.currentAttempt;
 
@@ -19,7 +21,7 @@ const reducer = handleActions({
       appState.currentAttemptSegment = nextSegment;
     });
 
-    return state;
+    return state.createNewAppState(state);
   },
 }, new AppState());
 

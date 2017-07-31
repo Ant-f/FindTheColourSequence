@@ -48,5 +48,32 @@ describe("Reducer", function() {
       expect(appState.currentAttempt).to.equal(2);
       expect(appState.currentAttemptSegment).to.equal(0);
     });
+
+    it("sets selected colour at current position", function() {
+
+      // Arrange
+
+      const selectedColour = Colour.Yellow;
+      const initialAttempt = 5;
+      const initialAttemptSegment = 2;
+
+      const appState = new AppState();
+      appState.currentAttempt = initialAttempt;
+      appState.currentAttemptSegment = initialAttemptSegment;
+
+      const action = actionCreators.onColourSelected(selectedColour);
+
+      // Act
+
+      reducer(appState, action);
+
+      // Assert
+
+      const colourAtInitialPosition = appState.gameState
+        .get(initialAttempt)
+        .get(initialAttemptSegment);
+
+      expect(colourAtInitialPosition).to.equal(selectedColour);
+    });
   });
 });
