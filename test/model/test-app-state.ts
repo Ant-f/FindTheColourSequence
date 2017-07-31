@@ -6,87 +6,87 @@ import AppState from "../../src/model/app-state";
 import { Colour } from "../../src/model/colour";
 
 describe("AppState", function() {
-  it("allows maxAttemptsCount to be saved", function() {
+  it("allows maxAttemptsCount to be set", function() {
 
     // Arrange
 
     const newValue = 3;
-    const appState = new AppState();
+    const state = new AppState();
 
     // Act
 
-    appState.maxAttemptsCount = newValue;
+    const updatedState = state.setMaxAttemptsCount(newValue);
 
     // Assert
 
-    expect(appState.maxAttemptsCount).to.equal(newValue);
+    expect(updatedState.maxAttemptsCount).to.equal(newValue);
   });
 
-  it("allows sequenceColourCount to be saved", function() {
+  it("allows sequenceColourCount to be set", function() {
 
     // Arrange
 
     const newValue = 3;
-    const appState = new AppState();
+    const state = new AppState();
 
     // Act
 
-    appState.sequenceColourCount = newValue;
+    const updatedState = state.setSequenceColourCount(newValue);
 
     // Assert
 
-    expect(appState.sequenceColourCount).to.equal(newValue);
+    expect(updatedState.sequenceColourCount).to.equal(newValue);
   });
 
-  it("allows game state to be saved", function() {
+  it("allows game state to be set", function() {
 
     // Arrange
 
     const newGameState = fromJS([
-      [ Colour.None ],
+      [Colour.None],
     ]);
 
-    const appState = new AppState();
+    const state = new AppState();
 
     // Act
 
-    appState.gameState = newGameState;
+    const updatedState = state.setGameState(newGameState);
 
     // Assert
 
-    expect(appState.gameState).to.equal(newGameState);
+    expect(updatedState.gameState).to.equal(newGameState);
   });
 
-  it("allows currentAttempt to be saved", function() {
+  it("allows currentAttempt to be set", function() {
 
     // Arrange
 
     const newValue = 3;
-    const appState = new AppState();
+    const state = new AppState();
 
     // Act
 
-    appState.currentAttempt = newValue;
+    const updatedState = state.setCurrentAttempt(newValue);
 
     // Assert
 
-    expect(appState.currentAttempt).to.equal(newValue);
+    expect(updatedState.currentAttempt).to.equal(newValue);
   });
 
-  it("allows currentAttemptSegment to be saved", function() {
+  it("allows currentAttemptSegment to be set", function() {
 
     // Arrange
 
     const newValue = 3;
-    const appState = new AppState();
+    const state = new AppState();
 
     // Act
 
-    appState.currentAttemptSegment = newValue;
+    const updatedState = state.setCurrentAttemptSegment(newValue);
 
     // Assert
 
-    expect(appState.currentAttemptSegment).to.equal(newValue);
+    expect(updatedState.currentAttemptSegment).to.equal(newValue);
   });
 
   it("allows multiple properties to be set as a single operation", function() {
@@ -95,18 +95,20 @@ describe("AppState", function() {
 
     const newCurrentAttempt = 7;
     const newCurrentAttemptSegment = 3;
-    const appState = new AppState();
+    const state = new AppState();
 
     // Act
 
-    appState.setProperties((state: AppState) => {
-      state.currentAttempt = newCurrentAttempt;
-      state.currentAttemptSegment = newCurrentAttemptSegment;
-    });
+    const updatedState = state.setProperties(
+      (appState: AppState): AppState => {
+        return appState
+          .setCurrentAttempt(newCurrentAttempt)
+          .setCurrentAttemptSegment(newCurrentAttemptSegment);
+      });
 
     // Assert
 
-    expect(appState.currentAttempt).to.equal(newCurrentAttempt);
-    expect(appState.currentAttemptSegment).to.equal(newCurrentAttemptSegment);
+    expect(updatedState.currentAttempt).to.equal(newCurrentAttempt);
+    expect(updatedState.currentAttemptSegment).to.equal(newCurrentAttemptSegment);
   });
 });

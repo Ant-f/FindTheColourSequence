@@ -49,61 +49,69 @@ export default class AppState {
     return this.stateMap.get(gameStateKey);
   }
 
-  set gameState(value: GameState) {
-    this.stateMap = this.stateMap.set(gameStateKey, value);
+  public setGameState(value: GameState): AppState {
+    const updatedRawState = this.stateMap.set(gameStateKey, value);
+    return new AppState(updatedRawState);
   }
 
   get currentAttempt(): number {
     return this.stateMap.get(currentAttemptKey);
   }
 
-  set currentAttempt(value: number) {
-    this.stateMap = this.stateMap.set(currentAttemptKey, value);
+  public setCurrentAttempt(value: number): AppState {
+    const updatedRawState = this.stateMap.set(currentAttemptKey, value);
+    return new AppState(updatedRawState);
   }
 
   get currentAttemptSegment(): number {
     return this.stateMap.get(currentAttemptSegmentKey);
   }
 
-  set currentAttemptSegment(value: number) {
-    this.stateMap = this.stateMap.set(currentAttemptSegmentKey, value);
+  public setCurrentAttemptSegment(value: number): AppState {
+    const updatedRawState = this.stateMap.set(currentAttemptSegmentKey, value);
+    return new AppState(updatedRawState);
   }
 
   get maxAttemptsCount(): number {
     return this.gameState.count();
   }
 
-  set maxAttemptsCount(value: number) {
-    this.gameState = initializeGameState(value, this.sequenceColourCount);
+  public setMaxAttemptsCount(value: number): AppState {
+    const updatedAppState = this.setGameState(
+      initializeGameState(value, this.sequenceColourCount));
+
+    return updatedAppState;
   }
 
   get sequenceColourCount(): number {
     return this.gameState.first().count();
   }
 
-  set sequenceColourCount(value: number) {
-    this.gameState = initializeGameState(this.maxAttemptsCount, value);
+  public setSequenceColourCount(value: number): AppState {
+    const updatedAppState = this.setGameState(
+      initializeGameState(this.maxAttemptsCount, value));
+    return updatedAppState;
   }
 
   /**
    * Sets multiple properties as a single operation
    * @param update Function for updating properties
    */
-  public setProperties(update: (appState: AppState) => void) {
-    this.stateMap = this.stateMap.withMutations((rawState) => {
+  public setProperties(update: (appState: AppState) => AppState): AppState {
+    const updatedStateMap = this.stateMap.withMutations((rawState) => {
       const tempAppState = new AppState(rawState);
       update(tempAppState);
     });
+    return new AppState(updatedStateMap);
   }
 
-  public setColourAtCurrentPosition(colour: Colour) {
-    this.gameState = this.gameState.setIn([
-      this.currentAttempt,
-      this.currentAttemptSegment,
-    ], colour);
-  }
+  public setColourAtCurrentPosition(colour: Colour): AppState {
+    const updatedAppState = this.setGameState(
+      this.gameState.setIn([
+        this.currentAttempt,
+        this.currentAttemptSegment,
+      ], colour));
 
-  public createNewAppState(s: AppState): AppState {
-    return new AppState(s.stateMap);
+    return updatedAppState;
   }
 }

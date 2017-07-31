@@ -13,40 +13,40 @@ describe("Reducer", function() {
 
       // Arrange
 
-      const appState = new AppState();
-      appState.currentAttempt = 1;
-      appState.currentAttemptSegment = 2;
+      const state = new AppState()
+        .setCurrentAttempt(1)
+        .setCurrentAttemptSegment(2);
 
       const action = actionCreators.onColourSelected(Colour.Black);
 
       // Act
 
-      reducer(appState, action);
+      const updatedState = reducer(state, action);
 
       // Assert
 
-      expect(appState.currentAttempt).to.equal(1);
-      expect(appState.currentAttemptSegment).to.equal(3);
+      expect(updatedState.currentAttempt).to.equal(1);
+      expect(updatedState.currentAttemptSegment).to.equal(3);
     });
 
     it("resets currentAttemptSegment if equal to sequence colour count", function() {
 
       // Arrange
 
-      const appState = new AppState();
-      appState.currentAttempt = 1;
-      appState.currentAttemptSegment = 3;
+      const state = new AppState()
+        .setCurrentAttempt(1)
+        .setCurrentAttemptSegment(3);
 
       const action = actionCreators.onColourSelected(Colour.Black);
 
       // Act
 
-      reducer(appState, action);
+      const updatedState = reducer(state, action);
 
       // Assert
 
-      expect(appState.currentAttempt).to.equal(2);
-      expect(appState.currentAttemptSegment).to.equal(0);
+      expect(updatedState.currentAttempt).to.equal(2);
+      expect(updatedState.currentAttemptSegment).to.equal(0);
     });
 
     it("sets selected colour at current position", function() {
@@ -57,19 +57,19 @@ describe("Reducer", function() {
       const initialAttempt = 5;
       const initialAttemptSegment = 2;
 
-      const appState = new AppState();
-      appState.currentAttempt = initialAttempt;
-      appState.currentAttemptSegment = initialAttemptSegment;
+      const state = new AppState()
+        .setCurrentAttempt(initialAttempt)
+        .setCurrentAttemptSegment(initialAttemptSegment);
 
       const action = actionCreators.onColourSelected(selectedColour);
 
       // Act
 
-      reducer(appState, action);
+      const updatedState = reducer(state, action);
 
       // Assert
 
-      const colourAtInitialPosition = appState.gameState
+      const colourAtInitialPosition = updatedState.gameState
         .get(initialAttempt)
         .get(initialAttemptSegment);
 
