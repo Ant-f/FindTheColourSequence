@@ -33,13 +33,14 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^2.0.4",
     "mocha": "^3.4.2",
+    "mocha-testdata": "^1.2.0",
     "source-map-loader": "^0.2.1",
     "typescript": "^2.4.2",
     "webpack": "^3.3.0",
     "webpack-dev-server": "^2.5.1"
   },
   "repository": {
-    "type" : "git",
-    "url" : "git+https://github.com/Ant-f/FindTheColourSequence.git"
+    "type": "git",
+    "url": "git+https://github.com/Ant-f/FindTheColourSequence.git"
   }
 }
