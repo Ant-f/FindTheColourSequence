@@ -111,4 +111,20 @@ describe("AppState", function() {
     expect(updatedState.currentAttempt).to.equal(newCurrentAttempt);
     expect(updatedState.currentAttemptSegment).to.equal(newCurrentAttemptSegment);
   });
+
+  it("allows target sequence to be set", function() {
+
+    // Arrange
+
+    const newValue = List<Colour>([Colour.Yellow, Colour.Blue]);
+    const state = new AppState();
+
+    // Act
+
+    const updatedState = state.setTargetSequence(newValue);
+
+    // Assert
+
+    expect(updatedState.targetSequence).to.equal(newValue);
+  });
 });

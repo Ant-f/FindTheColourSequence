@@ -3,7 +3,7 @@
 import { expect } from "chai";
 import { fromJS, Map, Set } from "immutable";
 import { given } from "mocha-testdata";
-import TargetSequenceGenerator from "../../src/helpers/target-sequence-generator";
+import GenerateTargetSequence from "../../src/helpers/target-sequence-generator";
 import AppState from "../../src/model/app-state";
 import { Colour } from "../../src/model/colour";
 
@@ -12,11 +12,11 @@ describe("Target Sequence Generator", function() {
 
     // Arrange, Act
 
-    const result = TargetSequenceGenerator(arg);
+    const result = GenerateTargetSequence(arg);
 
     // Assert
 
-    expect(result.count()).to.equal(arg);
+    expect(result.size).to.equal(arg);
   });
 
   it("does not output sequence with duplicates colours", function() {
@@ -25,15 +25,15 @@ describe("Target Sequence Generator", function() {
 
     const colourCount = Map<Colour, Colour>(Colour)
       .filter((colour) => colour !== Colour.None)
-      .count();
+      .size;
 
     // Act
 
-    const result = TargetSequenceGenerator(colourCount);
+    const result = GenerateTargetSequence(colourCount);
 
     // Assert
 
     const colourSet = result.toSet();
-    expect(colourSet.count()).to.equal(result.count());
+    expect(colourSet.size).to.equal(result.size);
   });
 });

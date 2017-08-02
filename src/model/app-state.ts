@@ -1,9 +1,11 @@
 import { fromJS, List, Map, Range } from "immutable";
+import GenerateTargetSequence from "../helpers/target-sequence-generator";
 import { Colour } from "./colour";
 
 const currentAttemptKey = "currentAttempt";
 const currentAttemptSegmentKey = "currentAttemptSegment";
 const gameStateKey = "gameState";
+const targetSequenceKey = "targetSequence";
 
 const defaultMaxAttemptsCount = 8;
 const defaultSequenceColourCount = 4;
@@ -76,7 +78,7 @@ export default class AppState {
   }
 
   get maxAttemptsCount(): number {
-    return this.gameState.count();
+    return this.gameState.size;
   }
 
   public setMaxAttemptsCount(value: number): AppState {
@@ -87,7 +89,7 @@ export default class AppState {
   }
 
   get sequenceColourCount(): number {
-    return this.gameState.first().count();
+    return this.gameState.first().size;
   }
 
   public setSequenceColourCount(value: number): AppState {
@@ -116,5 +118,14 @@ export default class AppState {
       ], colour));
 
     return updatedAppState;
+  }
+
+  get targetSequence(): List<Colour> {
+    return this.stateMap.get(targetSequenceKey);
+  }
+
+  public setTargetSequence(value: List<Colour>): AppState {
+    const updatedRawState = this.stateMap.set(targetSequenceKey, value);
+    return new AppState(updatedRawState);
   }
 }
