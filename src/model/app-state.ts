@@ -46,6 +46,7 @@ export default class AppState {
         currentAttemptSegment: 0,
         gameState: initializeGameState(defaultMaxAttemptsCount, defaultSequenceColourCount),
         sequenceColourCountKey: defaultSequenceColourCount,
+        targetSequence: GenerateTargetSequence(defaultSequenceColourCount),
       });
     }
   }

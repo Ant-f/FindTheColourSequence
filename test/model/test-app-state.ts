@@ -1,7 +1,8 @@
 // tslint:disable:only-arrow-functions
 
 import { expect } from "chai";
-import { fromJS } from "immutable";
+import { fromJS, List } from "immutable";
+import * as TypeMoq from "typemoq";
 import AppState from "../../src/model/app-state";
 import { Colour } from "../../src/model/colour";
 
@@ -126,5 +127,39 @@ describe("AppState", function() {
     // Assert
 
     expect(updatedState.targetSequence).to.equal(newValue);
+  });
+
+  it("is initialized with target sequence", function() {
+
+    // Arrange
+
+    const appStateModule = require("inject-loader!../../src/model/app-state");
+
+    const targetSequenceGeneratorMock: TypeMoq.IMock<(n: number) => List<Colour>>
+      = TypeMoq.Mock.ofInstance((n: number) => List<Colour>());
+
+    const targetSequence = List<Colour>([Colour.Yellow, Colour.Blue, Colour.Red]);
+
+    targetSequenceGeneratorMock
+      .setup((tsg) => tsg(TypeMoq.It.isAnyNumber()))
+      .returns(() => targetSequence);
+
+    const AppStateWithInjection = appStateModule({
+      "../helpers/target-sequence-generator": {
+        default: targetSequenceGeneratorMock.object,
+      },
+    }).default;
+
+    // Act
+
+    const appState = new AppStateWithInjection() as AppState;
+
+    // Assert
+
+    targetSequenceGeneratorMock.verify((tsg) =>
+      tsg(TypeMoq.It.isAnyNumber()),
+      TypeMoq.Times.once());
+
+    expect(appState.targetSequence).to.equal(targetSequence);
   });
 });
