@@ -45,6 +45,8 @@ export default class AppState {
         currentAttempt: initialCurrentAttempt,
         currentAttemptSegment: 0,
         gameState: initializeGameState(defaultMaxAttemptsCount, defaultSequenceColourCount),
+        isGameLost: false,
+        isGameWon: false,
         sequenceColourCountKey: defaultSequenceColourCount,
         targetSequence: GenerateTargetSequence(defaultSequenceColourCount),
       });
@@ -128,5 +130,14 @@ export default class AppState {
   public setTargetSequence(value: List<Colour>): AppState {
     const updatedRawState = this.stateMap.set(targetSequenceKey, value);
     return new AppState(updatedRawState);
+  }
+
+  get isGameLost(): boolean {
+    return this.currentAttempt < 0;
+  }
+
+  get isGameWon(): boolean {
+    const won = this.gameState.some((l) => l.equals(this.targetSequence));
+    return won;
   }
 }

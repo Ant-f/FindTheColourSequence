@@ -2,6 +2,7 @@
 
 import { expect } from "chai";
 import { fromJS, List } from "immutable";
+import { given } from "mocha-testdata";
 import * as TypeMoq from "typemoq";
 import AppState from "../../src/model/app-state";
 import { Colour } from "../../src/model/colour";
@@ -161,5 +162,63 @@ describe("AppState", function() {
       TypeMoq.Times.once());
 
     expect(appState.targetSequence).to.equal(targetSequence);
+  });
+
+  interface IIsGameLostArgs {
+    attempt: number;
+    isLost: boolean;
+  }
+
+  given({ attempt: -1, isLost: true },
+        { attempt: 0, isLost: false })
+    .it("sets isGameLost based on currentAttempt value", function(arg: IIsGameLostArgs) {
+
+    // Arrange
+
+    const state = new AppState();
+
+    // Act
+
+    const updatedState = state.setCurrentAttempt(arg.attempt);
+
+    // Assert
+
+    expect(updatedState.isGameLost).to.equal(arg.isLost);
+  });
+
+  it("sets isGameWon true if gameState has sequence matching target sequence", function() {
+
+    // Arrange
+
+    const state = new AppState();
+    const setupState = state.setTargetSequence(
+      List([Colour.Red, Colour.Blue, Colour.Green, Colour.Yellow]));
+
+    // Act
+
+    const updatedState = setupState.setGameState(
+      state.gameState.set(
+        3,
+        List([Colour.Red, Colour.Blue, Colour.Green, Colour.Yellow])));
+
+    // Assert
+
+    expect(updatedState.isGameWon).to.equal(true);
+  });
+
+  it("sets isGameWon false if gameState has no sequence matching target sequence", function() {
+
+    // Arrange
+
+    const state = new AppState();
+
+    // Act
+
+    const updatedState = state.setTargetSequence(
+      List([Colour.Red, Colour.Blue, Colour.Green, Colour.Yellow]));
+
+    // Assert
+
+    expect(updatedState.isGameWon).to.equal(false);
   });
 });
