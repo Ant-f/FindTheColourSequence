@@ -1,16 +1,19 @@
 import * as React from "react";
+import SequenceSegment from "../containers/sequence-segment-container";
 import { IOwnProps } from "../props/sequence-attempt-props";
-import SequenceSegment from "./sequence-segment";
 
-type CombinedProps = IOwnProps;
-
-export default class SequenceAttempt extends React.Component<CombinedProps> {
+export default class SequenceAttempt extends React.Component<IOwnProps> {
   public render() {
     return (
       <div>
         {
           this.props.colours.map((colour, key) =>
-            <SequenceSegment colour={colour} id={key} key={key}/>,
+            <SequenceSegment
+              attemptId={this.props.attemptId}
+              colour={colour}
+              key={key}
+              segmentId={key}>
+            </SequenceSegment>,
           )
         }
       </div>);

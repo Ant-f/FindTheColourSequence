@@ -1,10 +1,14 @@
 import * as React from "react";
-import { IOwnProps } from "../props/sequence-segment-props";
+import { IDispatchProps, IOwnProps } from "../props/sequence-segment-props";
 
-export default class SequenceSegment extends React.PureComponent<IOwnProps> {
+type CombinedProps = IDispatchProps & IOwnProps;
+
+export default class SequenceSegment extends React.PureComponent<CombinedProps> {
   public render() {
     return (
-      <button>
+      <button onClick={(e) => this.props.onPositionSelected(
+          this.props.attemptId,
+          this.props.segmentId)}>
         {
           this.props.colour
         }

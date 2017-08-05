@@ -3,5 +3,5 @@ import { Colour } from "../model/colour";
 
 export interface IOwnProps {
   colours: List<Colour>;
-  id: number;
+  attemptId: number;
 }

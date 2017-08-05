@@ -1,6 +1,6 @@
 import * as React from "react";
+import SequenceAttempt from "../components/sequence-attempt";
 import ColourSelect from "../containers/colour-select-container";
-import SequenceAttempt from "../containers/sequence-attempt-container";
 import ContentRootProps from "../props/content-root-props";
 
 export default class ContentRoot extends React.Component<ContentRootProps> {
@@ -9,7 +9,11 @@ export default class ContentRoot extends React.Component<ContentRootProps> {
       <div>
         {
           this.props.gameState.map((colours, listIndex) =>
-            <SequenceAttempt colours={colours} id={listIndex} key={listIndex}/>,
+            <SequenceAttempt
+              attemptId={listIndex}
+              colours={colours}
+              key={listIndex}>
+            </SequenceAttempt>,
           )
         }
         <ColourSelect />

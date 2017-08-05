@@ -16,6 +16,7 @@ const reducers = Map<ActionTypes, (s: AppState, a: Action) => AppState>({
 });
 
 export default (state: AppState = new AppState(), action: Action) => {
-  const updatedState = reducers.get(action.type, defaultReducer)(state, action);
+  const reducer = reducers.get(action.type, defaultReducer);
+  const updatedState = reducer(state, action);
   return updatedState;
 };
