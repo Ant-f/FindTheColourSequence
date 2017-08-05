@@ -1,7 +1,17 @@
-import { createAction } from "redux-actions";
+import * as Actions from "../action/actions";
 import { Colour } from "../model/colour";
-import * as actionTypes from "./action-types";
+import { ActionTypes } from "./action-types";
 
-export const onColourSelected = createAction(
-  actionTypes.ColourSelected,
-  (colour: Colour): Colour => colour);
+export const onColourSelected = (colour: Colour): Actions.IColourSelected => {
+  return {
+    payload: colour,
+    type: ActionTypes.ColourSelected,
+  };
+};
+
+export const onPositionSelected = (attempt: number, segment: number): Actions.IPositionSelected => {
+  return {
+    payload: { attempt, segment },
+    type: ActionTypes.PositionSelected,
+  };
+};

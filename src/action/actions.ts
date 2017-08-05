@@ -1,7 +1,16 @@
-import { Action } from "redux-actions";
-import { Colour } from "../../src/model/colour";
+import { Colour } from "../model/colour";
+import IPosition from "../model/position";
+import { ActionTypes } from "./action-types";
 
-export interface IColourSelected extends Action<Colour> {
-  colour: Colour;
+interface IAction<T> {
+  payload: T;
   type: string;
+}
+
+export interface IColourSelected extends IAction<Colour> {
+  type: ActionTypes.ColourSelected;
+}
+
+export interface IPositionSelected extends IAction<IPosition> {
+  type: ActionTypes.PositionSelected;
 }

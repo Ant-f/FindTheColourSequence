@@ -76,4 +76,26 @@ describe("Reducer", function() {
       expect(colourAtInitialPosition).to.equal(selectedColour);
     });
   });
+
+  describe("actionTypes.PositionSelected", function() {
+    it("sets attempt and segment", function() {
+
+      // Arrange
+
+      const attempt = 5;
+      const segment = 2;
+
+      const state = new AppState();
+      const action = actionCreators.onPositionSelected(attempt, segment);
+
+      // Act
+
+      const updatedState = reducer(state, action);
+
+      // Assert
+
+      expect(updatedState.currentAttempt).to.equal(attempt);
+      expect(updatedState.currentAttemptSegment).to.equal(segment);
+    });
+  });
 });

@@ -1,1 +1,4 @@
-export const ColourSelected = "ColourSelected";
+export enum ActionTypes {
+  ColourSelected = "ColourSelected",
+  PositionSelected = "PositionSelected",
+}
