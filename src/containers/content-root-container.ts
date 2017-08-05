@@ -9,12 +9,7 @@ const mapStateToProps = (state: AppState) => {
   } as ContentRootProps;
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<AppState>) => {
-  return {
-  };
-};
-
-export default connect<ContentRootProps, any, any>(
+export default connect<ContentRootProps, null, null>(
   mapStateToProps,
-  mapDispatchToProps,
+  null,
 )(ContentRoot);

@@ -17,10 +17,13 @@ const mapStateToProps = (state: AppState) => {
 };
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>) => {
-  return bindActionCreators({...actions}, dispatch);
+  return {
+    onColourSelected: (colour: Colour) => dispatch(
+      actions.onColourSelected(colour)),
+  };
 };
 
-export default connect<IStateProps, IDispatchProps, any>(
+export default connect<IStateProps, IDispatchProps, null>(
   mapStateToProps,
   mapDispatchToProps,
 )(ColourSelect);
