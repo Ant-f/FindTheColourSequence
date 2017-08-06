@@ -40,25 +40,6 @@ describe("AppState", function() {
     expect(updatedState.sequenceColourCount).to.equal(newValue);
   });
 
-  it("allows game state to be set", function() {
-
-    // Arrange
-
-    const newGameState = fromJS([
-      [Colour.None],
-    ]);
-
-    const state = new AppState();
-
-    // Act
-
-    const updatedState = state.setGameState(newGameState);
-
-    // Assert
-
-    expect(updatedState.gameState).to.equal(newGameState);
-  });
-
   it("allows currentAttempt to be set", function() {
 
     // Arrange
@@ -196,10 +177,16 @@ describe("AppState", function() {
 
     // Act
 
-    const updatedState = setupState.setGameState(
-      state.gameState.set(
-        3,
-        List([Colour.Red, Colour.Blue, Colour.Green, Colour.Yellow])));
+    const updatedState = setupState.setProperties((appState) => appState
+      .setCurrentAttempt(3)
+      .setCurrentAttemptSegment(0)
+      .setColourAtCurrentPosition(Colour.Red)
+      .setCurrentAttemptSegment(1)
+      .setColourAtCurrentPosition(Colour.Blue)
+      .setCurrentAttemptSegment(2)
+      .setColourAtCurrentPosition(Colour.Green)
+      .setCurrentAttemptSegment(3)
+      .setColourAtCurrentPosition(Colour.Yellow));
 
     // Assert
 

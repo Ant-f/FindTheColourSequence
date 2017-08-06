@@ -2,6 +2,6 @@ import { List } from "immutable";
 import { Colour } from "../model/colour";
 
 export interface IOwnProps {
-  colours: List<Colour>;
+  colours: Colour[];
   attemptId: number;
 }

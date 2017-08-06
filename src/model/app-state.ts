@@ -1,17 +1,26 @@
 import { fromJS, List, Map, Range } from "immutable";
 import GenerateTargetSequence from "../helpers/target-sequence-generator";
 import { Colour } from "./colour";
+import ISequenceAttemptData from "./sequence-attempt-data";
 
 const currentAttemptKey = "currentAttempt";
 const currentAttemptSegmentKey = "currentAttemptSegment";
+const feedbackKey = "feedback";
 const gameStateKey = "gameState";
+const inputKey = "input";
 const targetSequenceKey = "targetSequence";
 
 const defaultMaxAttemptsCount = 8;
 const defaultSequenceColourCount = 4;
 
-type GameState = List<List<Colour>>;
+type GameState = List<ISequenceAttemptData>;
 type StateMap = Map<string, any>;
+
+const generateEmptySequence = (sequenceColourCount: number): List<Colour> => {
+  return Range(0, sequenceColourCount)
+    .map((columnIndex) => Colour.None)
+    .toList();
+};
 
 const initializeGameState = (maxAttemptsCount: number, sequenceColourCount: number): GameState => {
   if (maxAttemptsCount < 1) {
@@ -22,10 +31,12 @@ const initializeGameState = (maxAttemptsCount: number, sequenceColourCount: numb
     throw new Error(`Invalid sequenceColourCount value: ${maxAttemptsCount}`);
   }
 
-  const gameState = Range(0, maxAttemptsCount)
-    .map((rowIndex) => Range(0, sequenceColourCount)
-      .map((columnIndex) => Colour.None).toList())
-    .toList();
+  const gameState = Range(0, maxAttemptsCount).map((rowIndex) => {
+    return fromJS({
+      [feedbackKey]: generateEmptySequence(sequenceColourCount),
+      [inputKey]: generateEmptySequence(sequenceColourCount),
+    });
+  }).toList();
 
   return gameState;
 };
@@ -53,13 +64,8 @@ export default class AppState {
     }
   }
 
-  get gameState(): GameState {
-    return this.stateMap.get(gameStateKey);
-  }
-
-  public setGameState(value: GameState): AppState {
-    const updatedRawState = this.stateMap.set(gameStateKey, value);
-    return new AppState(updatedRawState);
+  get attemptData(): ISequenceAttemptData[] {
+    return this.stateMap.get(gameStateKey).toJS();
   }
 
   get currentAttempt(): number {
@@ -67,8 +73,8 @@ export default class AppState {
   }
 
   public setCurrentAttempt(value: number): AppState {
-    const updatedRawState = this.stateMap.set(currentAttemptKey, value);
-    return new AppState(updatedRawState);
+    const updatedState = this.stateMap.set(currentAttemptKey, value);
+    return new AppState(updatedState);
   }
 
   get currentAttemptSegment(): number {
@@ -76,29 +82,30 @@ export default class AppState {
   }
 
   public setCurrentAttemptSegment(value: number): AppState {
-    const updatedRawState = this.stateMap.set(currentAttemptSegmentKey, value);
-    return new AppState(updatedRawState);
+    const updatedState = this.stateMap.set(currentAttemptSegmentKey, value);
+    return new AppState(updatedState);
   }
 
   get maxAttemptsCount(): number {
-    return this.gameState.size;
+    return this.stateMap.get(gameStateKey).size;
   }
 
   public setMaxAttemptsCount(value: number): AppState {
-    const updatedAppState = this.setGameState(
+    const updatedState = this.stateMap.set(gameStateKey,
       initializeGameState(value, this.sequenceColourCount));
 
-    return updatedAppState;
+    return new AppState(updatedState);
   }
 
   get sequenceColourCount(): number {
-    return this.gameState.first().size;
+    return this.stateMap.get(gameStateKey).getIn([0, inputKey]).size;
   }
 
   public setSequenceColourCount(value: number): AppState {
-    const updatedAppState = this.setGameState(
+    const updatedState = this.stateMap.set(gameStateKey,
       initializeGameState(this.maxAttemptsCount, value));
-    return updatedAppState;
+
+    return new AppState(updatedState);
   }
 
   /**
@@ -114,13 +121,14 @@ export default class AppState {
   }
 
   public setColourAtCurrentPosition(colour: Colour): AppState {
-    const updatedAppState = this.setGameState(
-      this.gameState.setIn([
-        this.currentAttempt,
-        this.currentAttemptSegment,
-      ], colour));
+    const updatedState = this.stateMap.setIn([
+      gameStateKey,
+      this.currentAttempt,
+      inputKey,
+      this.currentAttemptSegment,
+    ], colour);
 
-    return updatedAppState;
+    return new AppState(updatedState);
   }
 
   get targetSequence(): List<Colour> {
@@ -128,8 +136,8 @@ export default class AppState {
   }
 
   public setTargetSequence(value: List<Colour>): AppState {
-    const updatedRawState = this.stateMap.set(targetSequenceKey, value);
-    return new AppState(updatedRawState);
+    const updatedState = this.stateMap.set(targetSequenceKey, value);
+    return new AppState(updatedState);
   }
 
   get isGameLost(): boolean {
@@ -137,7 +145,9 @@ export default class AppState {
   }
 
   get isGameWon(): boolean {
-    const won = this.gameState.some((l) => l.equals(this.targetSequence));
+    const won = this.stateMap.get(gameStateKey).some((s: Map<string, List<Colour>>) =>
+      s.get(inputKey).equals(this.targetSequence));
+
     return won;
   }
 }

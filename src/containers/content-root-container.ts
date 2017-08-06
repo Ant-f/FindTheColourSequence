@@ -5,7 +5,7 @@ import ContentRootProps from "../props/content-root-props";
 
 const mapStateToProps = (state: AppState) => {
   return {
-    gameState: state.gameState,
+    data: state.attemptData,
   } as ContentRootProps;
 };
 

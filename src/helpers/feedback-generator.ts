@@ -1,5 +1,5 @@
 import { List } from "immutable";
-import { Colour } from "../../src/model/colour";
+import { Colour } from "../model/colour";
 
 const correctColourAndPosition = Colour.Black;
 const correctColourWrongPosition = Colour.White;

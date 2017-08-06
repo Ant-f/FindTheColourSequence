@@ -69,9 +69,9 @@ describe("Reducer", function() {
 
       // Assert
 
-      const colourAtInitialPosition = updatedState.gameState
-        .get(initialAttempt)
-        .get(initialAttemptSegment);
+      const colourAtInitialPosition = updatedState
+        .attemptData[initialAttempt]
+        .input[initialAttemptSegment];
 
       expect(colourAtInitialPosition).to.equal(selectedColour);
     });

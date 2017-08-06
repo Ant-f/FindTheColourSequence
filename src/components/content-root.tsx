@@ -8,10 +8,10 @@ export default class ContentRoot extends React.Component<ContentRootProps> {
     return (
       <div>
         {
-          this.props.gameState.map((colours, listIndex) =>
+          this.props.data.map((d, listIndex) =>
             <SequenceAttempt
               attemptId={listIndex}
-              colours={colours}
+              colours={d.input}
               key={listIndex}>
             </SequenceAttempt>,
           )
