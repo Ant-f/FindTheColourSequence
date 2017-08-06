@@ -1,4 +1,4 @@
-import { connect, Dispatch } from "react-redux";
+import { connect } from "react-redux";
 import ContentRoot from "../components/content-root";
 import AppState from "../model/app-state";
 import ContentRootProps from "../props/content-root-props";

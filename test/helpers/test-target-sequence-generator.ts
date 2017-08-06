@@ -3,7 +3,7 @@
 import { expect } from "chai";
 import { fromJS, Map, Set } from "immutable";
 import { given } from "mocha-testdata";
-import GenerateTargetSequence from "../../src/helpers/target-sequence-generator";
+import generateTargetSequence from "../../src/helpers/target-sequence-generator";
 import AppState from "../../src/model/app-state";
 import { Colour } from "../../src/model/colour";
 
@@ -12,7 +12,7 @@ describe("Target Sequence Generator", function() {
 
     // Arrange, Act
 
-    const result = GenerateTargetSequence(arg);
+    const result = generateTargetSequence(arg);
 
     // Assert
 
@@ -29,7 +29,7 @@ describe("Target Sequence Generator", function() {
 
     // Act
 
-    const result = GenerateTargetSequence(colourCount);
+    const result = generateTargetSequence(colourCount);
 
     // Assert
 

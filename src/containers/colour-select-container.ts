@@ -1,6 +1,5 @@
 import { Map } from "immutable";
 import { connect, Dispatch } from "react-redux";
-import { bindActionCreators } from "redux";
 import * as actions from "../action/action-creators";
 import ColourSelect from "../components/colour-select";
 import AppState from "../model/app-state";
