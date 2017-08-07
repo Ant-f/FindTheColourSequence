@@ -6,14 +6,24 @@ import ContentRootProps from "../props/content-root-props";
 export default class ContentRoot extends React.Component<ContentRootProps> {
   public render() {
     return (
-      <div>
+      <div style={{ display: "inline-grid" }}>
         {
           this.props.data.map((d, listIndex) =>
-            <SequenceAttempt
-              attemptId={listIndex}
-              colours={d.input}
-              key={listIndex}>
-            </SequenceAttempt>,
+            <div style={{ display: "inline-flex" }}>
+              <SequenceAttempt
+                attemptId={listIndex}
+                colours={d.input}
+                key={listIndex}>
+              </SequenceAttempt>
+
+              {
+                d.feedback.map((feedbackSegment) =>
+                  <div style={{ marginLeft: "0.5em", marginRight: "0.5em" }}>
+                    { feedbackSegment }
+                  </div>,
+                )
+              }
+            </div>,
           )
         }
         <ColourSelect />

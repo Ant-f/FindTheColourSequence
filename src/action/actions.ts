@@ -7,6 +7,10 @@ interface IAction<T> {
   type: string;
 }
 
+export type ReduxAction =
+  IColourSelected |
+  IPositionSelected;
+
 export interface IColourSelected extends IAction<Colour> {
   type: ActionTypes.ColourSelected;
 }

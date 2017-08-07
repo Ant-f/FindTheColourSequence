@@ -6,16 +6,12 @@ import colourReducer from "./colour-reducer";
 import defaultReducer from "./default-reducer";
 import positionReducer from "./position-reducer";
 
-type Action =
-  Actions.IColourSelected |
-  Actions.IPositionSelected;
-
-const reducers = Map<ActionTypes, (s: AppState, a: Action) => AppState>({
+const reducers = Map<ActionTypes, (s: AppState, a: Actions.ReduxAction) => AppState>({
   [ActionTypes.ColourSelected]: colourReducer,
   [ActionTypes.PositionSelected]: positionReducer,
 });
 
-export default (state: AppState = new AppState(), action: Action) => {
+export default (state: AppState = new AppState(), action: Actions.ReduxAction) => {
   const reducer = reducers.get(action.type, defaultReducer);
   const updatedState = reducer(state, action);
   return updatedState;

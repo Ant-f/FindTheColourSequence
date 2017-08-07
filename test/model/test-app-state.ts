@@ -208,4 +208,21 @@ describe("AppState", function() {
 
     expect(updatedState.isGameWon).to.equal(false);
   });
+
+  it("allows attempt data feedback to be set", function() {
+
+    // Arrange
+
+    const attempt = 2;
+    const feedback = List<Colour>([Colour.Red, Colour.Purple, Colour.White]);
+    const state = new AppState();
+
+    // Act
+
+    const updatedState = state.setAttemptDataFeedback(attempt, feedback);
+
+    // Assert
+
+    expect(updatedState.getAttemptDataFeedback(attempt)).to.equal(feedback);
+  });
 });

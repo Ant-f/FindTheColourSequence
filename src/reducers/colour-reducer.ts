@@ -1,22 +1,38 @@
+import { List } from "immutable";
 import * as Actions from "../action/actions";
+import generateFeedback from "../helpers/feedback-generator";
 import AppState from "../model/app-state";
+import { Colour } from "../model/colour";
 
 export default (state: AppState, action: Actions.IColourSelected): AppState => {
 
-  let nextSegment = state.currentAttemptSegment + 1;
-  let attempt = state.currentAttempt;
+  const provisionalNextSegment = state.currentAttemptSegment + 1;
+  const isAttemptComplete = provisionalNextSegment >= state.sequenceColourCount;
 
-  if (nextSegment >= state.sequenceColourCount) {
-    nextSegment = 0;
-    attempt--;
-  }
+  const nextSegment = isAttemptComplete
+    ? 0
+    : provisionalNextSegment;
 
   const updatedState = state
     .setProperties((appState: AppState): AppState => {
-      return appState
+      const originalAttemptIndex = state.currentAttempt;
+
+      const baseUpdate = appState
         .setColourAtCurrentPosition(action.payload)
-        .setCurrentAttempt(attempt)
         .setCurrentAttemptSegment(nextSegment);
+
+      if (isAttemptComplete) {
+        const feedback = generateFeedback(
+          baseUpdate.getAttemptDataInput(originalAttemptIndex),
+          baseUpdate.targetSequence);
+
+        return baseUpdate
+          .setCurrentAttempt(originalAttemptIndex - 1)
+          .setAttemptDataFeedback(originalAttemptIndex, feedback);
+      }
+      else {
+        return baseUpdate;
+      }
     });
 
   return updatedState;

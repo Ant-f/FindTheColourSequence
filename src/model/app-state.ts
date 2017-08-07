@@ -150,4 +150,22 @@ export default class AppState {
 
     return won;
   }
+
+  public getAttemptDataFeedback(attempt: number): List<Colour> {
+    const feedback = this.stateMap.getIn([gameStateKey, attempt, feedbackKey]);
+    return feedback;
+  }
+
+  public setAttemptDataFeedback(attempt: number, feedback: List<Colour>): AppState {
+    const updatedState = this.stateMap.setIn(
+      [gameStateKey, attempt, feedbackKey],
+      feedback);
+
+    return new AppState(updatedState);
+  }
+
+  public getAttemptDataInput(attempt: number): List<Colour> {
+    const input = this.stateMap.getIn([gameStateKey, attempt, inputKey]);
+    return input;
+  }
 }

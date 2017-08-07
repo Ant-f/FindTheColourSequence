@@ -1,8 +1,10 @@
 // tslint:disable:only-arrow-functions
 
 import { expect } from "chai";
-import { fromJS } from "immutable";
+import { fromJS, List } from "immutable";
+import * as TypeMoq from "typemoq";
 import * as actionCreators from "../../src/action/action-creators";
+import { ReduxAction } from "../../src/action/actions";
 import AppState from "../../src/model/app-state";
 import { Colour } from "../../src/model/colour";
 import reducer from "../../src/reducers/reducer";
@@ -74,6 +76,91 @@ describe("Reducer", function() {
         .input[initialAttemptSegment];
 
       expect(colourAtInitialPosition).to.equal(selectedColour);
+    });
+
+    it("assigns feedback if currentAttemptSegment is equal to sequence colour count", function() {
+
+      // Arrange
+
+      const attempt = 2;
+      const selectedColour = Colour.Black;
+      const targetSequence = List<Colour>([Colour.Blue, Colour.Green, Colour.Red])
+
+      const colourReducerModule = require("inject-loader!../../src/reducers/colour-reducer");
+
+      const feedbackGeneratorMock:
+        TypeMoq.IMock<(s: List<Colour>, t: List<Colour>) => List<Colour>>
+        = TypeMoq.Mock.ofInstance(
+          (s: List<Colour>, t: List<Colour>) => List<Colour>());
+
+      const feedback = List<Colour>([Colour.Black, Colour.White, Colour.None]);
+
+      feedbackGeneratorMock
+        .setup((fg) => fg(
+          TypeMoq.It.is((l: List<Colour>) => l.contains(selectedColour)),
+          TypeMoq.It.is((l: List<Colour>) => l.equals(targetSequence))))
+        .returns(() => feedback);
+
+      const reducerWithInjection = colourReducerModule({
+        "../helpers/feedback-generator": {
+          default: feedbackGeneratorMock.object,
+        },
+      }).default as (state: AppState, action: ReduxAction) => AppState;
+
+      const state = new AppState()
+        .setCurrentAttempt(attempt)
+        .setCurrentAttemptSegment(3)
+        .setTargetSequence(targetSequence);
+
+      const action = actionCreators.onColourSelected(selectedColour);
+
+      // Act
+
+      const updatedState = reducerWithInjection(state, action);
+
+      // Assert
+
+      feedbackGeneratorMock.verify((fg) => fg(
+        TypeMoq.It.is((l: List<Colour>) => l.contains(selectedColour)),
+        TypeMoq.It.is((l: List<Colour>) => l.equals(targetSequence))),
+        TypeMoq.Times.once());
+
+      expect(updatedState.getAttemptDataFeedback(attempt)).to.equal(feedback);
+    });
+
+    it("doesn't assign feedback if currentAttemptSegment is less than sequence colour count", function() {
+
+      // Arrange
+
+      const colourReducerModule = require("inject-loader!../../src/reducers/colour-reducer");
+
+      const feedbackGeneratorMock:
+        TypeMoq.IMock<(s: List<Colour>, t: List<Colour>) => List<Colour>>
+        = TypeMoq.Mock.ofInstance(
+          (s: List<Colour>, t: List<Colour>) => List<Colour>());
+
+      const reducerWithInjection = colourReducerModule({
+        "../helpers/feedback-generator": {
+          default: feedbackGeneratorMock.object,
+        },
+      }).default as (state: AppState, action: ReduxAction) => AppState;
+
+      const state = new AppState()
+        .setCurrentAttempt(2)
+        .setCurrentAttemptSegment(0);
+
+      const action = actionCreators.onColourSelected(Colour.Black);
+
+      // Act
+
+      const updatedState = reducerWithInjection(state, action);
+
+      // Assert
+
+      feedbackGeneratorMock.verify((fg) => fg(
+        TypeMoq.It.is((l: List<Colour>) => List.isList(l)),
+        TypeMoq.It.is((l: List<Colour>) => List.isList(l))),
+        TypeMoq.Times.never());
     });
   });
 
