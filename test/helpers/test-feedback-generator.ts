@@ -60,4 +60,21 @@ describe("Feedback Generator", function() {
     expect(whiteCount).to.equal(testCase.expectedWhite, "Unexpected White count");
     expect(noneCount).to.equal(expectedNone, "Unexpected None count");
   });
+
+  it("sorts feedback colours", function() {
+
+    // Arrange
+
+    const targetSequence = List<Colour>([Colour.Black, Colour.Blue, Colour.Red]);
+    const sequenceToCheck = List<Colour>([Colour.Blue, Colour.Purple, Colour.Red]);
+
+    // Act
+
+    const feedback = generateFeedback(sequenceToCheck, targetSequence);
+
+    // Assert
+
+    const expectedOrder = List<Colour>([Colour.Black, Colour.White, Colour.None]);
+    expect(feedback.equals(expectedOrder)).to.equal(true);
+  });
 });
