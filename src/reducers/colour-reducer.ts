@@ -1,8 +1,6 @@
-import { List } from "immutable";
 import * as Actions from "../action/actions";
 import generateFeedback from "../helpers/feedback-generator";
 import AppState from "../model/app-state";
-import { Colour } from "../model/colour";
 
 export default (state: AppState, action: Actions.IColourSelected): AppState => {
 

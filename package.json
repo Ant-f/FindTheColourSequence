@@ -11,10 +11,12 @@
   "author": "Anthony Fung",
   "license": "MIT",
   "dependencies": {
+    "@types/prop-types": "^15.5.1",
     "@types/react": "^15.0.38",
     "@types/react-dom": "^15.5.1",
     "@types/react-redux": "^4.4.46",
     "immutable": "^3.8.1",
+    "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.5",
