@@ -16,6 +16,20 @@ module.exports = {
     rules: [{
       test: /\.tsx?$/,
       loader: "awesome-typescript-loader"
+    }, {
+      test: /\.scss$/,
+      use: [{
+        loader: "style-loader" // creates style nodes from JS strings
+      }, {
+        loader: "typings-for-css-modules-loader",
+        options: {
+          camelCase: true,
+          modules: true,
+          namedExport: true
+        }
+      }, {
+        loader: "sass-loader"
+      }]
     }]
   },
 
@@ -23,7 +37,10 @@ module.exports = {
     new webpack.SourceMapDevToolPlugin({
       filename: null, // inline sourcemap
       test: /\.(ts|js)($|\?)/i // case-insensitive match for ts/js files
-    })
+    }),
+    new webpack.WatchIgnorePlugin([
+      /css\.d\.ts$/
+    ])
   ],
 
   // When importing a module whose path matches one of the following, just

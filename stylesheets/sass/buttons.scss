@@ -1,0 +1,88 @@
+$animation-duration: 0.5s;
+$colour-button-size: 3.5em;
+
+@mixin pulse {
+  $animation-name: unique-id();
+  @keyframes #{$animation-name} {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  animation-duration: $animation-duration;
+  animation-timing-function: ease;
+  animation-name: $animation-name;
+}
+
+@mixin gradient-background($light, $dark) {
+  background-image: radial-gradient(circle farthest-side at 40% 40%, $light, $dark);
+}
+
+.colour-button {
+  border: none;
+  border-radius: 50%;
+  font-size: 16px;
+  height: $colour-button-size;
+  margin: 0.2em;
+  outline: none;
+  width: $colour-button-size;
+}
+
+.black {
+  @extend .colour-button;
+  @include pulse();
+  @include gradient-background(#909090, black);
+}
+
+.blue {
+  @extend .colour-button;
+  @include pulse();
+  @include gradient-background(cornflowerblue, darkblue);
+}
+  
+.green {
+  @extend .colour-button;
+  @include pulse();
+  @include gradient-background(lightgreen, darkgreen);
+}
+  
+.none {
+  @extend .colour-button;
+  @include pulse();
+  @include gradient-background(cornflowerblue, darkblue);
+}
+  
+.orange {
+  @extend .colour-button;
+  @include pulse();
+  @include gradient-background(#FEDE84, #D06C00);
+}
+  
+.purple {
+  @extend .colour-button;
+  @include pulse();
+  @include gradient-background(#C887C8, #5A005A);
+}
+  
+.red {
+  @extend .colour-button;
+  @include pulse();
+  @include gradient-background(pink, #CE0000);
+}
+  
+.white {
+  @extend .colour-button;
+  @include pulse();
+  @include gradient-background(white, #9F9F9F);
+}
+  
+.yellow {
+  @extend .colour-button;
+  @include pulse();
+  @include gradient-background(#FFFFB0, #CAB000);
+}
