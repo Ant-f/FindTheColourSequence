@@ -25,7 +25,8 @@ module.exports = {
         options: {
           camelCase: true,
           modules: true,
-          namedExport: true
+          namedExport: true,
+          scss: true
         }
       }, {
         loader: "sass-loader"

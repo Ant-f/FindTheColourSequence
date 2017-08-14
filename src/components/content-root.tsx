@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as styles from "../../stylesheets/sass/game-board.scss";
 import SequenceAttempt from "../components/sequence-attempt";
 import ColourSelect from "../containers/colour-select-container";
 import ContentRootProps from "../props/content-root-props";
@@ -16,7 +17,7 @@ export default class ContentRoot extends React.Component<CombinedProps> {
 
   public render() {
     return (
-      <div style={{ display: "inline-grid" }}>
+      <div className={styles.gameBoard}>
         {
           this.props.data.map((d, inputIndex) =>
             <div

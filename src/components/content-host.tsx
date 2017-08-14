@@ -1,5 +1,6 @@
 import * as PropTypes from "prop-types";
 import * as React from "react";
+import * as styles from "../../stylesheets/sass/page-background.scss";
 
 export interface IContentHostContext {
   modalContentSetter: (content: JSX.Element) => void;
@@ -30,7 +31,7 @@ export default class ContentHost extends React.Component<null, IContentHostState
 
   public render() {
     return (
-      <div>
+      <div className={styles.pageBackground}>
         {
           <div style={this.state.modalContent ? { filter: "blur(2.5px)" } : null}>
             {
