@@ -1,5 +1,7 @@
 import * as React from "react";
-import * as styles from "../../stylesheets/sass/game-board.scss";
+import { sequenceSegmentsMap } from "../../stylesheets/classname-maps";
+import * as boardStyles from "../../stylesheets/sass/game-board.scss";
+import * as segmentStyles from "../../stylesheets/sass/sequence-segments.scss";
 import SequenceAttempt from "../components/sequence-attempt";
 import ColourSelect from "../containers/colour-select-container";
 import ContentRootProps from "../props/content-root-props";
@@ -17,26 +19,28 @@ export default class ContentRoot extends React.Component<CombinedProps> {
 
   public render() {
     return (
-      <div className={styles.gameBoard}>
+      <div className={boardStyles.gameBoard}>
         {
           this.props.data.map((d, inputIndex) =>
             <div
-              key={`input-${inputIndex}`}
-              style={{ display: "inline-flex" }}>
+              className={boardStyles.boardRow}
+              key={`input-${inputIndex}`}>
+
               <SequenceAttempt
                 attemptId={inputIndex}
                 colours={d.input}>
               </SequenceAttempt>
 
+              <div className={boardStyles.feedbackSection}>
               {
                 d.feedback.map((feedbackSegment, feedbackIndex) =>
                   <div
-                    key={`input-${inputIndex}-feedback-${feedbackIndex}`}
-                    style={{ marginLeft: "0.5em", marginRight: "0.5em" }}>
-                    { feedbackSegment }
+                    className={`${segmentStyles.small} ${sequenceSegmentsMap.get(feedbackSegment)}`}
+                    key={`input-${inputIndex}-feedback-${feedbackIndex}`}>
                   </div>,
                 )
               }
+              </div>
             </div>,
           )
         }

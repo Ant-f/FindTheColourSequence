@@ -18,6 +18,12 @@ $inverse-gradient-angle: $gradient-angle + 180deg;
   @include board-token($large-token - 0.5em);
 }
 
+.colour-panel {
+  display: flex;
+  flex-wrap: wrap;
+  width: ($large-token * 4) + ($token-margin * 8);
+}
+
 .black-wrapper {
   @include wrapper($black-highlight, $black-lowlight);
 }

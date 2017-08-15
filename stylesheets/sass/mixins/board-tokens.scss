@@ -1,9 +1,11 @@
+@import "partials/dimensions";
+
 @mixin board-token($diameter) {
   border: none;
   border-radius: 50%;
   font-size: 16px;
   height: $diameter;
-  margin: 0.2em;
+  margin: $token-margin;
   outline: none;
   width: $diameter;
 }

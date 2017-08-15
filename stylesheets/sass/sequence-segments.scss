@@ -24,8 +24,15 @@ $animation-duration: 0.5s;
 
 @mixin pulsing-board-token($highlight, $lowlight) {
   background-image: radial-gradient(circle farthest-side at 40% 40%, $highlight, $lowlight);
-  @include board-token($large-token);
   @include pulse();
+}
+
+.large {
+  @include board-token($large-token);
+}
+
+.small {
+  @include board-token($small-token);
 }
 
 .black {
@@ -41,9 +48,7 @@ $animation-duration: 0.5s;
 }
   
 .none {
-  @include board-token($large-token);
-  @include pulse();
-  background-image: radial-gradient(circle farthest-side at 40% 40%, cornflowerblue, darkblue);
+  background-color: rgba(225, 225, 225, 0.1);
 }
   
 .orange {

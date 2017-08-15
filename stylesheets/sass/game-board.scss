@@ -1,5 +1,17 @@
+@import "partials/dimensions";
+
 .game-board {
   background: linear-gradient(darkred, orange);
   display: inline-flex;
   flex-direction: column;
+}
+
+.board-row {
+  display: flex;
+}
+
+.feedback-section {
+  display: flex;
+  flex-wrap: wrap;
+  width: ($small-token * 2) + ($token-margin * 5)
 }
