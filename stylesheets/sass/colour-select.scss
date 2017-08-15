@@ -1,0 +1,83 @@
+@import "mixins/board-tokens";
+@import "partials/colours";
+@import "partials/dimensions";
+
+$gradient-angle: 135deg;
+$inverse-gradient-angle: $gradient-angle + 180deg;
+
+@mixin wrapper($highlight, $lowlight) {
+  align-items: center;
+  background-image: linear-gradient($gradient-angle, $highlight, $lowlight);
+  display: flex;
+  justify-content: center;
+  @include board-token($large-token);
+}
+
+@mixin button($highlight, $lowlight) {
+  background-image: linear-gradient($inverse-gradient-angle, $highlight, $lowlight);
+  @include board-token($large-token - 0.5em);
+}
+
+.black-wrapper {
+  @include wrapper($black-highlight, $black-lowlight);
+}
+
+.black-button {
+  @include button($black-highlight, $black-lowlight);
+}
+
+.blue-wrapper {
+  @include wrapper($blue-highlight, $blue-lowlight);
+}
+
+.blue-button {
+  @include button($blue-highlight, $blue-lowlight);
+}
+
+.green-wrapper {
+  @include wrapper($green-highlight, $green-lowlight);
+}
+
+.green-button {
+  @include button($green-highlight, $green-lowlight);
+}
+
+.orange-wrapper {
+  @include wrapper($orange-highlight, $orange-lowlight);
+}
+
+.orange-button {
+  @include button($orange-highlight, $orange-lowlight);
+}
+
+.purple-wrapper {
+  @include wrapper($purple-highlight, $purple-lowlight);
+}
+
+.purple-button {
+  @include button($purple-highlight, $purple-lowlight);
+}
+
+.red-wrapper {
+  @include wrapper($red-highlight, $red-lowlight);
+}
+
+.red-button {
+  @include button($red-highlight, $red-lowlight);
+}
+
+.white-wrapper {
+  @include wrapper($white-highlight, $white-lowlight);
+}
+
+.white-button {
+  @include button($white-highlight, $white-lowlight);
+}
+
+.yellow-wrapper {
+  @include wrapper($yellow-highlight, $yellow-lowlight);
+}
+
+.yellow-button {
+  @include button($yellow-highlight, $yellow-lowlight);
+}

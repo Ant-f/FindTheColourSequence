@@ -1,0 +1,67 @@
+@import "mixins/board-tokens";
+@import "partials/colours";
+@import "partials/dimensions";
+
+$animation-duration: 0.5s;
+
+@mixin pulse {
+  $animation-name: unique-id();
+  @keyframes #{$animation-name} {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  animation-duration: $animation-duration;
+  animation-timing-function: ease;
+  animation-name: $animation-name;
+}
+
+@mixin pulsing-board-token($highlight, $lowlight) {
+  background-image: radial-gradient(circle farthest-side at 40% 40%, $highlight, $lowlight);
+  @include board-token($large-token);
+  @include pulse();
+}
+
+.black {
+  @include pulsing-board-token($black-highlight, $black-lowlight);
+}
+
+.blue {
+  @include pulsing-board-token($blue-highlight, $blue-lowlight);
+}
+  
+.green {
+  @include pulsing-board-token($green-highlight, $green-lowlight);
+}
+  
+.none {
+  @include board-token($large-token);
+  @include pulse();
+  background-image: radial-gradient(circle farthest-side at 40% 40%, cornflowerblue, darkblue);
+}
+  
+.orange {
+  @include pulsing-board-token($orange-highlight, $orange-lowlight);
+}
+  
+.purple {
+  @include pulsing-board-token($purple-highlight, $purple-lowlight);
+}
+  
+.red {
+  @include pulsing-board-token($red-highlight, $red-lowlight);
+}
+  
+.white {
+  @include pulsing-board-token($white-highlight, $white-lowlight);
+}
+  
+.yellow {
+  @include pulsing-board-token($yellow-highlight, $yellow-lowlight);
+}

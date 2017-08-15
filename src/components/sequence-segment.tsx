@@ -1,21 +1,21 @@
 import { Map } from "immutable";
 import * as React from "react";
-import * as buttonStyles from "../../stylesheets/sass/buttons.scss";
+import * as styles from "../../stylesheets/sass/sequence-segments.scss";
 import { Colour } from "../model/colour";
 import { IDispatchProps, IOwnProps } from "../props/sequence-segment-props";
 
 type CombinedProps = IDispatchProps & IOwnProps;
 
 const colourClassMap = Map<Colour, string>({
-  [Colour.Black]: buttonStyles.black,
-  [Colour.Blue]: buttonStyles.blue,
-  [Colour.Green]: buttonStyles.green,
-  [Colour.None]: buttonStyles.none,
-  [Colour.Orange]: buttonStyles.orange,
-  [Colour.Purple]: buttonStyles.purple,
-  [Colour.Red]: buttonStyles.red,
-  [Colour.White]: buttonStyles.white,
-  [Colour.Yellow]: buttonStyles.yellow,
+  [Colour.Black]: styles.black,
+  [Colour.Blue]: styles.blue,
+  [Colour.Green]: styles.green,
+  [Colour.None]: styles.none,
+  [Colour.Orange]: styles.orange,
+  [Colour.Purple]: styles.purple,
+  [Colour.Red]: styles.red,
+  [Colour.White]: styles.white,
+  [Colour.Yellow]: styles.yellow,
 });
 
 export default class SequenceSegment extends React.PureComponent<CombinedProps> {

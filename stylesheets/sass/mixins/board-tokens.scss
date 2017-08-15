@@ -1,0 +1,9 @@
+@mixin board-token($diameter) {
+  border: none;
+  border-radius: 50%;
+  font-size: 16px;
+  height: $diameter;
+  margin: 0.2em;
+  outline: none;
+  width: $diameter;
+}
