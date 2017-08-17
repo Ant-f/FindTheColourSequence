@@ -4,19 +4,23 @@
   background-image: linear-gradient(#542806, #81410C);
   border-radius: 1%;
   display: inline-flex;
-  flex-direction: column;
 }
 
 .noise-overlay {
   background-image: url("../../images/noise150.png");
+  display: flex;
+  flex-direction: column;
+  padding: 1.25em;
 }
 
 .board-row {
+  align-items: center;
   display: flex;
 }
 
 .feedback-section {
   display: flex;
   flex-wrap: wrap;
+  margin: 0.2em 0em;
   width: ($small-token * 2) + ($token-margin * 5)
 }
