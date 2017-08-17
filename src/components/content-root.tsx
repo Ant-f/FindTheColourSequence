@@ -20,31 +20,33 @@ export default class ContentRoot extends React.Component<CombinedProps> {
   public render() {
     return (
       <div className={boardStyles.gameBoard}>
-        {
-          this.props.data.map((d, inputIndex) =>
-            <div
-              className={boardStyles.boardRow}
-              key={`input-${inputIndex}`}>
+        <div className={boardStyles.noiseOverlay}>
+          {
+            this.props.data.map((d, inputIndex) =>
+              <div
+                className={boardStyles.boardRow}
+                key={`input-${inputIndex}`}>
 
-              <SequenceAttempt
-                attemptId={inputIndex}
-                colours={d.input}>
-              </SequenceAttempt>
+                <SequenceAttempt
+                  attemptId={inputIndex}
+                  colours={d.input}>
+                </SequenceAttempt>
 
-              <div className={boardStyles.feedbackSection}>
-              {
-                d.feedback.map((feedbackSegment, feedbackIndex) =>
-                  <div
-                    className={`${segmentStyles.small} ${sequenceSegmentsMap.get(feedbackSegment)}`}
-                    key={`input-${inputIndex}-feedback-${feedbackIndex}`}>
-                  </div>,
-                )
-              }
-              </div>
-            </div>,
-          )
-        }
-        <ColourSelect />
+                <div className={boardStyles.feedbackSection}>
+                {
+                  d.feedback.map((feedbackSegment, feedbackIndex) =>
+                    <div
+                      className={`${segmentStyles.small} ${sequenceSegmentsMap.get(feedbackSegment)}`}
+                      key={`input-${inputIndex}-feedback-${feedbackIndex}`}>
+                    </div>,
+                  )
+                }
+                </div>
+              </div>,
+            )
+          }
+          <ColourSelect />
+        </div>
       </div>
     );
   }

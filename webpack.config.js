@@ -14,24 +14,34 @@ module.exports = {
 
   module: {
     rules: [{
-      test: /\.tsx?$/,
-      loader: "awesome-typescript-loader"
-    }, {
-      test: /\.scss$/,
-      use: [{
-        loader: "style-loader" // creates style nodes from JS strings
+        test: /\.tsx?$/,
+        loader: "awesome-typescript-loader"
       }, {
-        loader: "typings-for-css-modules-loader",
-        options: {
-          camelCase: true,
-          modules: true,
-          namedExport: true,
-          scss: true
-        }
+        test: /\.scss$/,
+        use: [{
+            loader: "style-loader" // creates style nodes from JS strings
+          }, {
+            loader: "typings-for-css-modules-loader",
+            options: {
+              camelCase: true,
+              modules: true,
+              namedExport: true,
+              scss: true
+            }
+          }, {
+            loader: "sass-loader"
+          }
+        ]
       }, {
-        loader: "sass-loader"
-      }]
-    }]
+        test: /\.(png)$/i,
+        use: [{
+            loader: "file-loader"
+          }, {
+            loader: 'image-webpack-loader'
+          }
+        ]
+      }
+    ]
   },
 
   plugins: [

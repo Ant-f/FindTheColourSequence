@@ -49,6 +49,7 @@ $animation-duration: 0.5s;
   
 .none {
   background-color: rgba(225, 225, 225, 0.1);
+  filter: blur(0.3em);
 }
   
 .orange {

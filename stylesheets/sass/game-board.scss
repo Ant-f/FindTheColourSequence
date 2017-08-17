@@ -1,9 +1,14 @@
 @import "partials/dimensions";
 
 .game-board {
-  background: linear-gradient(darkred, orange);
+  background-image: linear-gradient(#542806, #81410C);
+  border-radius: 1%;
   display: inline-flex;
   flex-direction: column;
+}
+
+.noise-overlay {
+  background-image: url("../../images/noise150.png");
 }
 
 .board-row {
