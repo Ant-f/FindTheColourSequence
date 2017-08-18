@@ -23,28 +23,31 @@ export default class ContentRoot extends React.Component<CombinedProps> {
         <div className={boardStyles.noiseOverlay}>
           {
             this.props.data.map((d, inputIndex) =>
-              <div
-                className={boardStyles.boardRow}
-                key={`input-${inputIndex}`}>
+              <div key={`input-${inputIndex}`}>
+                <div className={boardStyles.boardRow}>
 
-                <SequenceAttempt
-                  attemptId={inputIndex}
-                  colours={d.input}>
-                </SequenceAttempt>
+                  <SequenceAttempt
+                    attemptId={inputIndex}
+                    colours={d.input}>
+                  </SequenceAttempt>
 
-                <div className={boardStyles.feedbackSection}>
-                {
-                  d.feedback.map((feedbackSegment, feedbackIndex) =>
-                    <div
-                      className={`${segmentStyles.small} ${sequenceSegmentsMap.get(feedbackSegment)}`}
-                      key={`input-${inputIndex}-feedback-${feedbackIndex}`}>
-                    </div>,
-                  )
-                }
+                  <div className={boardStyles.feedbackSection}>
+                  {
+                    d.feedback.map((feedbackSegment, feedbackIndex) =>
+                      <div
+                        className={`${segmentStyles.small} ${sequenceSegmentsMap.get(feedbackSegment)}`}
+                        key={`input-${inputIndex}-feedback-${feedbackIndex}`}>
+                      </div>,
+                    )
+                  }
+                  </div>
                 </div>
+
+                <div className={boardStyles.separator} />
               </div>,
             )
           }
+
           <ColourSelect />
         </div>
       </div>

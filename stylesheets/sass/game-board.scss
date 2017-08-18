@@ -1,7 +1,10 @@
 @import "partials/dimensions";
 
+$dark-brown: #542806;
+$light-brown: #81410C;
+
 .game-board {
-  background-image: linear-gradient(#542806, #81410C);
+  background-image: linear-gradient($dark-brown, $light-brown);
   border-radius: 1%;
   display: inline-flex;
 }
@@ -21,6 +24,16 @@
 .feedback-section {
   display: flex;
   flex-wrap: wrap;
-  margin: 0.2em 0em;
+  margin: 0.3em 0em;
   width: ($small-token * 2) + ($token-margin * 5)
+}
+
+.separator {
+  border-bottom-color: $light-brown;
+  border-left-color: $dark-brown;
+  border-right-color: $light-brown;
+  border-style: solid;
+  border-top-color: $dark-brown;
+  border-width: 0.07em;
+  opacity: 0.6;
 }
