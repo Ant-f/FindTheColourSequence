@@ -36,7 +36,7 @@ describe("Reducer", function() {
       // Arrange
 
       const state = new AppState()
-        .setCurrentAttempt(2)
+        .setCurrentAttempt(4)
         .setCurrentAttemptSegment(3);
 
       const action = actionCreators.onColourSelected(Colour.Black);
@@ -47,7 +47,7 @@ describe("Reducer", function() {
 
       // Assert
 
-      expect(updatedState.currentAttempt).to.equal(1);
+      expect(updatedState.currentAttempt).to.equal(5);
       expect(updatedState.currentAttemptSegment).to.equal(0);
     });
 
@@ -84,7 +84,7 @@ describe("Reducer", function() {
 
       const attempt = 2;
       const selectedColour = Colour.Black;
-      const targetSequence = List<Colour>([Colour.Blue, Colour.Green, Colour.Red])
+      const targetSequence = List<Colour>([Colour.Blue, Colour.Green, Colour.Red]);
 
       const colourReducerModule = require("inject-loader!../../src/reducers/colour-reducer");
 

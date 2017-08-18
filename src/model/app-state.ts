@@ -10,7 +10,7 @@ const gameStateKey = "gameState";
 const inputKey = "input";
 const targetSequenceKey = "targetSequence";
 
-const defaultMaxAttemptsCount = 8;
+const defaultMaxAttemptsCount = 12;
 const defaultSequenceColourCount = 4;
 
 type GameState = List<ISequenceAttemptData>;
@@ -49,11 +49,8 @@ export default class AppState {
       this.stateMap = rawState;
     }
     else {
-      // Start at max value and decrement to move upwards
-      const initialCurrentAttempt = defaultMaxAttemptsCount - 1;
-
       this.stateMap = fromJS({
-        currentAttempt: initialCurrentAttempt,
+        currentAttempt: 0,
         currentAttemptSegment: 0,
         gameState: initializeGameState(defaultMaxAttemptsCount, defaultSequenceColourCount),
         isGameLost: false,
@@ -141,7 +138,7 @@ export default class AppState {
   }
 
   get isGameLost(): boolean {
-    return this.currentAttempt < 0;
+    return this.currentAttempt >= this.maxAttemptsCount;
   }
 
   get isGameWon(): boolean {

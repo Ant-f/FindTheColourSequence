@@ -148,15 +148,17 @@ describe("AppState", function() {
   interface IIsGameLostArgs {
     attempt: number;
     isLost: boolean;
+    maxAttempts: number;
   }
 
-  given({ attempt: -1, isLost: true },
-        { attempt: 0, isLost: false })
+  given({ attempt: 7, maxAttempts: 6, isLost: true },
+        { attempt: 6, maxAttempts: 6, isLost: true },
+        { attempt: 5, maxAttempts: 6, isLost: false })
     .it("sets isGameLost based on currentAttempt value", function(arg: IIsGameLostArgs) {
 
     // Arrange
 
-    const state = new AppState();
+    const state = new AppState().setMaxAttemptsCount(arg.maxAttempts);
 
     // Act
 

@@ -21,32 +21,36 @@ export default class ContentRoot extends React.Component<CombinedProps> {
     return (
       <div className={boardStyles.gameBoard}>
         <div className={boardStyles.noiseOverlay}>
-          {
-            this.props.data.map((d, inputIndex) =>
-              <div key={`input-${inputIndex}`}>
-                <div className={boardStyles.boardRow}>
+          <div className={boardStyles.columnSet}>
+            <div className={boardStyles.separator} />
 
-                  <SequenceAttempt
-                    attemptId={inputIndex}
-                    colours={d.input}>
-                  </SequenceAttempt>
+            {
+              this.props.data.map((d, inputIndex) =>
+                <div key={`input-${inputIndex}`} className={boardStyles.columnSet}>
+                  <div className={boardStyles.columnContent}>
 
-                  <div className={boardStyles.feedbackSection}>
-                  {
-                    d.feedback.map((feedbackSegment, feedbackIndex) =>
-                      <div
-                        className={`${segmentStyles.small} ${sequenceSegmentsMap.get(feedbackSegment)}`}
-                        key={`input-${inputIndex}-feedback-${feedbackIndex}`}>
-                      </div>,
-                    )
-                  }
+                    <SequenceAttempt
+                      attemptId={inputIndex}
+                      colours={d.input}>
+                    </SequenceAttempt>
+
+                    <div className={boardStyles.feedbackSection}>
+                      {
+                        d.feedback.map((feedbackSegment, feedbackIndex) =>
+                          <div
+                            className={`${segmentStyles.small} ${sequenceSegmentsMap.get(feedbackSegment)}`}
+                            key={`input-${inputIndex}-feedback-${feedbackIndex}`}>
+                          </div>,
+                        )
+                      }
+                    </div>
                   </div>
-                </div>
 
-                <div className={boardStyles.separator} />
-              </div>,
-            )
-          }
+                  <div className={boardStyles.separator} />
+                </div>,
+              )
+            }
+          </div>
 
           <ColourSelect />
         </div>

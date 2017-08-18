@@ -10,15 +10,22 @@ $light-brown: #81410C;
 }
 
 .noise-overlay {
+  align-items: center;
   background-image: url("../../images/noise150.png");
   display: flex;
   flex-direction: column;
   padding: 1.25em;
 }
 
-.board-row {
+.column-content {
   align-items: center;
-  display: flex;
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.column-set {
+  display: inline-flex;
+  flex-direction: row;
 }
 
 .feedback-section {

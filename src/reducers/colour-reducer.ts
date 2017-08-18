@@ -25,7 +25,7 @@ export default (state: AppState, action: Actions.IColourSelected): AppState => {
           baseUpdate.targetSequence);
 
         return baseUpdate
-          .setCurrentAttempt(originalAttemptIndex - 1)
+          .setCurrentAttempt(originalAttemptIndex + 1)
           .setAttemptDataFeedback(originalAttemptIndex, feedback);
       }
       else {

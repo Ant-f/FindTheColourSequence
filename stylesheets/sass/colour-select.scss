@@ -21,8 +21,6 @@ $inverse-gradient-angle: $gradient-angle + 180deg;
 .colour-panel {
   margin-top: 1.2em;
   display: flex;
-  flex-wrap: wrap;
-  width: ($large-token * 4) + ($token-margin * 8);
 }
 
 .black-wrapper {
