@@ -37,6 +37,7 @@ $animation-duration: 0.5s;
 }
 
 .glowing-halo {
+  @include board-token($large-token);
   @keyframes glowing-halo {
     0% {
       opacity: 0;
@@ -54,10 +55,8 @@ $animation-duration: 0.5s;
   animation-iteration-count: infinite;
   animation-name: glowing-halo;
   background: radial-gradient(circle farthest-side at center, transparent 60%, gold 80%, gold 90%, transparent 100%);
-  border-radius: 50%;
-  height: $large-token;
+  margin: initial;
   position: absolute;
-  width: $large-token;
 }
 
 .visible {
