@@ -60,11 +60,11 @@ $animation-duration: 0.5s;
   width: $large-token;
 }
 
-.active {
+.visible {
   opacity: 1;
 }
 
-.inactive {
+.invisible {
   opacity: 0;
 }
 
@@ -80,6 +80,26 @@ $animation-duration: 0.5s;
   justify-content: center;
   position: absolute;
   transition: opacity 0.7s;
+}
+
+.segment-shadow {
+  @include board-token($large-token);
+  @keyframes shadow {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0.4;
+    }
+  }
+  animation-duration: 1s;
+  animation-name: shadow;
+  background: black;
+  filter: blur(0.1em);
+  margin: initial;
+  opacity: 0.4;
+  position: absolute;
+  transform: scale(1.06) skew(2deg, 2deg) translate(0.2em, 0.2em);
 }
 
 .black {

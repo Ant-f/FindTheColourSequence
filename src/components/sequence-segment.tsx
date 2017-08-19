@@ -2,6 +2,7 @@ import * as React from "react";
 import { sequenceSegmentsMap } from "../../stylesheets/classname-maps";
 import * as styles from "../../stylesheets/sass/sequence-segments.scss";
 import classes from "../helpers/classes";
+import { Colour } from "../model/colour";
 import { IDispatchProps, IOwnProps, IStateProps } from "../props/sequence-segment-props";
 
 type CombinedProps = IDispatchProps & IOwnProps & IStateProps;
@@ -14,9 +15,13 @@ export default class SequenceSegment extends React.PureComponent<CombinedProps> 
 
     return (
       <div className={styles.zStack}>
+        <div className={this.props.colour === Colour.None
+          ? null
+          : styles.segmentShadow} />
+
         <div className={classes(
           styles.haloContainer,
-          isActive ? styles.active : styles.inactive)}>
+          isActive ? styles.visible : styles.invisible)}>
 
           <div className={styles.glowingHalo} />
         </div>
