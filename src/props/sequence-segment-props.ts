@@ -9,3 +9,8 @@ export interface IOwnProps {
   colour: Colour;
   segmentId: number;
 }
+
+export interface IStateProps {
+  activeAttemptId: number;
+  activeSegmentId: number;
+}

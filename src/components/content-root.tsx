@@ -4,6 +4,7 @@ import * as boardStyles from "../../stylesheets/sass/game-board.scss";
 import * as segmentStyles from "../../stylesheets/sass/sequence-segments.scss";
 import SequenceAttempt from "../components/sequence-attempt";
 import ColourSelect from "../containers/colour-select-container";
+import classes from "../helpers/classes";
 import ContentRootProps from "../props/content-root-props";
 import ModalProviderProps from "../props/modal-provider-props";
 
@@ -38,7 +39,9 @@ export default class ContentRoot extends React.Component<CombinedProps> {
                       {
                         d.feedback.map((feedbackSegment, feedbackIndex) =>
                           <div
-                            className={`${segmentStyles.small} ${sequenceSegmentsMap.get(feedbackSegment)}`}
+                            className={classes(
+                              segmentStyles.small,
+                              sequenceSegmentsMap.get(feedbackSegment))}
                             key={`input-${inputIndex}-feedback-${feedbackIndex}`}>
                           </div>,
                         )

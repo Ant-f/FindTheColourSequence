@@ -24,6 +24,7 @@ $animation-duration: 0.5s;
 
 @mixin pulsing-board-token($highlight, $lowlight) {
   background-image: radial-gradient(circle farthest-side at 40% 40%, $highlight, $lowlight);
+  z-index: 1;
   @include pulse();
 }
 
@@ -33,6 +34,52 @@ $animation-duration: 0.5s;
 
 .small {
   @include board-token($small-token);
+}
+
+.glowing-halo {
+  @keyframes glowing-halo {
+    0% {
+      opacity: 0;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.15;
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1.4);
+    }
+  }
+  animation-duration: 2.5s;
+  animation-iteration-count: infinite;
+  animation-name: glowing-halo;
+  background: radial-gradient(circle farthest-side at center, transparent 60%, gold 80%, gold 90%, transparent 100%);
+  border-radius: 50%;
+  height: $large-token;
+  position: absolute;
+  width: $large-token;
+}
+
+.active {
+  opacity: 1;
+}
+
+.inactive {
+  opacity: 0;
+}
+
+.z-stack {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.halo-container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  transition: opacity 0.7s;
 }
 
 .black {
