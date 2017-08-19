@@ -5,6 +5,7 @@ import * as segmentStyles from "../../stylesheets/sass/sequence-segments.scss";
 import SequenceAttempt from "../components/sequence-attempt";
 import ColourSelect from "../containers/colour-select-container";
 import classes from "../helpers/classes";
+import { Colour } from "../model/colour";
 import ContentRootProps from "../props/content-root-props";
 import ModalProviderProps from "../props/modal-provider-props";
 
@@ -39,10 +40,19 @@ export default class ContentRoot extends React.Component<CombinedProps> {
                       {
                         d.feedback.map((feedbackSegment, feedbackIndex) =>
                           <div
-                            className={classes(
-                              segmentStyles.small,
-                              sequenceSegmentsMap.get(feedbackSegment))}
+                            className={segmentStyles.zStack}
                             key={`input-${inputIndex}-feedback-${feedbackIndex}`}>
+
+                            <div className={
+                              feedbackSegment === Colour.None
+                                ? null
+                                : classes(segmentStyles.small, segmentStyles.segmentShadow)} />
+
+                            <div
+                              className={classes(
+                                segmentStyles.small,
+                                sequenceSegmentsMap.get(feedbackSegment))}>
+                            </div>
                           </div>,
                         )
                       }

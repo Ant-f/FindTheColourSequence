@@ -15,9 +15,10 @@ export default class SequenceSegment extends React.PureComponent<CombinedProps> 
 
     return (
       <div className={styles.zStack}>
-        <div className={this.props.colour === Colour.None
-          ? null
-          : styles.segmentShadow} />
+        <div className={
+          this.props.colour === Colour.None
+            ? null
+            : classes(styles.large, styles.segmentShadow)} />
 
         <div className={classes(
           styles.haloContainer,
