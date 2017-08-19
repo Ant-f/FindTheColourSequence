@@ -26,13 +26,13 @@ export const colourSelectWrapperMap = Map<Colour, string>({
   [Colour.Yellow]: colourSelect.yellowWrapper,
 });
 
-export const colourSelectButtonMap = Map<Colour, string>({
-  [Colour.Black]: colourSelect.blackButton,
-  [Colour.Blue]: colourSelect.blueButton,
-  [Colour.Green]: colourSelect.greenButton,
-  [Colour.Orange]: colourSelect.orangeButton,
-  [Colour.Purple]: colourSelect.purpleButton,
-  [Colour.Red]: colourSelect.redButton,
-  [Colour.White]: colourSelect.whiteButton,
-  [Colour.Yellow]: colourSelect.yellowButton,
+export const colourSelectInnerMap = Map<Colour, string>({
+  [Colour.Black]: colourSelect.blackInner,
+  [Colour.Blue]: colourSelect.blueInner,
+  [Colour.Green]: colourSelect.greenInner,
+  [Colour.Orange]: colourSelect.orangeInner,
+  [Colour.Purple]: colourSelect.purpleInner,
+  [Colour.Red]: colourSelect.redInner,
+  [Colour.White]: colourSelect.whiteInner,
+  [Colour.Yellow]: colourSelect.yellowInner,
 });
