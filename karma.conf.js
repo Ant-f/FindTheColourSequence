@@ -9,31 +9,38 @@ module.exports = function(config) {
     
     files: [
       // each file acts as entry point for the webpack configuration 
-      { pattern: 'test/**/test-*.ts' }
+      { pattern: "test/**/test-*.ts" },
+      { pattern: "test/**/test-*.tsx" }
     ],
  
     mime: {
-      'text/x-typescript': ['ts','tsx']
+      "text/x-typescript": ["ts", "tsx"]
     },
 
     preprocessors: {
-      '**/*.ts': ['webpack']
+      "**/*.ts": ["webpack"],
+      "**/*.tsx": ["webpack"]
     },
  
     webpack: {
       module: webpackConfig.module,
       plugins: webpackConfig.plugins,
-      resolve: webpackConfig.resolve
+      resolve: webpackConfig.resolve,
+      externals: {
+        "react/addons": true,
+        "react/lib/ExecutionEnvironment": true,
+        "react/lib/ReactContext": "window"
+      }
     },
- 
+
     webpackMiddleware: {
-      stats: 'errors-only'
+      stats: "errors-only"
     },
 
     // See https://www.npmjs.com/package/karma-mocha
     client: {
       mocha: {
-        reporter: 'html'
+        reporter: "html"
       }
     }
   });
