@@ -24,7 +24,7 @@ export default class SequenceSegment extends React.PureComponent<CombinedProps> 
           styles.haloContainer,
           isActive ? styles.visible : styles.invisible)}>
 
-          <div className={styles.glowingHalo} />
+          <div className={styles.pulsingHalo} />
         </div>
 
         <button

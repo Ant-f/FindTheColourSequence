@@ -30,15 +30,16 @@ $animation-duration: 0.5s;
 
 .large {
   @include board-token($large-token);
+  @include hover-halo();
 }
 
 .small {
   @include board-token($small-token);
 }
 
-.glowing-halo {
+.pulsing-halo {
   @include board-token($large-token);
-  @keyframes glowing-halo {
+  @keyframes pulsing-halo {
     0% {
       opacity: 0;
       transform: scale(1);
@@ -53,7 +54,7 @@ $animation-duration: 0.5s;
   }
   animation-duration: 2.5s;
   animation-iteration-count: infinite;
-  animation-name: glowing-halo;
+  animation-name: pulsing-halo;
   background: radial-gradient(circle farthest-side at center, transparent 60%, gold 80%, gold 90%, transparent 100%);
   margin: initial;
   position: absolute;
