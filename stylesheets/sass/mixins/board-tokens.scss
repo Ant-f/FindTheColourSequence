@@ -1,3 +1,4 @@
+@import "partials/colours";
 @import "partials/dimensions";
 
 @mixin board-token($diameter) {
@@ -7,13 +8,14 @@
   height: $diameter;
   margin: $token-margin;
   outline: none;
+  transition-timing-function: linear;
   width: $diameter;
 }
 
 @mixin hover-halo {
-  transition: box-shadow 0.15s;
+  transition: box-shadow 0.3s;
 
   &:hover {
-    box-shadow: 0em 0em 1em 0.3em gold;
+    box-shadow: 0em 0em 1em 0.3em $accent;
   }
 }

@@ -55,7 +55,7 @@ $animation-duration: 0.5s;
   animation-duration: 2.5s;
   animation-iteration-count: infinite;
   animation-name: pulsing-halo;
-  background: radial-gradient(circle farthest-side at center, transparent 60%, gold 80%, gold 90%, transparent 100%);
+  background: radial-gradient(circle farthest-side at center, transparent 60%, $accent 80%, $accent 90%, transparent 100%);
   margin: initial;
   position: absolute;
 }

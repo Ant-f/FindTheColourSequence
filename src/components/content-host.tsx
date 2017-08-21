@@ -30,38 +30,22 @@ export default class ContentHost extends React.Component<null, IContentHostState
   }
 
   public render() {
+    const showModalContent = this.state.modalContent;
     return (
       <div className={styles.pageBackground}>
         {
-          <div style={this.state.modalContent ? { filter: "blur(2.5px)" } : null}>
+          <div className={showModalContent ? styles.blurContent : null}>
             {
               this.props.children
             }
           </div>
         }
         {
-          this.state.modalContent ?
-            <div>
-              <div style={{
-                background: "black",
-                height: "100%",
-                left: "0",
-                opacity: 0.5,
-                position: "fixed",
-                top: "0",
-                width: "100%",
-              }} />
-
-              <div style={{
-                left: "50%",
-                position: "fixed",
-                top: "50%",
-                transform: "translate(-50%, -50%)",
-              }}>
-                {this.state.modalContent}
-              </div>
-            </div> :
-            null
+          showModalContent ?
+            <div className={styles.modalHost}>
+              {this.state.modalContent}
+            </div>
+            : null
         }
       </div>
     );
