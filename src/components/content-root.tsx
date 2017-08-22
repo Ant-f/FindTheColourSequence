@@ -1,5 +1,6 @@
 import * as React from "react";
 import { sequenceSegmentsMap } from "../../stylesheets/classname-maps";
+import * as lettering from "../../stylesheets/sass/font-lettering.scss";
 import * as boardStyles from "../../stylesheets/sass/game-board.scss";
 import * as segmentStyles from "../../stylesheets/sass/sequence-segments.scss";
 import SequenceAttempt from "../components/sequence-attempt";
@@ -65,7 +66,40 @@ export default class ContentRoot extends React.Component<CombinedProps> {
             }
           </div>
 
-          <ColourSelect />
+          <div className={boardStyles.boardFooter}>
+            <ColourSelect />
+
+            <div className={lettering.gameTitle}>
+              <p className={lettering.titleText}>
+                <span className={lettering.f}>F</span>
+                <span className={lettering.i}>i</span>
+                <span className={lettering.n}>n</span>
+                <span className={lettering.d}>d</span>
+
+                <span className={classes(lettering.newWord, lettering.t)}>t</span>
+                <span className={lettering.h}>h</span>
+                <span className={lettering.e}>e</span>
+              </p>
+
+              <p className={lettering.titleText}>
+                <span className={lettering.c}>C</span>
+                <span className={lettering.o}>o</span>
+                <span className={lettering.l}>l</span>
+                <span className={lettering.o}>o</span>
+                <span className={lettering.u}>u</span>
+                <span className={lettering.r}>r</span>
+
+                <span className={classes(lettering.newWord, lettering.s)}>S</span>
+                <span className={lettering.e}>e</span>
+                <span className={lettering.q}>q</span>
+                <span className={lettering.u}>u</span>
+                <span className={lettering.e}>e</span>
+                <span className={lettering.n}>n</span>
+                <span className={lettering.c}>c</span>
+                <span className={lettering.e}>e</span>
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     );

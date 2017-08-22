@@ -3,6 +3,13 @@
 $dark-brown: #542806;
 $light-brown: #81410C;
 
+.board-footer {
+  align-items: center;
+  display: flex;
+  margin-top: 1.2em;
+  width: 100%;
+}
+
 .game-board {
   background-image: linear-gradient($dark-brown, $light-brown);
   border-radius: 1%;
