@@ -20,7 +20,6 @@ export default <TProps extends {}>(
       return (
         <BaseComponent
           {...this.props}
-          hideModal={() => this.context.modalContentSetter(null) }
           showModal={ this.context.modalContentSetter } />
       );
     }

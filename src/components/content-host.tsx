@@ -1,13 +1,12 @@
 import * as React from "react";
 import * as styles from "../../stylesheets/sass/page-background.scss";
 import * as context from "../context/content-host-context";
-import ModalProviderProps from "../props/modal-provider-props";
 
 interface IContentHostState {
   modalContent: JSX.Element;
 }
 
-export default class ContentHost extends React.Component<ModalProviderProps, IContentHostState> {
+export default class ContentHost extends React.Component<null, IContentHostState> {
   public static childContextTypes = context.ContentHostContextTypes;
 
   public componentWillMount() {
