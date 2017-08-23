@@ -1,6 +1,5 @@
 import * as React from "react";
 import { sequenceSegmentsMap } from "../../stylesheets/classname-maps";
-import * as lettering from "../../stylesheets/sass/font-lettering.scss";
 import * as boardStyles from "../../stylesheets/sass/game-board.scss";
 import * as segmentStyles from "../../stylesheets/sass/sequence-segments.scss";
 import SequenceAttempt from "../components/sequence-attempt";
@@ -9,6 +8,8 @@ import classes from "../helpers/classes";
 import { Colour } from "../model/colour";
 import ContentRootProps from "../props/content-root-props";
 import ModalProviderProps from "../props/modal-provider-props";
+import Congratulations from "./congratulations-banner";
+import TitleBadge from "./title-badge";
 
 type CombinedProps = ContentRootProps & ModalProviderProps;
 
@@ -16,7 +17,7 @@ export default class ContentRoot extends React.Component<CombinedProps> {
 
   public componentDidUpdate(prevProps: CombinedProps, prevState: CombinedProps) {
     if (this.props.isGameWon) {
-      this.props.showModal(<span>Congratulations!</span>);
+      this.props.showModal(<Congratulations/>);
     }
   }
 
@@ -67,38 +68,8 @@ export default class ContentRoot extends React.Component<CombinedProps> {
           </div>
 
           <div className={boardStyles.boardFooter}>
-            <ColourSelect />
-
-            <div className={lettering.gameTitle}>
-              <p className={lettering.titleText}>
-                <span className={lettering.f}>F</span>
-                <span className={lettering.i}>i</span>
-                <span className={lettering.n}>n</span>
-                <span className={lettering.d}>d</span>
-
-                <span className={classes(lettering.newWord, lettering.t)}>t</span>
-                <span className={lettering.h}>h</span>
-                <span className={lettering.e}>e</span>
-              </p>
-
-              <p className={lettering.titleText}>
-                <span className={lettering.c}>C</span>
-                <span className={lettering.o}>o</span>
-                <span className={lettering.l}>l</span>
-                <span className={lettering.o}>o</span>
-                <span className={lettering.u}>u</span>
-                <span className={lettering.r}>r</span>
-
-                <span className={classes(lettering.newWord, lettering.s)}>S</span>
-                <span className={lettering.e}>e</span>
-                <span className={lettering.q}>q</span>
-                <span className={lettering.u}>u</span>
-                <span className={lettering.e}>e</span>
-                <span className={lettering.n}>n</span>
-                <span className={lettering.c}>c</span>
-                <span className={lettering.e}>e</span>
-              </p>
-            </div>
+            <ColourSelect/>
+            <TitleBadge/>
           </div>
         </div>
       </div>

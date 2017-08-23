@@ -6,21 +6,27 @@ $font-size: 1.3em;
   margin-left: ($font-size / 2.5);
 }
 
-.gameTitle {
+.titleBadge {
   align-items: center;
   display: flex;
   flex-direction: column;
   width: $font-size * 12;
 }
 
-.titleText {
+.winText {
+  display: flex;
+  font-size: $font-size * 3;
+  letter-spacing: 0.2em;
+}
+
+.titleBadgeText {
   margin: $font-size * -0.3;
   display: flex;
+  font-size: $font-size;
 }
 
 .letter {
   font-family: 'Rammetto One', cursive;
-  font-size: $font-size;
 }
 
 .f {
@@ -35,7 +41,7 @@ $font-size: 1.3em;
 
 .n {
   @extend .letter;
-  color: $orange-highlight;
+  color: $purple-highlight;
 }
 
 .d {
@@ -93,3 +99,17 @@ $font-size: 1.3em;
   color: $orange-highlight;
 }
 
+.g {
+  @extend .letter;
+  color: $green-highlight;
+}
+
+.a {
+  @extend .letter;
+  color: $blue-highlight;
+}
+
+.exclaimation {
+  @extend .letter;
+  color: $blue-highlight;
+}

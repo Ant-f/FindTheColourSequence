@@ -1,0 +1,92 @@
+@mixin create-rotation() {
+  $animation-name: unique-id();
+  
+  $range: 15;
+  $negative: #{-5 - random($range)}deg;
+  $positive: #{25 - random($range)}deg;
+  
+  $negativeToPositive: random(100) > 50;
+  $start: if($negativeToPositive, $negative, $positive);
+  $end: if($negativeToPositive, $positive, $negative);
+
+  $duration: #{1 + (random(10) / 10)}s;
+  
+  @keyframes #{$animation-name} {
+    0% {
+      transform: rotate($start);
+    }
+    50% {
+      transform: rotate($end);
+    }
+    100% {
+      transform: rotate($start);
+    }
+  }
+  animation-duration: $duration;
+  animation-iteration-count: infinite;
+  animation-name: $animation-name;
+}
+
+.rotate00 {
+  @include create-rotation();
+}
+
+.rotate01 {
+  @include create-rotation();
+}
+
+.rotate02 {
+  @include create-rotation();
+}
+
+.rotate03 {
+  @include create-rotation();
+}
+
+.rotate04 {
+  @include create-rotation();
+}
+
+.rotate05 {
+  @include create-rotation();
+}
+
+.rotate06 {
+  @include create-rotation();
+}
+
+.rotate07 {
+  @include create-rotation();
+}
+
+.rotate08 {
+  @include create-rotation();
+}
+
+.rotate09 {
+  @include create-rotation();
+}
+
+.rotate10 {
+  @include create-rotation();
+}
+
+.rotate11 {
+  @include create-rotation();
+}
+
+.rotate12 {
+  @include create-rotation();
+}
+
+.rotate13 {
+  @include create-rotation();
+}
+
+.rotate14 {
+  @include create-rotation();
+}
+
+.rotate15 {
+  @include create-rotation();
+}
