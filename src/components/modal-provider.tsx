@@ -1,6 +1,6 @@
 import * as React from "react";
+import * as context from "../context/content-host-context";
 import ModalProviderProps from "../props/modal-provider-props";
-import { ContentHostContextTypes, IContentHostContext } from "./content-host";
 
 export default <TProps extends {}>(
   BaseComponent: React.ComponentClass<TProps & ModalProviderProps>): React.ComponentClass => {
@@ -8,9 +8,9 @@ export default <TProps extends {}>(
   type CombinedProps = TProps & ModalProviderProps;
 
   return class extends React.PureComponent<CombinedProps> {
-    public static contextTypes = ContentHostContextTypes;
+    public static contextTypes = context.ContentHostContextTypes;
 
-    public context: IContentHostContext;
+    public context: context.IContentHostContext;
 
     constructor(props: CombinedProps) {
       super(props);
