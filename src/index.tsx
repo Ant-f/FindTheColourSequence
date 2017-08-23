@@ -4,17 +4,17 @@ import { Provider } from "react-redux";
 import { createStore } from "redux";
 import ContentHostBase from "./components/content-host";
 import withModalProvider from "./components/modal-provider";
-import ContentRootBase from "./containers/content-root-container";
+import GameBoardBase from "./containers/game-board-container";
 import reducer from "./reducers/reducer";
 
 const ContentHost = withModalProvider(ContentHostBase);
-const ContentRoot = withModalProvider(ContentRootBase);
+const GameBoard = withModalProvider(GameBoardBase);
 const store = createStore(reducer);
 
 ReactDOM.render(
   <Provider store={store}>
     <ContentHost>
-      <ContentRoot />
+      <GameBoard />
     </ContentHost>
   </Provider>,
   document.getElementById("app-content"),

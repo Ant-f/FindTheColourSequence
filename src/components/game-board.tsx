@@ -6,18 +6,18 @@ import SequenceAttempt from "../components/sequence-attempt";
 import ColourSelect from "../containers/colour-select-container";
 import classes from "../helpers/classes";
 import { Colour } from "../model/colour";
-import ContentRootProps from "../props/content-root-props";
+import GameBoardProps from "../props/game-board-props";
 import ModalProviderProps from "../props/modal-provider-props";
 import Congratulations from "./congratulations-banner";
 import TitleBadge from "./title-badge";
 
-type CombinedProps = ContentRootProps & ModalProviderProps;
+type CombinedProps = GameBoardProps & ModalProviderProps;
 
-export default class ContentRoot extends React.Component<CombinedProps> {
+export default class extends React.Component<CombinedProps> {
 
   public componentDidUpdate(prevProps: CombinedProps, prevState: CombinedProps) {
     if (this.props.isGameWon) {
-      this.props.showModal(<Congratulations/>);
+      this.props.showModal(<Congratulations />);
     }
   }
 
@@ -68,8 +68,8 @@ export default class ContentRoot extends React.Component<CombinedProps> {
           </div>
 
           <div className={boardStyles.boardFooter}>
-            <ColourSelect/>
-            <TitleBadge/>
+            <ColourSelect />
+            <TitleBadge />
           </div>
         </div>
       </div>
