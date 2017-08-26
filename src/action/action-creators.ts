@@ -15,3 +15,9 @@ export const onPositionSelected = (attempt: number, segment: number): Actions.IP
     type: ActionTypes.PositionSelected,
   };
 };
+
+export const onResetCurrentGame = (): Actions.IResetCurrentGame => {
+  return {
+    type: ActionTypes.ResetCurrentGame,
+  };
+};

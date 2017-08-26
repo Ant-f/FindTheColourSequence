@@ -5,10 +5,12 @@ import AppState from "../model/app-state";
 import colourReducer from "./colour-reducer";
 import defaultReducer from "./default-reducer";
 import positionReducer from "./position-reducer";
+import resetGameReducer from "./reset-game-reducer";
 
 const reducers = Map<ActionTypes, (s: AppState, a: Actions.ReduxAction) => AppState>({
   [ActionTypes.ColourSelected]: colourReducer,
   [ActionTypes.PositionSelected]: positionReducer,
+  [ActionTypes.ResetCurrentGame]: resetGameReducer,
 });
 
 export default (state: AppState = new AppState(), action: Actions.ReduxAction) => {

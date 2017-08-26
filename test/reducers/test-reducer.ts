@@ -185,4 +185,35 @@ describe("Reducer", function() {
       expect(updatedState.currentAttemptSegment).to.equal(segment);
     });
   });
+
+  describe("actionTypes.ResetCurrentGame", function() {
+    it("resets app state", function() {
+
+      // Arrange
+
+      const state = new AppState()
+        .setCurrentAttempt(5)
+        .setCurrentAttemptSegment(2)
+        .setColourAtCurrentPosition(Colour.Orange);
+
+      const action = actionCreators.onResetCurrentGame();
+
+      // Act
+
+      const updatedState = reducer(state, action);
+
+      // Assert
+
+      expect(updatedState.currentAttempt).to.equal(0);
+      expect(updatedState.currentAttemptSegment).to.equal(0);
+
+      const allColoursUnset = updatedState.attemptData.every((coloursArray) =>
+        coloursArray.input.every((colour) => colour === Colour.None),
+      );
+      expect(allColoursUnset).to.equal(true);
+
+      expect(updatedState.isGameLost).to.equal(false);
+      expect(updatedState.isGameWon).to.equal(false);
+    });
+  });
 });

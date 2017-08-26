@@ -3,10 +3,10 @@ import * as buttons from "../../stylesheets/sass/buttons.scss";
 import * as lettering from "../../stylesheets/sass/font-lettering.scss";
 import * as gameBoard from "../../stylesheets/sass/game-board.scss";
 import classes from "../helpers/classes";
-import * as NewGamePanelProps from "../props/new-game-panel-props";
+import NewGamePanelProps from "../props/new-game-panel-props";
 import ContentPanel from "./content-panel";
 
-export default class extends React.PureComponent<NewGamePanelProps.IOwnProps> {
+export default class extends React.PureComponent<NewGamePanelProps> {
   public render() {
     return (
       <ContentPanel>
@@ -17,7 +17,7 @@ export default class extends React.PureComponent<NewGamePanelProps.IOwnProps> {
           <div className={gameBoard.boardFooter}>
             <button
               className={classes(buttons.boardButton, lettering.defaultText)}
-              onClick={this.props.onExitPanel}>
+              onClick={this.ResetCurrentGame}>
 
               OK
 
@@ -34,5 +34,10 @@ export default class extends React.PureComponent<NewGamePanelProps.IOwnProps> {
         </div>
       </ContentPanel>
     );
+  }
+
+  private ResetCurrentGame = (): void => {
+    this.props.onResetCurrentGame();
+    this.props.onExitPanel();
   }
 }

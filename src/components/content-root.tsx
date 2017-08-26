@@ -1,10 +1,10 @@
 import * as React from "react";
 import * as styles from "../../stylesheets/sass/content-root.scss";
 import GameBoardBase from "../containers/game-board-container";
+import NewGamePanel from "../containers/new-game-panel-container";
 import classes from "../helpers/classes";
 import { IOwnProps as BoardOwnProps } from "../props/game-board-props";
 import withModalProvider from "./modal-provider";
-import NewGamePanel from "./new-game-panel";
 
 const GameBoard = withModalProvider<BoardOwnProps>(GameBoardBase);
 const activePanelKey = "activePanel";

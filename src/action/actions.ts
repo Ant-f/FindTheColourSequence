@@ -2,14 +2,18 @@ import { Colour } from "../model/colour";
 import IPosition from "../model/position";
 import { ActionTypes } from "./action-types";
 
-interface IAction<T> {
-  payload: T;
+interface IActionWithoutPayload {
   type: string;
+}
+
+interface IAction<T> extends IActionWithoutPayload {
+  payload: T;
 }
 
 export type ReduxAction =
   IColourSelected |
-  IPositionSelected;
+  IPositionSelected |
+  IResetCurrentGame;
 
 export interface IColourSelected extends IAction<Colour> {
   type: ActionTypes.ColourSelected;
@@ -17,4 +21,8 @@ export interface IColourSelected extends IAction<Colour> {
 
 export interface IPositionSelected extends IAction<IPosition> {
   type: ActionTypes.PositionSelected;
+}
+
+export interface IResetCurrentGame extends IActionWithoutPayload {
+  type: ActionTypes.ResetCurrentGame;
 }
