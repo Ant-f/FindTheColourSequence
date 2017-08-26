@@ -7,5 +7,5 @@ export interface IStateProps {
 }
 
 export interface IOwnProps {
-  onNewGame: () => void;
+  onNewGamePrompt: () => void;
 }

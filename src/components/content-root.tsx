@@ -23,7 +23,7 @@ export default class extends React.PureComponent {
         <div className={classes(styles.rotatingPanel, state[activePanelKey])}>
 
           <div className={styles.gameBoardHost}>
-            <GameBoard onNewGame={this.showNewGamePanel}/>
+            <GameBoard onNewGamePrompt={this.showNewGamePanel}/>
           </div>
 
           <div className={styles.newGamePanelHost}>

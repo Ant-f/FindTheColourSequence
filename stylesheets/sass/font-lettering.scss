@@ -1,4 +1,5 @@
 @import "partials/colours";
+@import "partials/fonts";
 
 $font-size: 1.3em;
 
@@ -10,7 +11,7 @@ $font-size: 1.3em;
   align-items: center;
   display: flex;
   flex-direction: column;
-  width: $font-size * 12;
+  flex-grow: 1;
 }
 
 .winText {
@@ -25,91 +26,92 @@ $font-size: 1.3em;
   font-size: $font-size;
 }
 
-.letter {
-  font-family: 'Rammetto One', cursive;
+.default-text {
+  @include set-font-family();
+  color: darken($board-lowlight, 4%)
 }
 
 .f {
-  @extend .letter;
+  @extend .default-text;
   color: $green-highlight;
 }
 
 .i {
-  @extend .letter;
+  @extend .default-text;
   color: $red-highlight;
 }
 
 .n {
-  @extend .letter;
+  @extend .default-text;
   color: $purple-highlight;
 }
 
 .d {
-  @extend .letter;
+  @extend .default-text;
   color: $white-highlight;
 }
 
 .t {
-  @extend .letter;
+  @extend .default-text;
   color: $red-highlight;
 }
 
 .h {
-  @extend .letter;
+  @extend .default-text;
   color: $purple-highlight;
 }
 
 .e {
-  @extend .letter;
+  @extend .default-text;
   color: $yellow-lowlight;
 }
 
 .c {
-  @extend .letter;
+  @extend .default-text;
   color: $white-highlight;
 }
 
 .o {
-  @extend .letter;
+  @extend .default-text;
   color: $orange-highlight;
 }
 
 .l {
-  @extend .letter;
+  @extend .default-text;
   color: $yellow-highlight;
 }
 
 .u {
-  @extend .letter;
+  @extend .default-text;
   color: $green-highlight;
 }
 
 .r {
-  @extend .letter;
+  @extend .default-text;
   color: $purple-highlight;
 }
 
 .s {
-  @extend .letter;
+  @extend .default-text;
   color: $red-highlight;
 }
 
 .q {
-  @extend .letter;
+  @extend .default-text;
   color: $orange-highlight;
 }
 
 .g {
-  @extend .letter;
+  @extend .default-text;
   color: $green-highlight;
 }
 
 .a {
-  @extend .letter;
+  @extend .default-text;
   color: $blue-highlight;
 }
 
 .exclaimation {
-  @extend .letter;
+  @extend .default-text;
   color: $blue-highlight;
 }

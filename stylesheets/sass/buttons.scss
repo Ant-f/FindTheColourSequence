@@ -1,0 +1,11 @@
+@import "partials/colours";
+
+.board-button {
+  background: transparent;
+  border-width: 0em;
+  outline: none;
+
+  &:hover{
+    text-shadow: 0em 0em 1em $accent
+  }
+}

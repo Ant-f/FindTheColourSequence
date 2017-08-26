@@ -1,5 +1,7 @@
 import * as React from "react";
 import { sequenceSegmentsMap } from "../../stylesheets/classname-maps";
+import * as buttonStyles from "../../stylesheets/sass/buttons.scss";
+import * as letteringStyles from "../../stylesheets/sass/font-lettering.scss";
 import * as boardStyles from "../../stylesheets/sass/game-board.scss";
 import * as segmentStyles from "../../stylesheets/sass/sequence-segments.scss";
 import SequenceAttempt from "../components/sequence-attempt";
@@ -70,8 +72,12 @@ export default class extends React.Component<CombinedProps> {
           <ColourSelect />
           <TitleBadge />
 
-          <button onClick={this.props.onNewGame}>
+          <button
+            className={classes(buttonStyles.boardButton, letteringStyles.defaultText)}
+            onClick={this.props.onNewGamePrompt}>
+
             New Game
+
           </button>
         </div>
 
