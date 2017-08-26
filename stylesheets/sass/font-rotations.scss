@@ -1,3 +1,5 @@
+@import "partials/durations";
+
 @mixin create-rotation() {
   $animation-name: unique-id();
   
@@ -13,18 +15,23 @@
   
   @keyframes #{$animation-name} {
     0% {
+      transform: rotate(0deg);
+    }
+    33% {
       transform: rotate($start);
     }
-    50% {
+    66% {
       transform: rotate($end);
     }
-    100% {
-      transform: rotate($start);
+    99% {
+      transform: rotate(0deg);
     }
   }
+  animation-delay: $win-text-pop-in-duration;
   animation-duration: $duration;
   animation-iteration-count: infinite;
   animation-name: $animation-name;
+  animation-timing-function: linear;
 }
 
 .rotate00 {
