@@ -6,12 +6,13 @@ import SequenceAttempt from "../components/sequence-attempt";
 import ColourSelect from "../containers/colour-select-container";
 import classes from "../helpers/classes";
 import { Colour } from "../model/colour";
-import GameBoardProps from "../props/game-board-props";
+import * as BoardProps from "../props/game-board-props";
 import ModalProviderProps from "../props/modal-provider-props";
 import Congratulations from "./congratulations-banner";
+import ContentPanel from "./content-panel";
 import TitleBadge from "./title-badge";
 
-type CombinedProps = GameBoardProps & ModalProviderProps;
+type CombinedProps = BoardProps.IOwnProps & BoardProps.IStateProps & ModalProviderProps;
 
 export default class extends React.Component<CombinedProps> {
 
@@ -23,56 +24,58 @@ export default class extends React.Component<CombinedProps> {
 
   public render() {
     return (
-      <div className={boardStyles.gameBoard}>
-        <div className={boardStyles.noiseOverlay}>
-          <div className={boardStyles.columnSet}>
-            <div className={boardStyles.separator} />
+      <ContentPanel>
+        <div className={boardStyles.columnSet}>
+          <div className={boardStyles.separator} />
+          {
+            this.props.data.map((d, inputIndex) =>
+              <div key={`input-${inputIndex}`} className={boardStyles.columnSet}>
+                <div className={boardStyles.columnContent}>
 
-            {
-              this.props.data.map((d, inputIndex) =>
-                <div key={`input-${inputIndex}`} className={boardStyles.columnSet}>
-                  <div className={boardStyles.columnContent}>
+                  <SequenceAttempt
+                    attemptId={inputIndex}
+                    colours={d.input}>
+                  </SequenceAttempt>
 
-                    <SequenceAttempt
-                      attemptId={inputIndex}
-                      colours={d.input}>
-                    </SequenceAttempt>
+                  <div className={boardStyles.feedbackSection}>
+                    {
+                      d.feedback.map((feedbackSegment, feedbackIndex) =>
+                        <div
+                          className={segmentStyles.zStack}
+                          key={`input-${inputIndex}-feedback-${feedbackIndex}`}>
 
-                    <div className={boardStyles.feedbackSection}>
-                      {
-                        d.feedback.map((feedbackSegment, feedbackIndex) =>
+                          <div className={
+                            feedbackSegment === Colour.None
+                              ? null
+                              : classes(segmentStyles.small, segmentStyles.segmentShadow)} />
+
                           <div
-                            className={segmentStyles.zStack}
-                            key={`input-${inputIndex}-feedback-${feedbackIndex}`}>
-
-                            <div className={
-                              feedbackSegment === Colour.None
-                                ? null
-                                : classes(segmentStyles.small, segmentStyles.segmentShadow)} />
-
-                            <div
-                              className={classes(
-                                segmentStyles.small,
-                                sequenceSegmentsMap.get(feedbackSegment))}>
-                            </div>
-                          </div>,
-                        )
-                      }
-                    </div>
+                            className={classes(
+                              segmentStyles.small,
+                              sequenceSegmentsMap.get(feedbackSegment))}>
+                          </div>
+                        </div>,
+                      )
+                    }
                   </div>
+                </div>
 
-                  <div className={boardStyles.separator} />
-                </div>,
-              )
-            }
-          </div>
-
-          <div className={boardStyles.boardFooter}>
-            <ColourSelect />
-            <TitleBadge />
-          </div>
+                <div className={boardStyles.separator} />
+              </div>,
+            )
+          }
         </div>
-      </div>
+
+        <div className={boardStyles.boardFooter}>
+          <ColourSelect />
+          <TitleBadge />
+
+          <button onClick={this.props.onNewGame}>
+            New Game
+          </button>
+        </div>
+
+      </ContentPanel>
     );
   }
 }

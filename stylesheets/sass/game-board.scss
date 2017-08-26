@@ -1,28 +1,10 @@
+@import "partials/colours";
 @import "partials/dimensions";
-
-$dark-brown: #542806;
-$light-brown: #81410C;
 
 .board-footer {
   align-items: center;
   display: flex;
   margin-top: 1.2em;
-  width: 100%;
-}
-
-.game-board {
-  background-image: linear-gradient($dark-brown, $light-brown);
-  border-radius: 1%;
-  box-shadow: 1em 1em 3em black;
-  display: inline-flex;
-}
-
-.noise-overlay {
-  align-items: center;
-  background-image: url("../../images/noise150.png");
-  display: flex;
-  flex-direction: column;
-  padding: 1.25em;
 }
 
 .column-content {
@@ -44,11 +26,11 @@ $light-brown: #81410C;
 }
 
 .separator {
-  border-bottom-color: $light-brown;
-  border-left-color: $dark-brown;
-  border-right-color: $light-brown;
+  border-bottom-color: $board-highlight;
+  border-left-color: $board-lowlight;
+  border-right-color: $board-highlight;
   border-style: solid;
-  border-top-color: $dark-brown;
+  border-top-color: $board-lowlight;
   border-width: 0.07em;
   opacity: 0.6;
 }

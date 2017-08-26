@@ -3,7 +3,7 @@ import * as context from "../context/content-host-context";
 import ModalProviderProps from "../props/modal-provider-props";
 
 export default <TProps extends {}>(
-  BaseComponent: React.ComponentClass<TProps & ModalProviderProps>): React.ComponentClass => {
+  BaseComponent: React.ComponentClass<TProps & ModalProviderProps>): React.ComponentClass<TProps> => {
 
   type CombinedProps = TProps & ModalProviderProps;
 
