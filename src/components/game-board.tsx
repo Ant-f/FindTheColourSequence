@@ -10,6 +10,7 @@ import classes from "../helpers/classes";
 import { Colour } from "../model/colour";
 import * as BoardProps from "../props/game-board-props";
 import ModalProviderProps from "../props/modal-provider-props";
+import BetterLuck from "./better-luck-banner";
 import Congratulations from "./congratulations-banner";
 import ContentPanel from "./content-panel";
 import TitleBadge from "./title-badge";
@@ -21,6 +22,9 @@ export default class extends React.Component<CombinedProps> {
   public componentDidUpdate(prevProps: CombinedProps, prevState: CombinedProps) {
     if (this.props.isGameWon) {
       this.props.showModal(<Congratulations />);
+    }
+    else if (this.props.isGameLost) {
+      this.props.showModal(<BetterLuck />);
     }
   }
 

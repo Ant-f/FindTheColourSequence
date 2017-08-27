@@ -30,8 +30,6 @@ $font-size: 1.3em;
 }
 
 .winText {
-  animation-duration: $win-text-pop-in-duration;
-  animation-name: pop-in;
   display: flex;
   font-size: $font-size * 3;
   letter-spacing: 0.2em;
@@ -46,6 +44,13 @@ $font-size: 1.3em;
 .default-text {
   @include set-font-family();
   color: darken($board-lowlight, 4%)
+}
+
+.game-over-text-container {
+  @include set-font-family();
+  animation-duration: $win-text-pop-in-duration;
+  animation-name: pop-in;
+  color: white;
 }
 
 .f {
