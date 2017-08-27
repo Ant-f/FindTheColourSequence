@@ -11,17 +11,17 @@ const getClassSelector = (...classNames: string[]): string => {
   const selector = classNames
     .map((n: string) => `.${n}`)
     .join(" ");
-  
+
   return selector;
-}
+};
 
 describe("<SequenceSegment/>", function() {
   describe("pulsing halo", function() {
-    
+
     const pulsingHalo = getClassSelector(
       styles.haloContainer,
       styles.visible);
-    
+
     it("is rendered when segment and attempt IDs match", function() {
       const wrapper = shallow(<SequenceSegment
         onPositionSelected={(a: number, s: number) => { return; }}
@@ -30,7 +30,7 @@ describe("<SequenceSegment/>", function() {
         segmentId={0}
         activeAttemptId={0}
         activeSegmentId={0} />);
-    
+
       expect(wrapper.find(pulsingHalo).exists()).to.equal(true);
     });
 
@@ -42,7 +42,7 @@ describe("<SequenceSegment/>", function() {
         segmentId={1}
         activeAttemptId={0}
         activeSegmentId={0} />);
-    
+
       expect(wrapper.find(pulsingHalo).exists()).to.equal(false);
     });
   });
