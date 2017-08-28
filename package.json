@@ -4,7 +4,7 @@
   "description": "Game based on a popular code breaking board game",
   "main": "index.js",
   "scripts": {
-    "lint": "node_modules\\.bin\\tslint --config tslint.json --type-check --project tsconfig.json",
+    "lint": "node_modules\\.bin\\tslint --config tslint.json --type-check --project tsconfig.test.json",
     "start": "node_modules\\.bin\\webpack-dev-server",
     "test": "node_modules\\.bin\\karma start"
   },

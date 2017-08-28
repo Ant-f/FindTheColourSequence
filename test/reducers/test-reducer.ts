@@ -1,7 +1,7 @@
 // tslint:disable:only-arrow-functions
 
 import { expect } from "chai";
-import { fromJS, List } from "immutable";
+import { List } from "immutable";
 import * as TypeMoq from "typemoq";
 import * as actionCreators from "../../src/action/action-creators";
 import { ReduxAction } from "../../src/action/actions";
@@ -153,7 +153,7 @@ describe("Reducer", function() {
 
       // Act
 
-      const updatedState = reducerWithInjection(state, action);
+      reducerWithInjection(state, action);
 
       // Assert
 

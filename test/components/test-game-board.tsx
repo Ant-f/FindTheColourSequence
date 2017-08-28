@@ -10,21 +10,19 @@ import Congratulations from "../../src/components/congratulations-banner";
 import { Colour } from "../../src/model/colour";
 
 describe("<GameBoard/>", function() {
+  const gameBoardModule = require("inject-loader!../../src/components/game-board");
+
+  const GameBoardWithInjection = gameBoardModule({
+    "../containers/colour-select-container": {
+      default: () => (
+        <ColourSelect
+          onColourSelected={(c: Colour) => { return; }}
+          availableColours={List()} />),
+    },
+  }).default;
+
   describe("Win Message", function() {
-
     it("is shown when isGameWon is true", function(done) {
-
-      const gameBoardModule = require("inject-loader!../../src/components/game-board");
-
-      const GameBoardWithInjection = gameBoardModule({
-        "../containers/colour-select-container": {
-          default: () => (
-            <ColourSelect
-              onColourSelected={(c: Colour) => { return; }}
-              availableColours={List()} />),
-        },
-      }).default;
-
       const wrapper = shallow(
         <GameBoardWithInjection
           data={[]}
@@ -42,20 +40,7 @@ describe("<GameBoard/>", function() {
   });
 
   describe("Better Luck Message", function() {
-
     it("is shown when isGameLost is true", function(done) {
-
-      const gameBoardModule = require("inject-loader!../../src/components/game-board");
-
-      const GameBoardWithInjection = gameBoardModule({
-        "../containers/colour-select-container": {
-          default: () => (
-            <ColourSelect
-              onColourSelected={(c: Colour) => { return; }}
-              availableColours={List()} />),
-        },
-      }).default;
-
       const wrapper = shallow(
         <GameBoardWithInjection
           data={[]}

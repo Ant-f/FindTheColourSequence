@@ -1,7 +1,7 @@
 // tslint:disable:only-arrow-functions
 
 import { expect } from "chai";
-import { fromJS, List } from "immutable";
+import { List } from "immutable";
 import { given } from "mocha-testdata";
 import * as TypeMoq from "typemoq";
 import AppState from "../../src/model/app-state";

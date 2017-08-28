@@ -1,10 +1,9 @@
 // tslint:disable:only-arrow-functions
 
 import { expect } from "chai";
-import { fromJS, Map, Set } from "immutable";
+import { Map } from "immutable";
 import { given } from "mocha-testdata";
 import generateTargetSequence from "../../src/helpers/target-sequence-generator";
-import AppState from "../../src/model/app-state";
 import { Colour } from "../../src/model/colour";
 
 describe("Target Sequence Generator", function() {

@@ -47,7 +47,7 @@ module.exports = {
   plugins: [
     new webpack.SourceMapDevToolPlugin({
       filename: null, // inline sourcemap
-      test: /\.(ts|js)($|\?)/i // case-insensitive match for ts/js files
+      test: /\.(tsx?|js)($|\?)/i // case-insensitive match for ts/js files
     }),
     new webpack.WatchIgnorePlugin([
       /css\.d\.ts$/
