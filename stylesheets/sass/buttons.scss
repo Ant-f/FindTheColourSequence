@@ -9,3 +9,11 @@
     text-shadow: 0em 0em 1em $accent
   }
 }
+
+.hover-halo {
+  transition: box-shadow 0.1s linear;
+
+  &:hover {
+    box-shadow: 0em 0em 1em 0.3em $accent;
+  }
+}

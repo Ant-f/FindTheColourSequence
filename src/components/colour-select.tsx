@@ -1,9 +1,20 @@
 import * as React from "react";
 import {colourSelectInnerMap, colourSelectWrapperMap} from "../../stylesheets/classname-maps";
+import * as buttons from "../../stylesheets/sass/buttons.scss";
 import * as styles from "../../stylesheets/sass/colour-select.scss";
+import classes from "../helpers/classes";
+import { Colour } from "../model/colour";
 import { IDispatchProps, IStateProps } from "../props/colour-select-props";
 
 type CombinedProps = IDispatchProps & IStateProps;
+
+const getClassNames = (colour: Colour): string => {
+  const classNames = classes(
+    buttons.hoverHalo,
+    colourSelectWrapperMap.get(colour));
+
+  return classNames;
+};
 
 export default class ColourSelect extends React.Component<CombinedProps> {
   public render() {
@@ -12,7 +23,7 @@ export default class ColourSelect extends React.Component<CombinedProps> {
         {
           this.props.availableColours.map((colour, key) =>
             <button
-              className={colourSelectWrapperMap.get(colour)}
+              className={getClassNames(colour)}
               disabled={this.props.isGameOver}
               key={key}
               onClick={(e) => this.props.onColourSelected(colour)}>

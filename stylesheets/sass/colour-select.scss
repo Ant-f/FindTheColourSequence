@@ -7,7 +7,6 @@ $inverse-gradient-angle: $gradient-angle + 180deg;
 
 @mixin wrapper($highlight, $lowlight) {
   @include board-token($large-token);
-  @include hover-halo();
   background-image: linear-gradient($gradient-angle, $highlight, $lowlight);
   display: flex;
   justify-content: center;

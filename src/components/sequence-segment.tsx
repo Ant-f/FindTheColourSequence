@@ -1,11 +1,21 @@
 import * as React from "react";
 import { sequenceSegmentsMap } from "../../stylesheets/classname-maps";
+import * as buttons from "../../stylesheets/sass/buttons.scss";
 import * as styles from "../../stylesheets/sass/sequence-segments.scss";
 import classes from "../helpers/classes";
 import { Colour } from "../model/colour";
 import { IDispatchProps, IOwnProps, IStateProps } from "../props/sequence-segment-props";
 
 type CombinedProps = IDispatchProps & IOwnProps & IStateProps;
+
+const getClassNames = (colour: Colour): string => {
+  const classNames = classes(
+    buttons.hoverHalo,
+    styles.large,
+    sequenceSegmentsMap.get(colour));
+
+  return classNames;
+};
 
 export default class SequenceSegment extends React.PureComponent<CombinedProps> {
   public render() {
@@ -28,9 +38,7 @@ export default class SequenceSegment extends React.PureComponent<CombinedProps> 
         </div>
 
         <button
-          className={classes(
-            styles.large,
-            sequenceSegmentsMap.get(this.props.colour))}
+          className={getClassNames(this.props.colour)}
           onClick={(e) => this.props.onPositionSelected(
             this.props.attemptId,
             this.props.segmentId)}>

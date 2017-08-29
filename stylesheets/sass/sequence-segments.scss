@@ -30,7 +30,6 @@ $animation-duration: 0.5s;
 
 .large {
   @include board-token($large-token);
-  @include hover-halo();
 }
 
 .small {
