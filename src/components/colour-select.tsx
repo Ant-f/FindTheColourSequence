@@ -13,6 +13,7 @@ export default class ColourSelect extends React.Component<CombinedProps> {
           this.props.availableColours.map((colour, key) =>
             <button
               className={colourSelectWrapperMap.get(colour)}
+              disabled={this.props.isGameOver}
               key={key}
               onClick={(e) => this.props.onColourSelected(colour)}>
               <div

@@ -7,4 +7,5 @@ export interface IDispatchProps {
 
 export interface IStateProps {
   availableColours: List<Colour>;
+  isGameOver: boolean;
 }

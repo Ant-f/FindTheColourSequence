@@ -17,7 +17,8 @@ describe("<GameBoard/>", function() {
       default: () => (
         <ColourSelect
           onColourSelected={(c: Colour) => { return; }}
-          availableColours={List()} />),
+          availableColours={List()}
+          isGameOver={false} />),
     },
   }).default;
 
