@@ -8,9 +8,9 @@ import { IDispatchProps, IStateProps } from "../props/colour-select-props";
 
 type CombinedProps = IDispatchProps & IStateProps;
 
-const getClassNames = (colour: Colour): string => {
+const getClassNames = (colour: Colour, isGameOver: boolean): string => {
   const classNames = classes(
-    buttons.hoverHalo,
+    isGameOver ? null : buttons.hoverHalo,
     colourSelectWrapperMap.get(colour));
 
   return classNames;
@@ -23,7 +23,7 @@ export default class ColourSelect extends React.Component<CombinedProps> {
         {
           this.props.availableColours.map((colour, key) =>
             <button
-              className={getClassNames(colour)}
+              className={getClassNames(colour, this.props.isGameOver)}
               disabled={this.props.isGameOver}
               key={key}
               onClick={(e) => this.props.onColourSelected(colour)}>
