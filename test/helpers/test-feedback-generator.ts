@@ -34,8 +34,30 @@ const test3: ITestParameters = {
   target: [Colour.Black, Colour.Blue, Colour.Green, Colour.Purple],
 };
 
+const test4: ITestParameters = {
+  attempt: [Colour.White, Colour.White, Colour.Black, Colour.Black],
+  expectedBlack: 3,
+  expectedWhite: 0,
+  target: [Colour.White, Colour.White, Colour.White, Colour.Black],
+};
+
+const test5: ITestParameters = {
+  attempt: [Colour.Red, Colour.Green, Colour.Blue, Colour.Blue],
+  expectedBlack: 0,
+  expectedWhite: 2,
+  target: [Colour.Blue, Colour.Blue, Colour.Yellow, Colour.Black],
+};
+
+const test6: ITestParameters = {
+  attempt: [Colour.Red, Colour.Green, Colour.Blue, Colour.Blue],
+  expectedBlack: 1,
+  expectedWhite: 1,
+  target: [Colour.Blue, Colour.Black, Colour.Yellow, Colour.Blue],
+};
+
 describe("Feedback Generator", function() {
-  given(test1, test2, test3).it("returns appropriate feedback", function(testCase: ITestParameters) {
+  given(test1, test2, test3, test4, test5, test6)
+    .it("returns appropriate feedback", function(testCase: ITestParameters) {
 
     // Arrange
 
