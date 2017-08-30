@@ -15,6 +15,7 @@ const mapStateToProps = (state: AppState): IStateProps => {
   return {
     activeAttemptId: state.currentAttempt,
     activeSegmentId: state.currentAttemptSegment,
+    isGameOver: state.isGameLost || state.isGameWon,
   };
 };
 

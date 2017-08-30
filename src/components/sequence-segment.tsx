@@ -8,9 +8,9 @@ import { IDispatchProps, IOwnProps, IStateProps } from "../props/sequence-segmen
 
 type CombinedProps = IDispatchProps & IOwnProps & IStateProps;
 
-const getClassNames = (colour: Colour): string => {
+const getClassNames = (colour: Colour, isGameOver: boolean): string => {
   const classNames = classes(
-    buttons.hoverHalo,
+    isGameOver ? null : buttons.hoverHalo,
     styles.large,
     sequenceSegmentsMap.get(colour));
 
@@ -38,7 +38,8 @@ export default class SequenceSegment extends React.PureComponent<CombinedProps> 
         </div>
 
         <button
-          className={getClassNames(this.props.colour)}
+          className={getClassNames(this.props.colour, this.props.isGameOver)}
+          disabled={this.props.isGameOver}
           onClick={(e) => this.props.onPositionSelected(
             this.props.attemptId,
             this.props.segmentId)}>

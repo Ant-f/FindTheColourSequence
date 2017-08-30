@@ -13,4 +13,5 @@ export interface IOwnProps {
 export interface IStateProps {
   activeAttemptId: number;
   activeSegmentId: number;
+  isGameOver: boolean;
 }
