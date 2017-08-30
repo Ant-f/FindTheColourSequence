@@ -17,6 +17,15 @@ import TitleBadge from "./title-badge";
 
 type CombinedProps = BoardProps.IOwnProps & BoardProps.IStateProps & ModalProviderProps;
 
+const getNewGameButtonClasses = (isGameLost: boolean, isGameWon: boolean) => {
+  const classNames = classes(
+    buttonStyles.boardButton,
+    isGameLost || isGameWon ? letteringStyles.pulsingText : null,
+    letteringStyles.defaultText);
+
+  return classNames;
+};
+
 export default class extends React.Component<CombinedProps> {
 
   public componentDidUpdate(prevProps: CombinedProps, prevState: CombinedProps) {
@@ -77,7 +86,9 @@ export default class extends React.Component<CombinedProps> {
           <TitleBadge />
 
           <button
-            className={classes(buttonStyles.boardButton, letteringStyles.defaultText)}
+            className={getNewGameButtonClasses(
+              this.props.isGameLost,
+              this.props.isGameWon)}
             onClick={this.props.onNewGamePrompt}>
 
             New Game

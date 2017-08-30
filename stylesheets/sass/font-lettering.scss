@@ -2,6 +2,7 @@
 @import "partials/durations";
 @import "partials/fonts";
 
+$default-board-text-colour: darken($board-lowlight, 4%);
 $font-size: 1.3em;
 
 .newWord {
@@ -43,7 +44,26 @@ $font-size: 1.3em;
 
 .default-text {
   @include set-font-family();
-  color: darken($board-lowlight, 4%)
+  color: $default-board-text-colour;
+}
+
+@keyframes pulsing-text-colour {
+  0% {
+    color: $default-board-text-colour;
+  }
+  50% {
+    color: gold;
+  }
+  100% {
+    color: $default-board-text-colour;
+  }
+}
+
+.pulsing-text {
+  animation-name: pulsing-text-colour;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
 
 .game-over-text-container {
