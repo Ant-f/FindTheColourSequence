@@ -32,7 +32,7 @@ export default class SequenceSegment extends React.PureComponent<CombinedProps> 
 
         <div className={classes(
           styles.haloContainer,
-          isActive ? styles.visible : styles.invisible)}>
+          isActive && !this.props.isGameOver ? styles.visible : styles.invisible)}>
 
           <div className={styles.pulsingHalo} />
         </div>

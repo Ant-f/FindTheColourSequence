@@ -70,6 +70,19 @@ describe("<SequenceSegment/>", function() {
 
       expect(wrapper.find(pulsingHalo).exists()).to.equal(false);
     });
+
+    it("is not rendered when game is over", function() {
+      const wrapper = shallow(<SequenceSegment
+        onPositionSelected={(a: number, s: number) => { return; }}
+        attemptId={0}
+        colour={Colour.None}
+        segmentId={0}
+        activeAttemptId={0}
+        activeSegmentId={0}
+        isGameOver={true} />);
+
+      expect(wrapper.find(pulsingHalo).exists()).to.equal(false);
+    });
   });
 
   describe("segment selection", function() {
