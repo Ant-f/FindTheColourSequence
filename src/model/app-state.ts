@@ -1,5 +1,5 @@
 import { fromJS, List, Map, Range } from "immutable";
-import GenerateTargetSequence from "../helpers/target-sequence-generator";
+import generateTargetSequence from "../helpers/target-sequence-generator";
 import { Colour } from "./colour";
 import ISequenceAttemptData from "./sequence-attempt-data";
 
@@ -50,12 +50,10 @@ export default class AppState {
     }
     else {
       this.stateMap = fromJS({
-        currentAttempt: 0,
-        currentAttemptSegment: 0,
-        gameState: initializeGameState(defaultMaxAttemptsCount, defaultSequenceColourCount),
-        isGameLost: false,
-        isGameWon: false,
-        targetSequence: GenerateTargetSequence(defaultSequenceColourCount),
+        [currentAttemptKey]: 0,
+        [currentAttemptSegmentKey]: 0,
+        [gameStateKey]: initializeGameState(defaultMaxAttemptsCount, defaultSequenceColourCount),
+        [targetSequenceKey]: generateTargetSequence(defaultSequenceColourCount),
       });
     }
   }
