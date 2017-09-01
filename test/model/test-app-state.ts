@@ -111,35 +111,40 @@ describe("AppState", function() {
     expect(updatedState.targetSequence).to.equal(newValue);
   });
 
-  it("is initialized with target sequence", function() {
+  given(true, false)
+    .it("is initialized with target sequence", function(allowDuplicates: boolean) {
 
     // Arrange
 
     const appStateModule = require("inject-loader!../../src/model/app-state");
 
-    const targetSequenceGeneratorMock: TypeMoq.IMock<(n: number) => List<Colour>>
-      = TypeMoq.Mock.ofInstance((n: number) => List<Colour>());
+    const sequenceGeneratorMock: TypeMoq.IMock<(n: number, d: boolean) => List<Colour>>
+      = TypeMoq.Mock.ofInstance((n: number, d: boolean) => List<Colour>());
 
     const targetSequence = List<Colour>([Colour.Yellow, Colour.Blue, Colour.Red]);
 
-    targetSequenceGeneratorMock
-      .setup((tsg) => tsg(TypeMoq.It.isAnyNumber()))
+    sequenceGeneratorMock
+      .setup((tsg) => tsg(
+        TypeMoq.It.isAnyNumber(),
+        TypeMoq.It.isAny()))
       .returns(() => targetSequence);
 
     const AppStateWithInjection = appStateModule({
       "../helpers/target-sequence-generator": {
-        default: targetSequenceGeneratorMock.object,
+        default: sequenceGeneratorMock.object,
       },
     }).default;
 
     // Act
 
-    const appState = new AppStateWithInjection() as AppState;
+    const appState = new AppStateWithInjection(null, allowDuplicates) as AppState;
 
     // Assert
 
-    targetSequenceGeneratorMock.verify((tsg) =>
-      tsg(TypeMoq.It.isAnyNumber()),
+    sequenceGeneratorMock
+      .verify((tsg) => tsg(
+        TypeMoq.It.isAnyNumber(),
+        TypeMoq.It.isValue(allowDuplicates)),
       TypeMoq.Times.once());
 
     expect(appState.targetSequence).to.equal(targetSequence);

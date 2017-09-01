@@ -44,7 +44,7 @@ const initializeGameState = (maxAttemptsCount: number, sequenceColourCount: numb
 export default class AppState {
   private stateMap = Map<string, any>();
 
-  constructor(rawState: StateMap = null) {
+  constructor(rawState: StateMap = null, allowDuplicatesInTarget: boolean = false) {
     if (rawState) {
       this.stateMap = rawState;
     }
@@ -52,8 +52,12 @@ export default class AppState {
       this.stateMap = fromJS({
         [currentAttemptKey]: 0,
         [currentAttemptSegmentKey]: 0,
-        [gameStateKey]: initializeGameState(defaultMaxAttemptsCount, defaultSequenceColourCount),
-        [targetSequenceKey]: generateTargetSequence(defaultSequenceColourCount),
+        [gameStateKey]: initializeGameState(
+          defaultMaxAttemptsCount,
+          defaultSequenceColourCount),
+        [targetSequenceKey]: generateTargetSequence(
+          defaultSequenceColourCount,
+          allowDuplicatesInTarget),
       });
     }
   }

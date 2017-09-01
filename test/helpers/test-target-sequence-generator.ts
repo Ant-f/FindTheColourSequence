@@ -11,28 +11,31 @@ describe("Target Sequence Generator", function() {
 
     // Arrange, Act
 
-    const result = generateTargetSequence(arg);
+    const result = generateTargetSequence(arg, false);
 
     // Assert
 
     expect(result.size).to.equal(arg);
   });
 
-  it("does not output sequence with duplicates colours", function() {
+  given(true, false)
+    .it("generates sequence with duplicate colours only if specified",
+    function(allowDuplicates: boolean) {
 
-    // Arrange
+      // Arrange
 
-    const colourCount = Map<Colour, Colour>(Colour)
-      .filter((colour) => colour !== Colour.None)
-      .size;
+      const colourCount = Map<Colour, Colour>(Colour)
+        .filter((colour) => colour !== Colour.None)
+        .size;
 
-    // Act
+      // Act
 
-    const result = generateTargetSequence(colourCount);
+      const result = generateTargetSequence(colourCount, allowDuplicates);
 
-    // Assert
+      // Assert
 
-    const colourSet = result.toSet();
-    expect(colourSet.size).to.equal(result.size);
-  });
+      const colourSet = result.toSet();
+      const hasDuplicates = colourSet.size !== result.size;
+      expect(hasDuplicates).to.equal(allowDuplicates);
+    });
 });

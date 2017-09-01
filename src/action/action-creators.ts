@@ -16,8 +16,9 @@ export const onPositionSelected = (attempt: number, segment: number): Actions.IP
   };
 };
 
-export const onResetCurrentGame = (): Actions.IResetCurrentGame => {
+export const onResetCurrentGame = (allowDuplicates: boolean): Actions.IResetCurrentGame => {
   return {
+    payload: allowDuplicates,
     type: ActionTypes.ResetCurrentGame,
   };
 };

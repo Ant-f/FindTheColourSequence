@@ -6,8 +6,8 @@ import { IDispatchProps, IOwnProps } from "../props/new-game-panel-props";
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): IDispatchProps => {
   return {
-    onResetCurrentGame: () => dispatch(
-      actions.onResetCurrentGame(),
+    onResetCurrentGame: (allowDuplicatesInTargetSequence: boolean) => dispatch(
+      actions.onResetCurrentGame(allowDuplicatesInTargetSequence),
     ),
   };
 };

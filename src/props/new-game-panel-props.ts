@@ -1,5 +1,5 @@
 export interface IDispatchProps {
-  onResetCurrentGame: () => void;
+  onResetCurrentGame: (allowDuplicatesInTargetSequence: boolean) => void;
 }
 
 export interface IOwnProps {

@@ -2,6 +2,7 @@
 
 import { expect } from "chai";
 import { List } from "immutable";
+import { given } from "mocha-testdata";
 import * as TypeMoq from "typemoq";
 import * as actionCreators from "../../src/action/action-creators";
 import { ReduxAction } from "../../src/action/actions";
@@ -196,7 +197,7 @@ describe("Reducer", function() {
         .setCurrentAttemptSegment(2)
         .setColourAtCurrentPosition(Colour.Orange);
 
-      const action = actionCreators.onResetCurrentGame();
+      const action = actionCreators.onResetCurrentGame(false);
 
       // Act
 
@@ -215,5 +216,26 @@ describe("Reducer", function() {
       expect(updatedState.isGameLost).to.equal(false);
       expect(updatedState.isGameWon).to.equal(false);
     });
+
+    given(true, false)
+      .it("generates sequence with duplicate colours if specified",
+      function(allowDuplicates: boolean) {
+
+        // Arrange
+
+        const state = new AppState();
+        const action = actionCreators.onResetCurrentGame(allowDuplicates);
+
+        // Act
+
+        const updatedState = reducer(state, action);
+
+        // Assert
+
+        const sequenceColours = updatedState.targetSequence;
+        const uniqueSequenceColours = sequenceColours.toSet();
+        const hasDuplicates = sequenceColours.size !== uniqueSequenceColours.size;
+        expect(hasDuplicates).to.equal(allowDuplicates);
+      });
   });
 });
