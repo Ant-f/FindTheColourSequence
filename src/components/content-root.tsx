@@ -7,23 +7,25 @@ import { IOwnProps as BoardOwnProps } from "../props/game-board-props";
 import withModalProvider from "./modal-provider";
 
 const GameBoard = withModalProvider<BoardOwnProps>(GameBoardBase);
-const activePanelKey = "activePanel";
 const defaultPanel = styles.gameBoardHost;
 
-export default class extends React.PureComponent {
+interface IContentRootState {
+  activePanel: string;
+}
+
+export default class extends React.PureComponent<null, IContentRootState> {
 
   public componentWillMount() {
-    this.setState({ [activePanelKey]: defaultPanel });
+    this.setState({ activePanel: defaultPanel });
   }
 
   public render() {
-    const state: { [key: string]: string } = this.state;
     return (
       <section className={styles.rootContainer}>
-        <div className={classes(styles.rotatingPanel, state[activePanelKey])}>
+        <div className={classes(styles.rotatingPanel, this.state.activePanel)}>
 
           <div className={styles.gameBoardHost}>
-            <GameBoard onNewGamePrompt={this.showNewGamePanel}/>
+            <GameBoard onNewGamePrompt={this.showNewGamePanel} />
           </div>
 
           <div className={styles.newGamePanelHost}>
@@ -36,10 +38,10 @@ export default class extends React.PureComponent {
   }
 
   private showGameBoardPanel = () => {
-    this.setState({ [activePanelKey]: defaultPanel });
+    this.setState({ activePanel: defaultPanel });
   }
 
   private showNewGamePanel = () => {
-    this.setState({ [activePanelKey]: styles.newGamePanelHost });
+    this.setState({ activePanel: styles.newGamePanelHost });
   }
 }
