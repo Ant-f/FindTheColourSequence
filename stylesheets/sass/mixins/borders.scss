@@ -1,0 +1,12 @@
+@import "partials/colours";
+
+$opacity: 0.6;
+
+@mixin emboss {
+  border-bottom-color: rgba($board-highlight, $opacity);
+  border-left-color: rgba($board-lowlight, $opacity);
+  border-right-color: rgba($board-highlight, $opacity);
+  border-style: solid;
+  border-top-color: rgba($board-lowlight, $opacity);
+  border-width: 0.07em;
+}

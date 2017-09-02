@@ -1,3 +1,4 @@
+@import "mixins/borders";
 @import "partials/colours";
 @import "partials/dimensions";
 
@@ -26,11 +27,5 @@
 }
 
 .separator {
-  border-bottom-color: $board-highlight;
-  border-left-color: $board-lowlight;
-  border-right-color: $board-highlight;
-  border-style: solid;
-  border-top-color: $board-lowlight;
-  border-width: 0.07em;
-  opacity: 0.6;
+  @include emboss();
 }

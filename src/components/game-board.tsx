@@ -6,6 +6,7 @@ import * as boardStyles from "../../stylesheets/sass/game-board.scss";
 import * as segmentStyles from "../../stylesheets/sass/sequence-segments.scss";
 import SequenceAttempt from "../components/sequence-attempt";
 import ColourSelect from "../containers/colour-select-container";
+import TargetSequence from "../containers/target-sequence-container";
 import classes from "../helpers/classes";
 import { Colour } from "../model/colour";
 import * as BoardProps from "../props/game-board-props";
@@ -79,6 +80,8 @@ export default class extends React.Component<CombinedProps> {
               </div>,
             )
           }
+
+          <TargetSequence />
         </div>
 
         <div className={boardStyles.boardFooter}>
