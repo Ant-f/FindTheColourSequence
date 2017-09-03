@@ -18,7 +18,7 @@ export default class extends React.Component<IStateProps> {
     return (
       <div className={styles.shieldedContent}>
         <SequenceAttempt
-          attemptId={6}
+          attemptId={-1}
           colours={this.props.targetSequence}>
         </SequenceAttempt>
 
