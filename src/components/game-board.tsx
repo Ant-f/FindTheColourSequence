@@ -1,6 +1,7 @@
 import * as React from "react";
 import { sequenceSegmentsMap } from "../../stylesheets/classname-maps";
 import * as buttonStyles from "../../stylesheets/sass/buttons.scss";
+import * as panelStyles from "../../stylesheets/sass/content-panel.scss";
 import * as letteringStyles from "../../stylesheets/sass/font-lettering.scss";
 import * as boardStyles from "../../stylesheets/sass/game-board.scss";
 import * as segmentStyles from "../../stylesheets/sass/sequence-segments.scss";
@@ -84,7 +85,7 @@ export default class extends React.Component<CombinedProps> {
           <TargetSequence />
         </div>
 
-        <div className={boardStyles.boardFooter}>
+        <div className={panelStyles.boardFooter}>
           <ColourSelect />
           <TitleBadge />
 

@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as buttons from "../../stylesheets/sass/buttons.scss";
+import * as panelStyles from "../../stylesheets/sass/content-panel.scss";
 import * as lettering from "../../stylesheets/sass/font-lettering.scss";
-import * as gameBoard from "../../stylesheets/sass/game-board.scss";
 import classes from "../helpers/classes";
 import NewGamePanelProps from "../props/new-game-panel-props";
 import ContentPanel from "./content-panel";
@@ -34,7 +34,7 @@ export default class extends React.PureComponent<NewGamePanelProps, INewGamePane
             </input>
           </label>
 
-          <div className={gameBoard.boardFooter}>
+          <div className={panelStyles.boardFooter}>
             <button
               className={classes(buttons.boardButton, lettering.defaultText)}
               onClick={this.ResetCurrentGame}>

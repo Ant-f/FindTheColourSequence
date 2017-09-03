@@ -1,12 +1,5 @@
 @import "mixins/borders";
-@import "partials/colours";
 @import "partials/dimensions";
-
-.board-footer {
-  align-items: center;
-  display: flex;
-  margin-top: 1.2em;
-}
 
 .column-content {
   align-items: center;

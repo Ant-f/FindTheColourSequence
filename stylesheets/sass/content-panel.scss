@@ -9,6 +9,12 @@
   width: 100%;
 }
 
+.board-footer {
+  align-items: center;
+  display: flex;
+  margin-top: 1.2em;
+}
+
 .noise-overlay {
   align-items: center;
   background-image: url("../../images/noise150.png");
