@@ -221,21 +221,33 @@ describe("Reducer", function() {
       .it("generates sequence with duplicate colours if specified",
       function(allowDuplicates: boolean) {
 
+        // Colour sequence is random; repeat test up to specified maximum iterations
+        const maxAttempts = 5;
+        let currentAttempt = 0;
+        let testSuccess = false;
+
         // Arrange
 
         const state = new AppState();
         const action = actionCreators.onResetCurrentGame(allowDuplicates);
 
-        // Act
+        while (!testSuccess && currentAttempt < maxAttempts) {
 
-        const updatedState = reducer(state, action);
+          // Act
 
-        // Assert
+          const updatedState = reducer(state, action);
 
-        const sequenceColours = updatedState.targetSequence;
-        const uniqueSequenceColours = sequenceColours.toSet();
-        const hasDuplicates = sequenceColours.size !== uniqueSequenceColours.size;
-        expect(hasDuplicates).to.equal(allowDuplicates);
+          // Assert
+
+          const sequenceColours = updatedState.targetSequence;
+          const uniqueSequenceColours = sequenceColours.toSet();
+          const hasDuplicates = sequenceColours.size !== uniqueSequenceColours.size;
+
+          testSuccess = hasDuplicates === allowDuplicates;
+          currentAttempt++;
+        }
+
+        expect(testSuccess).to.equal(true);
       });
   });
 });
