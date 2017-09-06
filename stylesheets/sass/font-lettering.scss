@@ -47,6 +47,11 @@ $font-size: 1.3em;
   color: $default-board-text-colour;
 }
 
+.alt-text {
+  @include set-font-family();
+  color: white;
+}
+
 @keyframes pulsing-text-colour {
   0% {
     color: $default-board-text-colour;
@@ -66,11 +71,10 @@ $font-size: 1.3em;
   animation-timing-function: linear;
 }
 
-.game-over-text-container {
-  @include set-font-family();
+.game-over-text {
+  @extend .alt-text;
   animation-duration: $win-text-pop-in-duration;
   animation-name: pop-in;
-  color: white;
 }
 
 .f {

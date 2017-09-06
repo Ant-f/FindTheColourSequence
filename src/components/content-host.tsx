@@ -1,6 +1,8 @@
 import * as React from "react";
-import * as styles from "../../stylesheets/sass/page-background.scss";
+import * as fontStyles from "../../stylesheets/sass/font-lettering.scss";
+import * as pageStyles from "../../stylesheets/sass/page-background.scss";
 import * as context from "../context/content-host-context";
+import classes from "../helpers/classes";
 
 interface IContentHostState {
   modalContent: JSX.Element;
@@ -24,18 +26,25 @@ export default class ContentHost extends React.Component<null, IContentHostState
   public render() {
     const showModalContent = this.state.modalContent;
     return (
-      <div className={styles.pageBackground}>
+      <div className={pageStyles.pageBackground}>
         {
-          <div className={showModalContent ? styles.blurContent : null}>
+          <div className={showModalContent ? pageStyles.blurContent : null}>
             {
               this.props.children
             }
           </div>
         }
+        <a
+          className={classes(fontStyles.altText, pageStyles.moreInfoLink)}
+          href={"https://github.com/Ant-f/FindTheColourSequence"}>
+
+          Copyright © 2017 Anthony Fung
+
+        </a>
         {
           showModalContent ?
             <div
-              className={styles.modalHost}
+              className={pageStyles.modalHost}
               onClick={() => {
                 this.setState({ modalContent: null });
               }}>

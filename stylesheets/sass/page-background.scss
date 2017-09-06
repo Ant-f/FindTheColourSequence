@@ -5,6 +5,15 @@ $background-lowlight: #121212;
   filter: blur(0.3em);
 }
 
+.more-info-link {
+  bottom: 0%;
+  font-size: 0.75em;
+  margin-bottom: 0.5em;
+  margin-right: 0.5em;
+  position: fixed;
+  right: 0%;
+}
+
 .page-background {
   align-items: center;
   background: black;

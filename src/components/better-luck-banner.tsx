@@ -6,7 +6,7 @@ export default class extends React.PureComponent {
 
   public render() {
     return (
-      <div className={classes(lettering.gameOverTextContainer, lettering.titleBadge)}>
+      <div className={classes(lettering.gameOverText, lettering.titleBadge)}>
         <span className={lettering.winText}>Better Luck</span>
         <span className={lettering.winText}>Next Time...</span>
         <span>(Click to Continue)</span>

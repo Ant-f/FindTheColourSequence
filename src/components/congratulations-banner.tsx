@@ -7,7 +7,7 @@ export default class extends React.PureComponent {
 
   public render() {
     return (
-      <div className={classes(lettering.gameOverTextContainer, lettering.titleBadge)}>
+      <div className={classes(lettering.gameOverText, lettering.titleBadge)}>
         <div className={lettering.winText}>
           <span className={classes(rotations.rotate00, lettering.c)}>C</span>
           <span className={classes(rotations.rotate01, lettering.o)}>o</span>
