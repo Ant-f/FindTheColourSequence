@@ -96,7 +96,7 @@ describe("<GameBoard/>", function() {
       );
 
       const newGameButton = wrapper.find({ children: "New Game" });
-      const isPulsing = newGameButton.hasClass(letteringStyles.pulsingText);
+      const isPulsing = newGameButton.hasClass(letteringStyles.pulsingTextColour);
 
       expect(isPulsing).to.equal(testCase.shouldPulse);
     });

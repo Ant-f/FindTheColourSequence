@@ -5,11 +5,12 @@
 $default-board-text-colour: darken($board-lowlight, 4%);
 $font-size: 1.3em;
 
-.newWord {
+// Applies a left margin, suitable for inter-word spacing
+.new-word {
   margin-left: ($font-size / 2.5);
 }
 
-.titleBadge {
+.title-badge {
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -29,42 +30,44 @@ $font-size: 1.3em;
   }
 }
 
-.winText {
+.win-text {
   display: flex;
   font-size: $font-size * 3;
   letter-spacing: 0.2em;
 }
 
-.titleBadgeText {
+.title-badge-text {
   margin: $font-size * -0.3;
   display: flex;
   font-size: $font-size;
 }
 
+// Text to be displayed on the game board surface
 .default-text {
   @include set-font-family();
   color: $default-board-text-colour;
 }
 
+// Text on surfaces other than the game board, e.g. modal overlay
 .alt-text {
   @include set-font-family();
   color: white;
 }
 
-@keyframes pulsing-text-colour {
-  0% {
-    color: $default-board-text-colour;
+.pulsing-text-colour {
+  @keyframes pulsing-colour {
+    0% {
+      color: $default-board-text-colour;
+    }
+    50% {
+      color: gold;
+    }
+    100% {
+      color: $default-board-text-colour;
+    }
   }
-  50% {
-    color: gold;
-  }
-  100% {
-    color: $default-board-text-colour;
-  }
-}
 
-.pulsing-text {
-  animation-name: pulsing-text-colour;
+  animation-name: pulsing-colour;
   animation-duration: 4s;
   animation-iteration-count: infinite;
   animation-timing-function: linear;

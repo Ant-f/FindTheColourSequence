@@ -21,7 +21,7 @@ type CombinedProps = BoardProps.IOwnProps & BoardProps.IStateProps & ModalProvid
 const getNewGameButtonClasses = (isGameLost: boolean, isGameWon: boolean) => {
   const classNames = classes(
     buttonStyles.boardButton,
-    isGameLost || isGameWon ? letteringStyles.pulsingText : null,
+    isGameLost || isGameWon ? letteringStyles.pulsingTextColour : null,
     letteringStyles.defaultText);
 
   return classNames;
