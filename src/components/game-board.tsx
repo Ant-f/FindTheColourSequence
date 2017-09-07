@@ -15,7 +15,6 @@ import ModalProviderProps from "../props/modal-provider-props";
 import BetterLuck from "./better-luck-banner";
 import Congratulations from "./congratulations-banner";
 import ContentPanel from "./content-panel";
-import TitleBadge from "./title-badge";
 
 type CombinedProps = BoardProps.IOwnProps & BoardProps.IStateProps & ModalProviderProps;
 
@@ -87,7 +86,6 @@ export default class extends React.Component<CombinedProps> {
 
         <div className={panelStyles.boardFooter}>
           <ColourSelect />
-          <TitleBadge />
 
           <button
             className={getNewGameButtonClasses(
