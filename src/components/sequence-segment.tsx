@@ -8,9 +8,9 @@ import { IDispatchProps, IOwnProps, IStateProps } from "../props/sequence-segmen
 
 type CombinedProps = IDispatchProps & IOwnProps & IStateProps;
 
-const getClassNames = (colour: Colour, isGameOver: boolean): string => {
+const getClassNames = (colour: Colour, canSelect: boolean): string => {
   const classNames = classes(
-    isGameOver ? null : buttons.hoverHalo,
+    canSelect ? buttons.hoverHalo : null,
     styles.large,
     sequenceSegmentsMap.get(colour));
 
@@ -22,6 +22,10 @@ export default class SequenceSegment extends React.PureComponent<CombinedProps> 
     const isActive =
       this.props.attemptId === this.props.activeAttemptId &&
       this.props.segmentId === this.props.activeSegmentId;
+
+    const canSelect =
+      this.props.attemptId === this.props.activeAttemptId &&
+      !this.props.isGameOver;
 
     return (
       <div className={styles.zStack}>
@@ -38,8 +42,8 @@ export default class SequenceSegment extends React.PureComponent<CombinedProps> 
         </div>
 
         <button
-          className={getClassNames(this.props.colour, this.props.isGameOver)}
-          disabled={this.props.isGameOver}
+          className={getClassNames(this.props.colour, canSelect)}
+          disabled={!canSelect}
           onClick={(e) => this.props.onPositionSelected(
             this.props.attemptId,
             this.props.segmentId)}>

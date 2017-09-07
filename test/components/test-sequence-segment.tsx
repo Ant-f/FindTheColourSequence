@@ -100,5 +100,35 @@ describe("<SequenceSegment/>", function() {
       const allDisabled = wrapper.find("button").every("[disabled=true]");
       expect(allDisabled).to.equal(isGameOver);
     });
+
+    it("is disabled if attempt does not match active attempt", function() {
+
+      const wrapper = shallow(<SequenceSegment
+        onPositionSelected={(a: number, s: number) => { return; }}
+        attemptId={1}
+        colour={Colour.None}
+        segmentId={1}
+        activeAttemptId={0}
+        activeSegmentId={0}
+        isGameOver={false} />);
+
+      const allDisabled = wrapper.find("button").every("[disabled=true]");
+      expect(allDisabled).to.equal(true);
+    });
+
+    it("is enabled if attempt matches active attempt", function() {
+
+      const wrapper = shallow(<SequenceSegment
+        onPositionSelected={(a: number, s: number) => { return; }}
+        attemptId={1}
+        colour={Colour.None}
+        segmentId={1}
+        activeAttemptId={1}
+        activeSegmentId={1}
+        isGameOver={false} />);
+
+      const allEnabled = wrapper.find("button").every("[disabled=false]");
+      expect(allEnabled).to.equal(true);
+    });
   });
 });
