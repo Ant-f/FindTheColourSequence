@@ -1,11 +1,12 @@
 const webpack = require('webpack');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.tsx",
   output: {
     filename: "bundle.js",
     path: __dirname + "/dist",
-    publicPath: "/dist"
+    publicPath: "./dist/"
   },
 
   resolve: {
@@ -14,34 +15,39 @@ module.exports = {
 
   module: {
     rules: [{
-        test: /\.tsx?$/,
-        loader: "awesome-typescript-loader"
-      }, {
-        test: /\.scss$/,
+      test: /\.tsx?$/,
+      loader: "awesome-typescript-loader"
+    }, {
+      test: /\.scss$/,
+      use: ExtractTextPlugin.extract({
         use: [{
-            loader: "style-loader" // creates style nodes from JS strings
-          }, {
-            loader: "typings-for-css-modules-loader",
-            options: {
-              camelCase: true,
-              modules: true,
-              namedExport: true,
-              scss: true
-            }
-          }, {
-            loader: "sass-loader"
+          loader: "typings-for-css-modules-loader",
+          options: {
+            camelCase: true,
+            modules: true,
+            namedExport: true,
+            scss: true
           }
-        ]
+        }, {
+          loader: "sass-loader",
+          options: {
+            sourceMap: true
+          }
+        }]
+      })
+    }, {
+      test: /\.(png)$/i,
+      use: [{
+        loader: "file-loader",
+        options: {
+          name: "[hash].[ext]",
+          outputPath: "images/",
+          publicPath: "../"
+        }
       }, {
-        test: /\.(png)$/i,
-        use: [{
-            loader: "file-loader"
-          }, {
-            loader: 'image-webpack-loader'
-          }
-        ]
-      }
-    ]
+        loader: "image-webpack-loader"
+      }]
+    }]
   },
 
   plugins: [
@@ -51,6 +57,7 @@ module.exports = {
     }),
     new webpack.WatchIgnorePlugin([
       /css\.d\.ts$/
-    ])
+    ]),
+    new ExtractTextPlugin("stylesheets/main.css")
   ]
 };
