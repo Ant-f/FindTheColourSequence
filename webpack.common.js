@@ -1,12 +1,13 @@
-const webpack = require('webpack');
+const CleanWebpackPlugin = require("clean-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const webpack = require('webpack');
 
 module.exports = {
   entry: "./src/index.tsx",
   output: {
     filename: "bundle.js",
     path: __dirname + "/dist",
-    publicPath: "./dist/"
+    publicPath: "/dist/"
   },
 
   resolve: {
@@ -51,9 +52,8 @@ module.exports = {
   },
 
   plugins: [
-    new webpack.SourceMapDevToolPlugin({
-      filename: null, // inline sourcemap
-      test: /\.(tsx?|js)($|\?)/i // case-insensitive match for ts/js files
+    new CleanWebpackPlugin(['dist'], {
+      root: __dirname
     }),
     new webpack.WatchIgnorePlugin([
       /css\.d\.ts$/
