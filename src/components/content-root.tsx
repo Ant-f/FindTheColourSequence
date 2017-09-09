@@ -21,7 +21,7 @@ export default class extends React.PureComponent<null, IContentRootState> {
 
   public render() {
     return (
-      <section className={styles.rootContainer}>
+      <section className={styles.contentContainer}>
         <div className={classes(styles.rotatingPanel, this.state.activePanel)}>
 
           <div className={styles.gameBoardHost}>
