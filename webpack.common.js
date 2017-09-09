@@ -2,62 +2,63 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const webpack = require('webpack');
 
-module.exports = {
-  entry: "./src/index.tsx",
-  output: {
-    filename: "bundle.js",
-    path: __dirname + "/dist",
-    publicPath: "/dist/"
-  },
+module.exports = function (isProduction) {
+  return {
+    entry: "./src/index.tsx",
+  
+    output: {
+      filename: "bundle.js",
+      path: __dirname + "/dist",
+      publicPath: "/dist/"
+    },
 
-  resolve: {
-    extensions: [".ts", ".tsx", ".js", ".json"]
-  },
+    resolve: {
+      extensions: [".ts", ".tsx", ".js", ".json"]
+    },
 
-  module: {
-    rules: [{
-      test: /\.tsx?$/,
-      loader: "awesome-typescript-loader"
-    }, {
-      test: /\.scss$/,
-      use: ExtractTextPlugin.extract({
+    module: {
+      rules: [{
+        test: /\.tsx?$/,
+        loader: "awesome-typescript-loader"
+      }, {
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+          use: [{
+            loader: "typings-for-css-modules-loader",
+            options: {
+              camelCase: true,
+              modules: true,
+              minimize: isProduction,
+              namedExport: true,
+              scss: true
+            }
+          }, {
+            loader: "sass-loader"
+          }]
+        })
+      }, {
+        test: /\.(png)$/i,
         use: [{
-          loader: "typings-for-css-modules-loader",
+          loader: "file-loader",
           options: {
-            camelCase: true,
-            modules: true,
-            namedExport: true,
-            scss: true
+            name: "[hash].[ext]",
+            outputPath: "images/",
+            publicPath: "../"
           }
         }, {
-          loader: "sass-loader",
-          options: {
-            sourceMap: true
-          }
+          loader: "image-webpack-loader"
         }]
-      })
-    }, {
-      test: /\.(png)$/i,
-      use: [{
-        loader: "file-loader",
-        options: {
-          name: "[hash].[ext]",
-          outputPath: "images/",
-          publicPath: "../"
-        }
-      }, {
-        loader: "image-webpack-loader"
       }]
-    }]
-  },
+    },
 
-  plugins: [
-    new CleanWebpackPlugin(['dist'], {
-      root: __dirname
-    }),
-    new webpack.WatchIgnorePlugin([
-      /css\.d\.ts$/
-    ]),
-    new ExtractTextPlugin("stylesheets/main.css")
-  ]
+    plugins: [
+      new CleanWebpackPlugin(['dist'], {
+        root: __dirname
+      }),
+      new webpack.WatchIgnorePlugin([
+        /css\.d\.ts$/
+      ]),
+      new ExtractTextPlugin("stylesheets/main.css")
+    ]
+  }
 };
