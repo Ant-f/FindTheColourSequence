@@ -8,13 +8,13 @@ $animation-duration: 0.5s;
   $animation-name: unique-id();
   @keyframes #{$animation-name} {
     0% {
-      transform: scale(1);
+      transform: scale3d(1, 1, 1);
     }
     50% {
-      transform: scale(1.1);
+      transform: scale3d(1.1, 1.1, 1);
     }
     100% {
-      transform: scale(1);
+      transform: scale3d(1, 1, 1);
     }
   }
   animation-duration: $animation-duration;
@@ -41,14 +41,14 @@ $animation-duration: 0.5s;
   @keyframes pulsing-halo {
     0% {
       opacity: 0;
-      transform: scale(1);
+      transform: scale3d(1, 1, 1);
     }
     50% {
       opacity: 0.15;
     }
     100% {
       opacity: 0;
-      transform: scale(1.4);
+      transform: scale3d(1.4, 1.4, 1);
     }
   }
   animation-duration: 2.5s;
@@ -97,7 +97,7 @@ $animation-duration: 0.5s;
   margin: initial;
   opacity: 0.4;
   position: absolute;
-  transform: scale(1.06) skew(2deg, 2deg) translate(0.2em, 0.2em);
+  transform: scale3d(1.06, 1.06, 1) skew(2deg, 2deg) translate3d(0.2em, 0.2em, 0em);
 }
 
 .black {

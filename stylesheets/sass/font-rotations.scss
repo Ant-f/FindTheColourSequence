@@ -15,16 +15,16 @@
   
   @keyframes #{$animation-name} {
     0% {
-      transform: rotate(0deg);
+      transform: rotateZ(0deg);
     }
     33% {
-      transform: rotate($start);
+      transform: rotateZ($start);
     }
     66% {
-      transform: rotate($end);
+      transform: rotateZ($end);
     }
     99% {
-      transform: rotate(0deg);
+      transform: rotateZ(0deg);
     }
   }
   animation-delay: $win-text-pop-in-duration;
