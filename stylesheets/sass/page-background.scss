@@ -5,15 +5,6 @@ $background-lowlight: #121212;
   filter: blur(0.3em);
 }
 
-.more-info-link {
-  bottom: 0%;
-  font-size: 0.75em;
-  margin-bottom: 0.5em;
-  margin-right: 0.5em;
-  position: fixed;
-  right: 0%;
-}
-
 .page-background {
   align-items: center;
   background: black;
@@ -25,6 +16,21 @@ $background-lowlight: #121212;
   position: fixed;
   top: 0px;
   width: 100%;
+
+  & > span, a {
+    bottom: 0%;
+    font-size: 0.8em;
+    margin: 0.5em;
+    position: fixed;
+  }
+}
+
+.more-info-link {
+  right: 0%;
+}
+
+.version-label {
+  left: 0%;
 }
 
 .modalHost {

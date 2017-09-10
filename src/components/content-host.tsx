@@ -1,4 +1,5 @@
 import * as React from "react";
+import { version } from "../../package.json";
 import * as fontStyles from "../../stylesheets/sass/font-lettering.scss";
 import * as pageStyles from "../../stylesheets/sass/page-background.scss";
 import * as context from "../context/content-host-context";
@@ -41,6 +42,11 @@ export default class ContentHost extends React.Component<null, IContentHostState
           Copyright © 2017 Anthony Fung
 
         </a>
+        <span className={classes(fontStyles.altText, pageStyles.versionLabel)}>
+          {
+            `version ${version}`
+          }
+        </span>
         {
           showModalContent ?
             <div

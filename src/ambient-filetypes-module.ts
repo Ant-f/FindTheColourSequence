@@ -8,3 +8,7 @@
 // specific typings.
 
 declare module "*.scss";
+
+// Allowing .json files to be imported
+
+declare module "*.json";
