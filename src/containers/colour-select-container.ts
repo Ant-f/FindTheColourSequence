@@ -8,7 +8,6 @@ import { IDispatchProps, IStateProps } from "../props/colour-select-props";
 
 const mapStateToProps = (state: AppState): IStateProps => {
   const colours = Map<Colour, string>(Colour)
-    .filter((colour) => colour !== Colour.None)
     .valueSeq()
     .toList() as List<Colour>;
 

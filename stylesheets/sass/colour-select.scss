@@ -4,12 +4,14 @@
 
 $gradient-angle: 135deg;
 $inverse-gradient-angle: $gradient-angle + 180deg;
+$none-opacity: 0.1;
 
 @mixin wrapper($highlight, $lowlight) {
   @include board-token($large-token);
   background-image: linear-gradient($gradient-angle, $highlight, $lowlight);
   display: flex;
   justify-content: center;
+  margin: 0em;
   padding: 0em;
 }
 
@@ -17,6 +19,13 @@ $inverse-gradient-angle: $gradient-angle + 180deg;
   @include board-token($large-token - 0.5em);
   background-image: linear-gradient($inverse-gradient-angle, $highlight, $lowlight);
   filter: blur(0.1em);
+}
+
+.colour-button {
+  @include board-token($large-token);
+  background: transparent;
+  margin: 0.25em;
+  padding: 0em;
 }
 
 .colour-panel {
@@ -46,6 +55,15 @@ $inverse-gradient-angle: $gradient-angle + 180deg;
 
 .green-inner {
   @include inner($green-highlight, $green-lowlight);
+}
+
+.none-wrapper {
+  @include wrapper($white-highlight, $white-lowlight);
+  opacity: 0.2;
+}
+
+.none-inner {
+  @include inner($white-highlight, $white-lowlight);
 }
 
 .orange-wrapper {

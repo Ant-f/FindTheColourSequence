@@ -1,9 +1,7 @@
 import { List, Map } from "immutable";
 import { Colour } from "../model/colour";
 
-const availableColours = Map<Colour, Colour>(Colour)
-  .filter((colour) => colour !== Colour.None)
-  .toList();
+const availableColours = Map<Colour, Colour>(Colour).toList();
 
 export default function(length: number, allowDuplicates: boolean): List<Colour> {
   let targetSequence = List<Colour>();
