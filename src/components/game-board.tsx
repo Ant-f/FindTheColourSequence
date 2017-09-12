@@ -10,13 +10,13 @@ import ColourSelect from "../containers/colour-select-container";
 import TargetSequence from "../containers/target-sequence-container";
 import classes from "../helpers/classes";
 import { Colour } from "../model/colour";
-import * as BoardProps from "../props/game-board-props";
+import GameBoardProps from "../props/game-board-props";
 import ModalProviderProps from "../props/modal-provider-props";
 import BetterLuck from "./better-luck-banner";
 import Congratulations from "./congratulations-banner";
 import ContentPanel from "./content-panel";
 
-type CombinedProps = BoardProps.IOwnProps & BoardProps.IStateProps & ModalProviderProps;
+type CombinedProps = GameBoardProps & ModalProviderProps;
 
 const getNewGameButtonClasses = (isGameLost: boolean, isGameWon: boolean) => {
   const classNames = classes(
@@ -87,15 +87,27 @@ export default class extends React.Component<CombinedProps> {
         <div className={panelStyles.boardFooter}>
           <ColourSelect />
 
-          <button
-            className={getNewGameButtonClasses(
-              this.props.isGameLost,
-              this.props.isGameWon)}
-            onClick={this.props.onNewGamePrompt}>
+          <div className={boardStyles.textButtonPanel}>
+            <button
+              className={classes(
+                buttonStyles.boardButton,
+                letteringStyles.defaultText)}
+              onClick={this.props.onCheckSequence}>
 
-            New Game
+              Check
 
-          </button>
+            </button>
+
+            <button
+              className={getNewGameButtonClasses(
+                this.props.isGameLost,
+                this.props.isGameWon)}
+              onClick={this.props.onNewGamePrompt}>
+
+              New Game
+
+            </button>
+          </div>
         </div>
 
       </ContentPanel>

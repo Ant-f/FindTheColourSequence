@@ -23,7 +23,7 @@ const mapStateToProps = (state: AppState): IStateProps => {
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<AppState>) => {
+const mapDispatchToProps = (dispatch: Dispatch<AppState>): IDispatchProps => {
   return {
     onColourSelected: (colour: Colour) => dispatch(
       actions.onColourSelected(colour)),

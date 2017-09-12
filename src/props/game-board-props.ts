@@ -1,5 +1,9 @@
 import ISequenceAttemptData from "../model/sequence-attempt-data";
 
+export interface IDispatchProps {
+  onCheckSequence: () => void;
+}
+
 export interface IStateProps {
   data: ISequenceAttemptData[];
   isGameLost: boolean;
@@ -9,3 +13,6 @@ export interface IStateProps {
 export interface IOwnProps {
   onNewGamePrompt: () => void;
 }
+
+type Combined = IDispatchProps & IStateProps & IOwnProps;
+export default Combined;
