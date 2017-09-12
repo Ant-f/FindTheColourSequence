@@ -2,6 +2,12 @@ import * as Actions from "../action/actions";
 import { Colour } from "../model/colour";
 import { ActionTypes } from "./action-types";
 
+export const onCheckSequence = (): Actions.ICheckSequence => {
+  return {
+    type: ActionTypes.CheckSequence,
+  };
+};
+
 export const onColourSelected = (colour: Colour): Actions.IColourSelected => {
   return {
     payload: colour,
