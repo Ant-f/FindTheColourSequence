@@ -11,6 +11,7 @@ export interface IStateProps {
 }
 
 export interface IOwnProps {
+  onHowToPlay: () => void;
   onNewGamePrompt: () => void;
 }
 

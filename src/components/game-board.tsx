@@ -99,6 +99,16 @@ export default class extends React.Component<CombinedProps> {
             </button>
 
             <button
+              className={classes(
+                buttonStyles.boardButton,
+                letteringStyles.defaultText)}
+              onClick={this.props.onHowToPlay}>
+
+              How to Play
+
+            </button>
+
+            <button
               className={getNewGameButtonClasses(
                 this.props.isGameLost,
                 this.props.isGameWon)}

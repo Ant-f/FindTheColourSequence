@@ -21,13 +21,31 @@
   }
 }
 
-.game-board-host {
+.front-panel-host {
   @extend .rotating-panel-face;
   z-index: 2;
 }
 
-.new-game-panel-host {
+.back-panel-host-horizontal {
   @extend .rotating-panel-face;
   transform: rotateY(180deg);
   z-index: 1;
+}
+
+.back-panel-host-vertical {
+  @extend .rotating-panel-face;
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+.show-back-panel-horizontal {
+  transform: rotateY(180deg);
+}
+
+.show-back-panel-vertical {
+  transform: rotateX(-180deg);
+}
+
+.hide {
+  display: none;
 }
