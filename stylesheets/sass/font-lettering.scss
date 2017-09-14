@@ -5,6 +5,18 @@
 $default-board-text-colour: darken($board-lowlight, 4%);
 $font-size: 1.3em;
 
+h1 {
+  font-size: 2em;
+  -webkit-margin-after: 0.2em;
+  -webkit-margin-before: 0em;
+}
+
+h2 {
+  font-size: 1.5em;
+  -webkit-margin-after: 0.2em;
+  -webkit-margin-before: 0.2em;
+}
+
 // Applies a left margin, suitable for inter-word spacing
 .new-word {
   margin-left: ($font-size / 2.5);
