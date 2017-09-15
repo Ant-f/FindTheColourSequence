@@ -1,13 +1,10 @@
 import * as React from "react";
-import * as styles from "../../../stylesheets/sass/how-to-play.scss";
+import HowToPlayItem from "./how-to-play-item";
 
 export default class extends React.PureComponent {
   public render() {
     return (
-      <div className={styles.expand}>
-        <h2>
-          Introduction
-        </h2>
+      <HowToPlayItem heading="Introduction">
 
         {/* tslint:disable:max-line-length */}
 
@@ -24,7 +21,8 @@ export default class extends React.PureComponent {
         </p>
 
         {/* tslint:enable:max-line-length */}
-      </div>
+
+      </HowToPlayItem>
     );
   }
 }
