@@ -12,7 +12,7 @@ export default class extends React.PureComponent {
         {/* tslint:disable:max-line-length */}
 
         <p>
-          The objective of the game is to find the colours and their order within a particular sequence of colours. In each new game the colour sequence will change, and you will only have a limited number of guesses.
+          The objective of the game is to find the colours and their order within a particular sequence of colours. In each new game the colour sequence is different, and you only have a limited number of guesses.
         </p>
 
         <p>
