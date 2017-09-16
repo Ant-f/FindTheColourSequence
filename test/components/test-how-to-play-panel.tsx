@@ -7,13 +7,22 @@ import HowToPlayPanel, { IHowToPlayPanelState } from "../../src/components/how-t
 import * as styles from "../../stylesheets/sass/how-to-play.scss";
 
 describe("<HowToPlayPanel/>", function() {
+  const makingGuessesModule = require("inject-loader!../../src/components/how-to-play/how-to-play-panel");
+
+  const HowToPlayPanelWithInjection = makingGuessesModule({
+    "./making-guesses": {
+      default: () => (
+        <div />),
+    },
+  }).default;
+
   describe("Next page button", function() {
     it("increments displayed page number", function() {
 
       // Arrange
 
       const wrapper = mount(
-        <HowToPlayPanel onExitPanel={() => { return; }} />,
+        <HowToPlayPanelWithInjection onExitPanel={() => { return; }} />,
       );
 
       const initialState: IHowToPlayPanelState = {
@@ -32,10 +41,12 @@ describe("<HowToPlayPanel/>", function() {
 
       // Assert
 
+      const instance = wrapper.instance() as HowToPlayPanel;
+
       const pageDisplay = wrapper
         .findWhere((w: ReactWrapper) => w.hasClass(styles.pageNumber));
 
-      expect(pageDisplay.text()).to.contain("2/2");
+      expect(pageDisplay.text()).to.contain(`2/${instance.maxHelpPageCount}`);
     });
   });
 
@@ -45,7 +56,7 @@ describe("<HowToPlayPanel/>", function() {
       // Arrange
 
       const wrapper = mount(
-        <HowToPlayPanel onExitPanel={() => { return; }} />,
+        <HowToPlayPanelWithInjection onExitPanel={() => { return; }} />,
       );
 
       const initialState: IHowToPlayPanelState = {
@@ -64,10 +75,12 @@ describe("<HowToPlayPanel/>", function() {
 
       // Assert
 
+      const instance = wrapper.instance() as HowToPlayPanel;
+
       const pageDisplay = wrapper
         .findWhere((w: ReactWrapper) => w.hasClass(styles.pageNumber));
 
-      expect(pageDisplay.text()).to.contain("1/2");
+      expect(pageDisplay.text()).to.contain(`1/${instance.maxHelpPageCount}`);
     });
   });
 });

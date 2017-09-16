@@ -7,13 +7,13 @@ import classes from "../../helpers/classes";
 import { IOwnProps } from "../../props/how-to-play-panel-props";
 import ContentPanel from "../content-panel";
 import GuessFeedback from "./guess-feedback";
-import Introduction from "./introduction";
+import Introduction1 from "./introduction-1";
+import Introduction2 from "./introduction-2";
+import MakingGuesses from "./making-guesses";
 
 export interface IHowToPlayPanelState {
   currentPage: number;
 }
-
-const maxHelpPageCount = 2;
 
 export default class extends React.PureComponent<IOwnProps, IHowToPlayPanelState> {
   constructor() {
@@ -22,6 +22,10 @@ export default class extends React.PureComponent<IOwnProps, IHowToPlayPanelState
     this.state = {
       currentPage: 1,
     };
+  }
+
+  get maxHelpPageCount(): number {
+    return 4;
   }
 
   public render() {
@@ -33,8 +37,10 @@ export default class extends React.PureComponent<IOwnProps, IHowToPlayPanelState
           </h1>
 
           <div className={styles.itemContainer}>
-            <Introduction itemPage={1} currentPage={this.state.currentPage} />
-            <GuessFeedback itemPage={2} currentPage={this.state.currentPage} />
+            <Introduction1 itemPage={1} currentPage={this.state.currentPage} />
+            <Introduction2 itemPage={2} currentPage={this.state.currentPage} />
+            <MakingGuesses itemPage={3} currentPage={this.state.currentPage} />
+            <GuessFeedback itemPage={4} currentPage={this.state.currentPage} />
           </div>
 
           <div className={panel.boardFooter}>
@@ -73,7 +79,7 @@ export default class extends React.PureComponent<IOwnProps, IHowToPlayPanelState
             </div>
 
             <div className={styles.pageNumber}>
-              {`${this.state.currentPage}/${maxHelpPageCount}`}
+              {`${this.state.currentPage}/${this.maxHelpPageCount}`}
             </div>
           </div>
         </div>
@@ -84,7 +90,7 @@ export default class extends React.PureComponent<IOwnProps, IHowToPlayPanelState
   private nextPage = () => {
     this.setState((prevState: IHowToPlayPanelState, props: IOwnProps): IHowToPlayPanelState => {
       const updatedPage = prevState.currentPage + 1;
-      return updatedPage > maxHelpPageCount
+      return updatedPage > this.maxHelpPageCount
         ? prevState
         : { currentPage: prevState.currentPage + 1 };
     });
