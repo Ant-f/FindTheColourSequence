@@ -1,5 +1,27 @@
-.expand {
+.currentPage {
+  transform: translateZ(0em);
+  opacity: 1;
+}
+
+.pastPage {
+  transform: translateZ(0em);
+  opacity: 0;
+}
+
+.upcomingPage {
+  transform: translateZ(10em);
+  opacity: 0;
+}
+
+.help-item {
+  position: absolute;
+  transition: opacity 1s, transform 1s;
+}
+
+.item-container {
   flex-grow: 1;
+  perspective: 10em;
+  position: relative;
 }
 
 .main-container {
@@ -15,4 +37,15 @@
   position: absolute;
   right: 0em;
   top: 0em;
+}
+
+.transport-button {
+  margin-left: 1em;
+}
+
+.page-number {
+  position: absolute;
+  left: 50%;
+  margin-right: -50%;
+  transform: translateX(-50%)
 }

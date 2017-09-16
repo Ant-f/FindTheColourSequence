@@ -7,14 +7,19 @@ $font-size: 1.3em;
 
 h1 {
   font-size: 2em;
-  -webkit-margin-after: 0.2em;
-  -webkit-margin-before: 0em;
+  margin-bottom: 0.2em;
+  margin-top: 0em;
 }
 
 h2 {
   font-size: 1.5em;
-  -webkit-margin-after: 0.2em;
-  -webkit-margin-before: 0.2em;
+  margin-bottom: 0em;
+  margin-top: 0.2em;
+}
+
+p {
+  margin-bottom: 1.7em;
+  margin-top: 1.7em;
 }
 
 // Applies a left margin, suitable for inter-word spacing
