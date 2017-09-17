@@ -143,8 +143,14 @@ export default class AppState {
   }
 
   get isGameWon(): boolean {
-    const won = this.stateMap.get(gameStateKey).some((s: Map<string, List<Colour>>) =>
-      s.get(inputKey).equals(this.targetSequence));
+    const winSequenceIndex = this.stateMap
+      .get(gameStateKey)
+      .findIndex((s: Map<string, List<Colour>>) =>
+        s.get(inputKey).equals(this.targetSequence));
+
+    const won =
+      winSequenceIndex > -1 &&
+      this.currentAttempt > winSequenceIndex;
 
     return won;
   }

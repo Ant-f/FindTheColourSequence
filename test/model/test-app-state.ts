@@ -174,7 +174,7 @@ describe("AppState", function() {
     expect(updatedState.isGameLost).to.equal(arg.isLost);
   });
 
-  it("sets isGameWon true if gameState has sequence matching target sequence", function() {
+  it("sets isGameWon false if gameState has sequence matching target sequence at currentAttempt", function() {
 
     // Arrange
 
@@ -194,6 +194,33 @@ describe("AppState", function() {
       .setColourAtCurrentPosition(Colour.Green)
       .setCurrentAttemptSegment(3)
       .setColourAtCurrentPosition(Colour.Yellow));
+
+    // Assert
+
+    expect(updatedState.isGameWon).to.equal(false);
+  });
+
+  it("sets isGameWon true if gameState has sequence matching target sequence before currentAttempt", function() {
+
+    // Arrange
+
+    const state = new AppState();
+    const setupState = state.setTargetSequence(
+      List([Colour.Red, Colour.Blue, Colour.Green, Colour.Yellow]));
+
+    // Act
+
+    const updatedState = setupState.setProperties((appState) => appState
+      .setCurrentAttempt(3)
+      .setCurrentAttemptSegment(0)
+      .setColourAtCurrentPosition(Colour.Red)
+      .setCurrentAttemptSegment(1)
+      .setColourAtCurrentPosition(Colour.Blue)
+      .setCurrentAttemptSegment(2)
+      .setColourAtCurrentPosition(Colour.Green)
+      .setCurrentAttemptSegment(3)
+      .setColourAtCurrentPosition(Colour.Yellow)
+      .setCurrentAttempt(4));
 
     // Assert
 
