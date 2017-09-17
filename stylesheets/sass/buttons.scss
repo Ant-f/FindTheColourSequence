@@ -4,6 +4,7 @@
   background: transparent;
   border-width: 0em;
   outline: none;
+  transition: opacity 0.5s;
 
   &:hover{
     text-shadow: 0em 0em 1em $accent
