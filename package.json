@@ -1,6 +1,6 @@
 {
   "name": "find-the-colour-sequence",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Game based on a popular code breaking board game",
   "main": "index.js",
   "scripts": {
