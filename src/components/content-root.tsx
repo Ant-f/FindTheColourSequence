@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as styles from "../../stylesheets/sass/content-root.scss";
+import * as general from "../../stylesheets/sass/general.scss";
 import HowToPlay from "../components/how-to-play/how-to-play-panel";
 import GameBoardBase from "../containers/game-board-container";
 import NewGamePanel from "../containers/new-game-panel-container";
@@ -51,7 +52,7 @@ export default class extends React.PureComponent<null, IContentRootState> {
           <div className={
             this.state.activePanel === Panel.HowToPlay ||
               this.state.previousPanel === Panel.HowToPlay
-              ? styles.hide
+              ? general.hide
               : styles.backPanelHostHorizontal}>
             <NewGamePanel onExitPanel={this.setActivePanelToGameBoard} />
           </div>
@@ -59,7 +60,7 @@ export default class extends React.PureComponent<null, IContentRootState> {
           <div className={
             this.state.activePanel === Panel.NewGame ||
               this.state.previousPanel === Panel.NewGame
-              ? styles.hide
+              ? general.hide
               : styles.backPanelHostVertical}>
             <HowToPlay onExitPanel={this.setActivePanelToGameBoard} />
           </div>

@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as general from "../../stylesheets/sass/general.scss";
 import * as styles from "../../stylesheets/sass/target-sequence.scss";
 import SequenceAttempt from "../components/sequence-attempt";
 import classes from "../helpers/classes";
@@ -17,10 +18,12 @@ export default class extends React.Component<IStateProps> {
   public render() {
     return (
       <div className={styles.shieldedContent}>
-        <SequenceAttempt
-          attemptId={-1}
-          colours={this.props.targetSequence}>
-        </SequenceAttempt>
+        <div className={this.props.isGameOver ? null : general.hide}>
+          <SequenceAttempt
+            attemptId={-1}
+            colours={this.props.targetSequence}>
+          </SequenceAttempt>
+        </div>
 
         <div className={getShieldClasses(this.props.isGameOver)}>
 
