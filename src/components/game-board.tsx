@@ -47,7 +47,11 @@ export default class extends React.Component<CombinedProps> {
             {
               this.props.data.map((d, inputIndex) =>
                 <div key={`input-${inputIndex}`} className={boardStyles.columnSet}>
-                  <div className={boardStyles.columnContent}>
+                  <div className={classes(
+                    boardStyles.columnContent,
+                    inputIndex > this.props.activeAttemptId
+                      ? boardStyles.fade
+                      : null)}>
 
                     <SequenceAttempt
                       attemptId={inputIndex}
