@@ -3,13 +3,18 @@ import { connect, Dispatch } from "react-redux";
 import * as actions from "../action/action-creators";
 import ColourSelect from "../components/colour-select";
 import AppState from "../model/app-state";
-import { Colour } from "../model/colour";
+import { Colour, colourOrder } from "../model/colour";
 import { IDispatchProps, IStateProps } from "../props/colour-select-props";
+
+const compareColour = (c1: Colour, c2: Colour): number => {
+  const value = colourOrder[c1] - colourOrder[c2];
+  return value;
+};
 
 const mapStateToProps = (state: AppState): IStateProps => {
   const colours = Map<Colour, string>(Colour)
-    .filter((colour) => colour !== Colour.None)
     .valueSeq()
+    .sort(compareColour)
     .toList() as List<Colour>;
 
   return {
@@ -18,7 +23,7 @@ const mapStateToProps = (state: AppState): IStateProps => {
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<AppState>) => {
+const mapDispatchToProps = (dispatch: Dispatch<AppState>): IDispatchProps => {
   return {
     onColourSelected: (colour: Colour) => dispatch(
       actions.onColourSelected(colour)),

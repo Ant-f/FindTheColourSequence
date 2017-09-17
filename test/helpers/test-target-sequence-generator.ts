@@ -24,9 +24,7 @@ describe("Target Sequence Generator", function() {
 
       // Arrange
 
-      const colourCount = Map<Colour, Colour>(Colour)
-        .filter((colour) => colour !== Colour.None)
-        .size;
+      const colourCount = Map<Colour, Colour>(Colour).size;
 
       // Act
 

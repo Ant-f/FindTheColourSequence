@@ -10,13 +10,13 @@ import ColourSelect from "../containers/colour-select-container";
 import TargetSequence from "../containers/target-sequence-container";
 import classes from "../helpers/classes";
 import { Colour } from "../model/colour";
-import * as BoardProps from "../props/game-board-props";
+import GameBoardProps from "../props/game-board-props";
 import ModalProviderProps from "../props/modal-provider-props";
 import BetterLuck from "./better-luck-banner";
 import Congratulations from "./congratulations-banner";
 import ContentPanel from "./content-panel";
 
-type CombinedProps = BoardProps.IOwnProps & BoardProps.IStateProps & ModalProviderProps;
+type CombinedProps = GameBoardProps & ModalProviderProps;
 
 const getNewGameButtonClasses = (isGameLost: boolean, isGameWon: boolean) => {
   const classNames = classes(
@@ -41,63 +41,86 @@ export default class extends React.Component<CombinedProps> {
   public render() {
     return (
       <ContentPanel>
-        <div className={boardStyles.columnSet}>
-          <div className={boardStyles.separator} />
-          {
-            this.props.data.map((d, inputIndex) =>
-              <div key={`input-${inputIndex}`} className={boardStyles.columnSet}>
-                <div className={boardStyles.columnContent}>
+        <div>
+          <div className={boardStyles.columnSet}>
+            <div className={boardStyles.separator} />
+            {
+              this.props.data.map((d, inputIndex) =>
+                <div key={`input-${inputIndex}`} className={boardStyles.columnSet}>
+                  <div className={boardStyles.columnContent}>
 
-                  <SequenceAttempt
-                    attemptId={inputIndex}
-                    colours={d.input}>
-                  </SequenceAttempt>
+                    <SequenceAttempt
+                      attemptId={inputIndex}
+                      colours={d.input}>
+                    </SequenceAttempt>
 
-                  <div className={boardStyles.feedbackSection}>
-                    {
-                      d.feedback.map((feedbackSegment, feedbackIndex) =>
-                        <div
-                          className={segmentStyles.zStack}
-                          key={`input-${inputIndex}-feedback-${feedbackIndex}`}>
-
-                          <div className={
-                            feedbackSegment === Colour.None
-                              ? null
-                              : classes(segmentStyles.small, segmentStyles.segmentShadow)} />
-
+                    <div className={boardStyles.feedbackSection}>
+                      {
+                        d.feedback.map((feedbackSegment, feedbackIndex) =>
                           <div
-                            className={classes(
-                              segmentStyles.small,
-                              sequenceSegmentsMap.get(feedbackSegment))}>
-                          </div>
-                        </div>,
-                      )
-                    }
+                            className={segmentStyles.zStack}
+                            key={`input-${inputIndex}-feedback-${feedbackIndex}`}>
+
+                            <div className={
+                              feedbackSegment === Colour.None
+                                ? null
+                                : classes(segmentStyles.small, segmentStyles.segmentShadow)} />
+
+                            <div
+                              className={classes(
+                                segmentStyles.small,
+                                sequenceSegmentsMap.get(feedbackSegment))}>
+                            </div>
+                          </div>,
+                        )
+                      }
+                    </div>
                   </div>
-                </div>
 
-                <div className={boardStyles.separator} />
-              </div>,
-            )
-          }
+                  <div className={boardStyles.separator} />
+                </div>,
+              )
+            }
 
-          <TargetSequence />
+            <TargetSequence />
+          </div>
+
+          <div className={panelStyles.boardFooter}>
+            <ColourSelect />
+
+            <div className={boardStyles.textButtonPanel}>
+              <button
+                className={classes(
+                  buttonStyles.boardButton,
+                  letteringStyles.defaultText)}
+                onClick={this.props.onCheckSequence}>
+
+                Check
+
+            </button>
+
+              <button
+                className={classes(
+                  buttonStyles.boardButton,
+                  letteringStyles.defaultText)}
+                onClick={this.props.onHowToPlay}>
+
+                How to Play
+
+            </button>
+
+              <button
+                className={getNewGameButtonClasses(
+                  this.props.isGameLost,
+                  this.props.isGameWon)}
+                onClick={this.props.onNewGamePrompt}>
+
+                New Game
+
+            </button>
+            </div>
+          </div>
         </div>
-
-        <div className={panelStyles.boardFooter}>
-          <ColourSelect />
-
-          <button
-            className={getNewGameButtonClasses(
-              this.props.isGameLost,
-              this.props.isGameWon)}
-            onClick={this.props.onNewGamePrompt}>
-
-            New Game
-
-          </button>
-        </div>
-
       </ContentPanel>
     );
   }

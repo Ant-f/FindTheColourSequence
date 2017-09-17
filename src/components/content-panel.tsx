@@ -6,11 +6,9 @@ export default class extends React.Component {
     return (
       <div className={styles.backgroundPanel}>
         <div className={styles.noiseOverlay}>
-          <div>
-            {
-              this.props.children
-            }
-          </div>
+          {
+            this.props.children
+          }
         </div>
       </div>
     );

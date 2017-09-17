@@ -2,15 +2,23 @@ import { Colour } from "../model/colour";
 import IPosition from "../model/position";
 import { ActionTypes } from "./action-types";
 
-interface IAction<T> {
-  payload: T;
+interface IActionWithoutPayload {
   type: string;
 }
 
+interface IAction<T> extends IActionWithoutPayload {
+  payload: T;
+}
+
 export type ReduxAction =
+  ICheckSequence |
   IColourSelected |
   IPositionSelected |
   IResetCurrentGame;
+
+export interface ICheckSequence extends IActionWithoutPayload {
+    type: ActionTypes.CheckSequence;
+}
 
 export interface IColourSelected extends IAction<Colour> {
   type: ActionTypes.ColourSelected;

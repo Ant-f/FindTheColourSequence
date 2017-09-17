@@ -1,7 +1,8 @@
-import { connect } from "react-redux";
+import { connect, Dispatch } from "react-redux";
+import * as actions from "../action/action-creators";
 import GameBoard from "../components/game-board";
 import AppState from "../model/app-state";
-import { IOwnProps, IStateProps } from "../props/game-board-props";
+import { IDispatchProps, IOwnProps, IStateProps } from "../props/game-board-props";
 import ModalProviderProps from "../props/modal-provider-props";
 
 const mapStateToProps = (state: AppState): IStateProps => {
@@ -12,7 +13,14 @@ const mapStateToProps = (state: AppState): IStateProps => {
   };
 };
 
-export default connect<IStateProps, null, IOwnProps & ModalProviderProps>(
+const mapDispatchToProps = (dispatch: Dispatch<AppState>): IDispatchProps => {
+  return {
+    onCheckSequence: () => dispatch(
+      actions.onCheckSequence()),
+  };
+};
+
+export default connect<IStateProps, IDispatchProps, IOwnProps & ModalProviderProps>(
   mapStateToProps,
-  null,
+  mapDispatchToProps,
 )(GameBoard);

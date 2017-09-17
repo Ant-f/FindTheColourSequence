@@ -36,8 +36,10 @@ describe("Reducer", function() {
 
       // Arrange
 
+      const attemptId = 4;
+
       const state = new AppState()
-        .setCurrentAttempt(4)
+        .setCurrentAttempt(attemptId)
         .setCurrentAttemptSegment(3);
 
       const action = actionCreators.onColourSelected(Colour.Black);
@@ -48,7 +50,7 @@ describe("Reducer", function() {
 
       // Assert
 
-      expect(updatedState.currentAttempt).to.equal(5);
+      expect(updatedState.currentAttempt).to.equal(attemptId);
       expect(updatedState.currentAttemptSegment).to.equal(0);
     });
 
@@ -77,91 +79,6 @@ describe("Reducer", function() {
         .input[initialAttemptSegment];
 
       expect(colourAtInitialPosition).to.equal(selectedColour);
-    });
-
-    it("assigns feedback if currentAttemptSegment is equal to sequence colour count", function() {
-
-      // Arrange
-
-      const attempt = 2;
-      const selectedColour = Colour.Black;
-      const targetSequence = List<Colour>([Colour.Blue, Colour.Green, Colour.Red]);
-
-      const colourReducerModule = require("inject-loader!../../src/reducers/colour-reducer");
-
-      const feedbackGeneratorMock:
-        TypeMoq.IMock<(s: List<Colour>, t: List<Colour>) => List<Colour>>
-        = TypeMoq.Mock.ofInstance(
-          (s: List<Colour>, t: List<Colour>) => List<Colour>());
-
-      const feedback = List<Colour>([Colour.Black, Colour.White, Colour.None]);
-
-      feedbackGeneratorMock
-        .setup((fg) => fg(
-          TypeMoq.It.is((l: List<Colour>) => l.contains(selectedColour)),
-          TypeMoq.It.is((l: List<Colour>) => l.equals(targetSequence))))
-        .returns(() => feedback);
-
-      const reducerWithInjection = colourReducerModule({
-        "../helpers/feedback-generator": {
-          default: feedbackGeneratorMock.object,
-        },
-      }).default as (state: AppState, action: ReduxAction) => AppState;
-
-      const state = new AppState()
-        .setCurrentAttempt(attempt)
-        .setCurrentAttemptSegment(3)
-        .setTargetSequence(targetSequence);
-
-      const action = actionCreators.onColourSelected(selectedColour);
-
-      // Act
-
-      const updatedState = reducerWithInjection(state, action);
-
-      // Assert
-
-      feedbackGeneratorMock.verify((fg) => fg(
-        TypeMoq.It.is((l: List<Colour>) => l.contains(selectedColour)),
-        TypeMoq.It.is((l: List<Colour>) => l.equals(targetSequence))),
-        TypeMoq.Times.once());
-
-      expect(updatedState.getAttemptDataFeedback(attempt)).to.equal(feedback);
-    });
-
-    it("doesn't assign feedback if currentAttemptSegment is less than sequence colour count", function() {
-
-      // Arrange
-
-      const colourReducerModule = require("inject-loader!../../src/reducers/colour-reducer");
-
-      const feedbackGeneratorMock:
-        TypeMoq.IMock<(s: List<Colour>, t: List<Colour>) => List<Colour>>
-        = TypeMoq.Mock.ofInstance(
-          (s: List<Colour>, t: List<Colour>) => List<Colour>());
-
-      const reducerWithInjection = colourReducerModule({
-        "../helpers/feedback-generator": {
-          default: feedbackGeneratorMock.object,
-        },
-      }).default as (state: AppState, action: ReduxAction) => AppState;
-
-      const state = new AppState()
-        .setCurrentAttempt(2)
-        .setCurrentAttemptSegment(0);
-
-      const action = actionCreators.onColourSelected(Colour.Black);
-
-      // Act
-
-      reducerWithInjection(state, action);
-
-      // Assert
-
-      feedbackGeneratorMock.verify((fg) => fg(
-        TypeMoq.It.is((l: List<Colour>) => List.isList(l)),
-        TypeMoq.It.is((l: List<Colour>) => List.isList(l))),
-        TypeMoq.Times.never());
     });
   });
 
@@ -249,5 +166,99 @@ describe("Reducer", function() {
 
         expect(testSuccess).to.equal(true);
       });
+  });
+
+  describe("actionTypes.CheckSequence", function() {
+    it("increments currentAttempt", function() {
+
+      // Arrange
+
+      const state = new AppState()
+        .setCurrentAttempt(1);
+
+      const action = actionCreators.onCheckSequence();
+
+      // Act
+
+      const updatedState = reducer(state, action);
+
+      // Assert
+
+      expect(updatedState.currentAttempt).to.equal(2);
+    });
+
+    it("resets currentAttemptSegment", function() {
+
+      // Arrange
+
+      const state = new AppState()
+        .setCurrentAttemptSegment(2);
+
+      const action = actionCreators.onCheckSequence();
+
+      // Act
+
+      const updatedState = reducer(state, action);
+
+      // Assert
+
+      expect(updatedState.currentAttemptSegment).to.equal(0);
+    });
+
+    it("assigns feedback to currentAttempt", function() {
+
+      // Arrange
+
+      const attempt = 2;
+      const inputSequence = List<Colour>([Colour.Yellow, Colour.Orange, Colour.White]);
+      const targetSequence = List<Colour>([Colour.Blue, Colour.Green, Colour.Red]);
+
+      const checkSequenceReducerModule = require("inject-loader!../../src/reducers/check-sequence-reducer");
+
+      const feedbackGeneratorMock:
+        TypeMoq.IMock<(s: List<Colour>, t: List<Colour>) => List<Colour>>
+        = TypeMoq.Mock.ofInstance(
+          (s: List<Colour>, t: List<Colour>) => List<Colour>());
+
+      const feedback = List<Colour>([Colour.Black, Colour.White, Colour.None]);
+
+      feedbackGeneratorMock
+        .setup((fg) => fg(
+          TypeMoq.It.is((l: List<Colour>) => l.equals(inputSequence)),
+          TypeMoq.It.is((l: List<Colour>) => l.equals(targetSequence))))
+        .returns(() => feedback);
+
+      const reducerWithInjection = checkSequenceReducerModule({
+        "../helpers/feedback-generator": {
+          default: feedbackGeneratorMock.object,
+        },
+      }).default as (state: AppState, action: ReduxAction) => AppState;
+
+      const state = new AppState()
+        .setSequenceColourCount(3)
+        .setCurrentAttempt(attempt)
+        .setCurrentAttemptSegment(0)
+        .setColourAtCurrentPosition(inputSequence.get(0))
+        .setCurrentAttemptSegment(1)
+        .setColourAtCurrentPosition(inputSequence.get(1))
+        .setCurrentAttemptSegment(2)
+        .setColourAtCurrentPosition(inputSequence.get(2))
+        .setTargetSequence(targetSequence);
+
+      const action = actionCreators.onCheckSequence();
+
+      // Act
+
+      const updatedState = reducerWithInjection(state, action);
+
+      // Assert
+
+      feedbackGeneratorMock.verify((fg) => fg(
+        TypeMoq.It.is((l: List<Colour>) => l.equals(inputSequence)),
+        TypeMoq.It.is((l: List<Colour>) => l.equals(targetSequence))),
+        TypeMoq.Times.once());
+
+      expect(updatedState.getAttemptDataFeedback(attempt)).to.equal(feedback);
+    });
   });
 });

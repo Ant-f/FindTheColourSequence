@@ -1,5 +1,5 @@
 const webpack = require('webpack');
-const webpackConfig = require('./webpack.config');
+const webpackConfig = require('./webpack.dev');
 
 // Karma configuration 
 module.exports = function(config) {
