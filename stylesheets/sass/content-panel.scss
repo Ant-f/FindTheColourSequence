@@ -16,6 +16,15 @@
   margin-top: 1.2em;
 }
 
+.control-label {
+  align-items: center;
+  display: flex;
+}
+
+.label-target {
+  margin-left: 0.6em;
+}
+
 .noise-overlay {
   align-items: center;
   background-image: url("../../images/noise150.png");

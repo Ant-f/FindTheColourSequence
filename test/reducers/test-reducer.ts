@@ -114,7 +114,10 @@ describe("Reducer", function() {
         .setCurrentAttemptSegment(2)
         .setColourAtCurrentPosition(Colour.Orange);
 
-      const action = actionCreators.onResetCurrentGame(false);
+      const action = actionCreators.onResetCurrentGame({
+        allowDuplicatesInTargetSequence: false,
+        colourSequenceLength: 4,
+      });
 
       // Act
 
@@ -134,6 +137,28 @@ describe("Reducer", function() {
       expect(updatedState.isGameWon).to.equal(false);
     });
 
+    it("sets target sequence length", function() {
+
+      // Arrange
+
+      const newLength = 7;
+      const state = new AppState();
+
+      const action = actionCreators.onResetCurrentGame({
+        allowDuplicatesInTargetSequence: false,
+        colourSequenceLength: newLength,
+      });
+
+      // Act
+
+      const updatedState = reducer(state, action);
+
+      // Assert
+
+      expect(updatedState.targetSequence.size).to.equal(newLength);
+      expect(updatedState.attemptData[0].input.length).to.equal(newLength);
+    });
+
     given(true, false)
       .it("generates sequence with duplicate colours if specified",
       function(allowDuplicates: boolean) {
@@ -146,7 +171,10 @@ describe("Reducer", function() {
         // Arrange
 
         const state = new AppState();
-        const action = actionCreators.onResetCurrentGame(allowDuplicates);
+        const action = actionCreators.onResetCurrentGame({
+          allowDuplicatesInTargetSequence: allowDuplicates,
+          colourSequenceLength: 4,
+        });
 
         while (!testSuccess && currentAttempt < maxAttempts) {
 
