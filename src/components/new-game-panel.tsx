@@ -21,31 +21,33 @@ export default class extends React.PureComponent<NewGamePanelProps, INewGamePara
     return (
       <ContentPanel>
         <div className={classes(lettering.defaultText, lettering.titleBadge)}>
-          <span>Start new game? All progress will be lost!</span>
+          <h2>Start new game? All progress will be lost!</h2>
 
-          <label className={panelStyles.controlLabel}>
-            Allow duplicates in hidden colour sequence?
-            <input
-              checked={this.state.allowDuplicatesInTargetSequence}
-              className={panelStyles.labelTarget}
-              onChange={this.onTargetDuplicatesChange}
-              type="checkbox">
-            </input>
-          </label>
+          <div>
+            <label className={panelStyles.controlLabel}>
+              Allow duplicates in hidden colour sequence?
+              <input
+                checked={this.state.allowDuplicatesInTargetSequence}
+                className={panelStyles.labelTarget}
+                onChange={this.onTargetDuplicatesChange}
+                type="checkbox">
+              </input>
+            </label>
 
-          <label className={panelStyles.controlLabel}>
-            {
-              `${this.state.colourSequenceLength} colours in sequence`
-            }
-            <input
-              className={panelStyles.labelTarget}
-              max={8}
-              min={4}
-              onChange={this.onColourSequenceLengthChange}
-              type="range"
-              value={this.state.colourSequenceLength}>
-            </input>
-          </label>
+            <label className={panelStyles.controlLabel}>
+              {
+                `${this.state.colourSequenceLength} colours in sequence`
+              }
+              <input
+                className={panelStyles.labelTarget}
+                max={8}
+                min={4}
+                onChange={this.onColourSequenceLengthChange}
+                type="range"
+                value={this.state.colourSequenceLength}>
+              </input>
+            </label>
+          </div>
 
           <div className={panelStyles.boardFooter}>
             <button
