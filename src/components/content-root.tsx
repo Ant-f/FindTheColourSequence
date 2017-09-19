@@ -5,6 +5,7 @@ import HowToPlay from "../components/how-to-play/how-to-play-panel";
 import GameBoardBase from "../containers/game-board-container";
 import NewGamePanel from "../containers/new-game-panel-container";
 import classes from "../helpers/classes";
+import IContentRootProps from "../props/content-root-props";
 import { IOwnProps as BoardOwnProps } from "../props/game-board-props";
 import withModalProvider from "./modal-provider";
 
@@ -27,7 +28,7 @@ const boardPanelClassnames: { [panel: string]: string } = {
   [Panel.NewGame]: styles.showBackPanelHorizontal,
 };
 
-export default class extends React.PureComponent<null, IContentRootState> {
+export default class extends React.PureComponent<IContentRootProps, IContentRootState> {
 
   public componentWillMount() {
     this.setState({
@@ -38,7 +39,10 @@ export default class extends React.PureComponent<null, IContentRootState> {
 
   public render() {
     return (
-      <section className={styles.contentContainer}>
+      <section
+        className={styles.contentContainer}
+        style={{ height: this.props.boardHeight }}>
+
         <div className={classes(
           styles.rotatingPanel,
           boardPanelClassnames[this.state.activePanel])}>
