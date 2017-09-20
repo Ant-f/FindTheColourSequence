@@ -9,6 +9,9 @@ module.exports = merge(common(false), {
   },
 
   plugins: [
+    new webpack.WatchIgnorePlugin([
+      /css\.d\.ts$/
+    ]),
     new webpack.SourceMapDevToolPlugin({
       filename: null, // inline sourcemap
       test: /\.(tsx?|js)($|\?)/i // case-insensitive match for ts/js files

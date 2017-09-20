@@ -1,4 +1,3 @@
-const CleanWebpackPlugin = require("clean-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const webpack = require('webpack');
 
@@ -52,12 +51,6 @@ module.exports = function (isProduction) {
     },
 
     plugins: [
-      new CleanWebpackPlugin(['dist'], {
-        root: __dirname
-      }),
-      new webpack.WatchIgnorePlugin([
-        /css\.d\.ts$/
-      ]),
       new ExtractTextPlugin("stylesheets/main.css")
     ]
   }
