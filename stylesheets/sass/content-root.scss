@@ -26,6 +26,7 @@ $transition-duration: 2s;
 
 .front-panel-host {
   @extend .rotating-panel-face;
+  transform: rotateY(0deg);
   z-index: 2;
 }
 
