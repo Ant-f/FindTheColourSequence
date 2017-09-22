@@ -1,11 +1,15 @@
+/// <reference types="modernizr"/>
+
 import * as React from "react";
-import * as Modernizr from "../../.modernizrrc.json";
+import * as modernizrConfig from "../../.modernizrrc.json";
 import { version } from "../../package.json";
 import * as fontStyles from "../../stylesheets/sass/font-lettering.scss";
 import * as pageStyles from "../../stylesheets/sass/page-background.scss";
 import * as context from "../context/content-host-context";
 import classes from "../helpers/classes";
 import Unsupported from "./unsupported";
+
+const modernizr = modernizrConfig as ModernizrStatic;
 
 interface IContentHostState {
   canDismissModal: boolean;
@@ -16,7 +20,7 @@ export default class ContentHost extends React.Component<null, IContentHostState
   public static childContextTypes = context.ContentHostContextTypes;
 
   public componentWillMount() {
-    if (Modernizr.preserve3d) {
+    if (modernizr.preserve3d) {
       this.setState({
         canDismissModal: true,
       });

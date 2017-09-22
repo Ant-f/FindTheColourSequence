@@ -27,6 +27,7 @@
     "@types/chai": "^4.0.1",
     "@types/enzyme": "^2.8.6",
     "@types/mocha": "^2.2.41",
+    "@types/modernizr": "^3.5.1",
     "@types/requirejs": "^2.1.30",
     "awesome-typescript-loader": "^3.2.1",
     "chai": "^4.1.0",
