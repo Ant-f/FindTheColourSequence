@@ -1,5 +1,5 @@
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const webpack = require('webpack');
+const webpack = require("webpack");
 
 module.exports = function (isProduction) {
   return {
@@ -46,6 +46,13 @@ module.exports = function (isProduction) {
           }
         }, {
           loader: "image-webpack-loader"
+        }]
+      }, {
+        test: /\.modernizrrc\.json$/,
+        use: [{
+          loader: "modernizr-loader"
+        },{
+          loader: "json-loader"
         }]
       }]
     },

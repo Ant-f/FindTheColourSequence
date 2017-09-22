@@ -44,6 +44,8 @@
     "karma-webpack": "^2.0.4",
     "mocha": "^3.4.2",
     "mocha-testdata": "^1.2.0",
+    "modernizr": "^3.5.0",
+    "modernizr-loader": "^1.0.1",
     "node-sass": "^4.5.3",
     "react-addons-test-utils": "^15.6.0",
     "react-test-renderer": "^15.6.1",
