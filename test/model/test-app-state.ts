@@ -6,6 +6,7 @@ import { given } from "mocha-testdata";
 import * as TypeMoq from "typemoq";
 import AppState from "../../src/model/app-state";
 import { Colour } from "../../src/model/colour";
+import { defaultParameters } from "../../src/model/new-game-parameters";
 
 describe("AppState", function() {
   it("allows maxAttemptsCount to be set", function() {
@@ -261,5 +262,23 @@ describe("AppState", function() {
     // Assert
 
     expect(updatedState.getAttemptDataFeedback(attempt)).to.equal(feedback);
+  });
+
+  it("allows availableColourCount to be set from constructor", function() {
+
+    // Arrange
+
+    const colourCount = 5;
+
+    // Act
+
+    const state = new AppState(null, {
+      ...defaultParameters,
+      availableColourCount: colourCount,
+    });
+
+    // Assert
+
+    expect(state.availableColourCount).to.equal(colourCount);
   });
 });

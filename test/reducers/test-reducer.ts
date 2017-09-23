@@ -8,6 +8,7 @@ import * as actionCreators from "../../src/action/action-creators";
 import { ReduxAction } from "../../src/action/actions";
 import AppState from "../../src/model/app-state";
 import { Colour } from "../../src/model/colour";
+import { defaultParameters } from "../../src/model/new-game-parameters";
 import reducer from "../../src/reducers/reducer";
 
 describe("Reducer", function() {
@@ -114,10 +115,7 @@ describe("Reducer", function() {
         .setCurrentAttemptSegment(2)
         .setColourAtCurrentPosition(Colour.Orange);
 
-      const action = actionCreators.onResetCurrentGame({
-        allowDuplicatesInTargetSequence: false,
-        colourSequenceLength: 4,
-      });
+      const action = actionCreators.onResetCurrentGame(defaultParameters);
 
       // Act
 
@@ -145,7 +143,7 @@ describe("Reducer", function() {
       const state = new AppState();
 
       const action = actionCreators.onResetCurrentGame({
-        allowDuplicatesInTargetSequence: false,
+        ...defaultParameters,
         colourSequenceLength: newLength,
       });
 
@@ -172,8 +170,8 @@ describe("Reducer", function() {
 
         const state = new AppState();
         const action = actionCreators.onResetCurrentGame({
+          ...defaultParameters,
           allowDuplicatesInTargetSequence: allowDuplicates,
-          colourSequenceLength: 4,
         });
 
         while (!testSuccess && currentAttempt < maxAttempts) {

@@ -73,6 +73,7 @@ export default class extends React.PureComponent<NewGamePanelProps, INewGamePara
     this.setState((prevState: INewGameParameters, props: null): INewGameParameters => {
       return {
         allowDuplicatesInTargetSequence: prevState.allowDuplicatesInTargetSequence,
+        availableColourCount: prevState.availableColourCount,
         colourSequenceLength: newValue,
       };
     });
@@ -84,6 +85,7 @@ export default class extends React.PureComponent<NewGamePanelProps, INewGamePara
     this.setState((prevState: INewGameParameters, props: null): INewGameParameters => {
       return {
         allowDuplicatesInTargetSequence: newValue,
+        availableColourCount: prevState.availableColourCount,
         colourSequenceLength: prevState.colourSequenceLength,
       };
     });

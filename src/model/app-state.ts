@@ -4,6 +4,7 @@ import { defaultParameters, INewGameParameters } from "../model/new-game-paramet
 import { Colour } from "./colour";
 import ISequenceAttemptData from "./sequence-attempt-data";
 
+const availableColourCountKey = "availableColourCount";
 const currentAttemptKey = "currentAttempt";
 const currentAttemptSegmentKey = "currentAttemptSegment";
 const feedbackKey = "feedback";
@@ -50,6 +51,7 @@ export default class AppState {
     }
     else {
       this.stateMap = fromJS({
+        [availableColourCountKey]: parameters.availableColourCount,
         [currentAttemptKey]: 0,
         [currentAttemptSegmentKey]: 0,
         [gameStateKey]: initializeGameState(
@@ -171,5 +173,9 @@ export default class AppState {
   public getAttemptDataInput(attempt: number): List<Colour> {
     const input = this.stateMap.getIn([gameStateKey, attempt, inputKey]);
     return input;
+  }
+
+  get availableColourCount(): number {
+    return this.stateMap.get(availableColourCountKey);
   }
 }
