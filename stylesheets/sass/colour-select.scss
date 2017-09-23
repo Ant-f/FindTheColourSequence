@@ -48,12 +48,28 @@ $none-opacity: 0.1;
   @include inner($blue-highlight, $blue-lowlight);
 }
 
+.dark-green-wrapper {
+  @include wrapper($dark-green-highlight, $dark-green-lowlight);
+}
+
+.dark-green-inner {
+  @include inner($dark-green-highlight, $dark-green-lowlight);
+}
+
 .green-wrapper {
   @include wrapper($green-highlight, $green-lowlight);
 }
 
 .green-inner {
   @include inner($green-highlight, $green-lowlight);
+}
+
+.light-blue-wrapper {
+  @include wrapper($light-blue-highlight, $light-blue-lowlight);
+}
+
+.light-blue-inner {
+  @include inner($light-blue-highlight, $light-blue-lowlight);
 }
 
 .none-wrapper {

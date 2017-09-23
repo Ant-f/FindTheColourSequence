@@ -8,7 +8,7 @@ import { IDispatchProps, IStateProps } from "../props/colour-select-props";
 
 const mapStateToProps = (state: AppState): IStateProps => {
   return {
-    availableColours: getColours(8),
+    availableColours: getColours(state.availableColourCount),
     isGameOver: state.isGameLost || state.isGameWon,
   };
 };

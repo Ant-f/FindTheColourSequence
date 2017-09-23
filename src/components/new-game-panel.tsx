@@ -32,7 +32,7 @@ export default class extends React.PureComponent<NewGamePanelProps, INewGamePara
 
             <label className={panelStyles.controlLabel}>
               {
-                `${this.state.colourSequenceLength} colours in sequence`
+                `Sequence will be ${this.state.colourSequenceLength} colours long`
               }
               <input
                 className={panelStyles.labelTarget}
@@ -41,6 +41,20 @@ export default class extends React.PureComponent<NewGamePanelProps, INewGamePara
                 onChange={this.onColourSequenceLengthChange}
                 type="range"
                 value={this.state.colourSequenceLength}>
+              </input>
+            </label>
+
+            <label className={panelStyles.controlLabel}>
+              {
+                `Up to ${this.state.availableColourCount} different colours will be chosen from to form the sequence`
+              }
+              <input
+                className={panelStyles.labelTarget}
+                max={10}
+                min={8}
+                onChange={this.onAvailableColourCountChange}
+                type="range"
+                value={this.state.availableColourCount}>
               </input>
             </label>
           </div>
@@ -75,6 +89,18 @@ export default class extends React.PureComponent<NewGamePanelProps, INewGamePara
         allowDuplicatesInTargetSequence: prevState.allowDuplicatesInTargetSequence,
         availableColourCount: prevState.availableColourCount,
         colourSequenceLength: newValue,
+      };
+    });
+  }
+
+  private onAvailableColourCountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = event.target.valueAsNumber;
+
+    this.setState((prevState: INewGameParameters, props: null): INewGameParameters => {
+      return {
+        allowDuplicatesInTargetSequence: prevState.allowDuplicatesInTargetSequence,
+        availableColourCount: newValue,
+        colourSequenceLength: prevState.colourSequenceLength,
       };
     });
   }

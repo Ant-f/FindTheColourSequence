@@ -5,13 +5,17 @@ import { Map } from "immutable";
 import { given } from "mocha-testdata";
 import generateTargetSequence from "../../src/helpers/target-sequence-generator";
 import { Colour } from "../../src/model/colour";
+import { defaultParameters } from "../../src/model/new-game-parameters";
 
 describe("Target Sequence Generator", function() {
   given(1, 2, 3, 4).it("generates a sequence of equal length", function(arg: number) {
 
     // Arrange, Act
 
-    const result = generateTargetSequence(arg, false);
+    const result = generateTargetSequence({
+      ...defaultParameters,
+      colourSequenceLength: arg,
+    });
 
     // Assert
 
@@ -30,7 +34,11 @@ describe("Target Sequence Generator", function() {
 
       // Act
 
-      const result = generateTargetSequence(colourCount, allowDuplicates);
+      const result = generateTargetSequence({
+        allowDuplicatesInTargetSequence: allowDuplicates,
+        availableColourCount: colourCount,
+        colourSequenceLength: colourCount,
+      });
 
       // Assert
 

@@ -6,7 +6,7 @@ import { given } from "mocha-testdata";
 import * as TypeMoq from "typemoq";
 import AppState from "../../src/model/app-state";
 import { Colour } from "../../src/model/colour";
-import { defaultParameters } from "../../src/model/new-game-parameters";
+import { defaultParameters, INewGameParameters } from "../../src/model/new-game-parameters";
 
 describe("AppState", function() {
   it("allows maxAttemptsCount to be set", function() {
@@ -119,14 +119,13 @@ describe("AppState", function() {
 
     const appStateModule = require("inject-loader!../../src/model/app-state");
 
-    const sequenceGeneratorMock: TypeMoq.IMock<(n: number, d: boolean) => List<Colour>>
-      = TypeMoq.Mock.ofInstance((n: number, d: boolean) => List<Colour>());
+    const sequenceGeneratorMock: TypeMoq.IMock<(p: INewGameParameters) => List<Colour>>
+      = TypeMoq.Mock.ofInstance((p: INewGameParameters) => List<Colour>());
 
     const targetSequence = List<Colour>([Colour.Yellow, Colour.Blue, Colour.Red]);
 
     sequenceGeneratorMock
       .setup((tsg) => tsg(
-        TypeMoq.It.isAnyNumber(),
         TypeMoq.It.isAny()))
       .returns(() => targetSequence);
 
@@ -147,8 +146,8 @@ describe("AppState", function() {
 
     sequenceGeneratorMock
       .verify((tsg) => tsg(
-        TypeMoq.It.isAnyNumber(),
-        TypeMoq.It.isValue(allowDuplicates)),
+        TypeMoq.It.is<INewGameParameters>((p: INewGameParameters) =>
+          p.allowDuplicatesInTargetSequence === allowDuplicates)),
       TypeMoq.Times.once());
 
     expect(appState.targetSequence).to.equal(targetSequence);

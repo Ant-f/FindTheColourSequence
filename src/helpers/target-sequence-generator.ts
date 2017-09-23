@@ -1,16 +1,17 @@
 import { List } from "immutable";
 import { getColours } from "../helpers/colour-helper";
 import { Colour } from "../model/colour";
+import { INewGameParameters } from "../model/new-game-parameters";
 
-const availableColours = getColours(8);
-
-export default function(length: number, allowDuplicates: boolean): List<Colour> {
+export default function(parameters: INewGameParameters): List<Colour> {
   let targetSequence = List<Colour>();
 
-  while (targetSequence.size < length) {
+  const availableColours = getColours(parameters.availableColourCount);
+
+  while (targetSequence.size < parameters.colourSequenceLength) {
     let index = Math.floor((Math.random() * availableColours.size));
 
-    if (!allowDuplicates) {
+    if (!parameters.allowDuplicatesInTargetSequence) {
       while (targetSequence.contains(availableColours.get(index))) {
         index = (index + 1) % availableColours.size;
       }

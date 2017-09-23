@@ -57,9 +57,7 @@ export default class AppState {
         [gameStateKey]: initializeGameState(
           defaultMaxAttemptsCount,
           parameters.colourSequenceLength),
-        [targetSequenceKey]: generateTargetSequence(
-          parameters.colourSequenceLength,
-          parameters.allowDuplicatesInTargetSequence),
+        [targetSequenceKey]: generateTargetSequence(parameters),
       });
     }
   }
