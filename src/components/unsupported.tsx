@@ -10,7 +10,7 @@ export default class extends React.PureComponent {
         </div>
 
         <div>
-          Please try another one; Chrome, Edge, and Firefox all work well.
+          Please try another browser; Chrome, Edge, and Firefox all work well.
         </div>
       </div>
     );
