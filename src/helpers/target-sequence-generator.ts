@@ -1,7 +1,8 @@
-import { List, Map } from "immutable";
+import { List } from "immutable";
+import { getColours } from "../helpers/colour-helper";
 import { Colour } from "../model/colour";
 
-const availableColours = Map<Colour, Colour>(Colour).toList();
+const availableColours = getColours(8);
 
 export default function(length: number, allowDuplicates: boolean): List<Colour> {
   let targetSequence = List<Colour>();
