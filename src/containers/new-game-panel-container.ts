@@ -1,8 +1,8 @@
 import { connect, Dispatch } from "react-redux";
 import * as actions from "../action/action-creators";
-import { INewGameParameters } from "../action/actions";
 import NewGamePanel from "../components/new-game-panel";
 import AppState from "../model/app-state";
+import { INewGameParameters } from "../model/new-game-parameters";
 import { IDispatchProps, IOwnProps } from "../props/new-game-panel-props";
 
 const mapDispatchToProps = (dispatch: Dispatch<AppState>): IDispatchProps => {

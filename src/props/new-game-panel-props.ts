@@ -1,4 +1,4 @@
-import { INewGameParameters } from "../action/actions";
+import { INewGameParameters } from "../model/new-game-parameters";
 
 export interface IDispatchProps {
   onResetCurrentGame: (newGameParameters: INewGameParameters) => void;

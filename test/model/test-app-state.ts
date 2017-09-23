@@ -137,7 +137,10 @@ describe("AppState", function() {
 
     // Act
 
-    const appState = new AppStateWithInjection(null, allowDuplicates) as AppState;
+    const appState = new AppStateWithInjection(null, {
+      allowDuplicatesInTargetSequence: allowDuplicates,
+      colourSequenceLength: targetSequence.size,
+    }) as AppState;
 
     // Assert
 

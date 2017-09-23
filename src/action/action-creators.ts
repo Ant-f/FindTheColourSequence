@@ -1,6 +1,6 @@
 import * as Actions from "../action/actions";
-import { INewGameParameters } from "../action/actions";
 import { Colour } from "../model/colour";
+import { INewGameParameters } from "../model/new-game-parameters";
 import { ActionTypes } from "./action-types";
 
 export const onCheckSequence = (): Actions.ICheckSequence => {

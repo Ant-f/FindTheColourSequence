@@ -1,11 +1,7 @@
 import { Colour } from "../model/colour";
+import { INewGameParameters } from "../model/new-game-parameters";
 import IPosition from "../model/position";
 import { ActionTypes } from "./action-types";
-
-export interface INewGameParameters {
-  allowDuplicatesInTargetSequence: boolean;
-  colourSequenceLength: number;
-}
 
 interface IActionWithoutPayload {
   type: string;
@@ -22,7 +18,7 @@ export type ReduxAction =
   IResetCurrentGame;
 
 export interface ICheckSequence extends IActionWithoutPayload {
-    type: ActionTypes.CheckSequence;
+  type: ActionTypes.CheckSequence;
 }
 
 export interface IColourSelected extends IAction<Colour> {

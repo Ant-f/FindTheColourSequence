@@ -1,5 +1,6 @@
 import { fromJS, List, Map, Range } from "immutable";
 import generateTargetSequence from "../helpers/target-sequence-generator";
+import { defaultParameters, INewGameParameters } from "../model/new-game-parameters";
 import { Colour } from "./colour";
 import ISequenceAttemptData from "./sequence-attempt-data";
 
@@ -10,7 +11,7 @@ const gameStateKey = "gameState";
 const inputKey = "input";
 const targetSequenceKey = "targetSequence";
 
-const defaultMaxAttemptsCount = 12;
+const defaultMaxAttemptsCount: number = 12;
 
 type GameState = List<ISequenceAttemptData>;
 type StateMap = Map<string, any>;
@@ -43,9 +44,7 @@ const initializeGameState = (maxAttemptsCount: number, sequenceColourCount: numb
 export default class AppState {
   private stateMap = Map<string, any>();
 
-  constructor(rawState: StateMap = null,
-              allowDuplicatesInTarget: boolean = false,
-              colourSequenceLength: number = 4) {
+  constructor(rawState: StateMap = null, parameters: INewGameParameters = defaultParameters) {
     if (rawState) {
       this.stateMap = rawState;
     }
@@ -55,10 +54,10 @@ export default class AppState {
         [currentAttemptSegmentKey]: 0,
         [gameStateKey]: initializeGameState(
           defaultMaxAttemptsCount,
-          colourSequenceLength),
+          parameters.colourSequenceLength),
         [targetSequenceKey]: generateTargetSequence(
-          colourSequenceLength,
-          allowDuplicatesInTarget),
+          parameters.colourSequenceLength,
+          parameters.allowDuplicatesInTargetSequence),
       });
     }
   }

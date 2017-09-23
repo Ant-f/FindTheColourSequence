@@ -2,19 +2,15 @@ import * as React from "react";
 import * as buttons from "../../stylesheets/sass/buttons.scss";
 import * as panelStyles from "../../stylesheets/sass/content-panel.scss";
 import * as lettering from "../../stylesheets/sass/font-lettering.scss";
-import { INewGameParameters } from "../action/actions";
 import classes from "../helpers/classes";
+import { defaultParameters, INewGameParameters } from "../model/new-game-parameters";
 import NewGamePanelProps from "../props/new-game-panel-props";
 import ContentPanel from "./content-panel";
 
 export default class extends React.PureComponent<NewGamePanelProps, INewGameParameters> {
   constructor() {
     super();
-
-    this.state = {
-      allowDuplicatesInTargetSequence: false,
-      colourSequenceLength: 4,
-    };
+    this.state = defaultParameters;
   }
 
   public render() {
