@@ -27,6 +27,12 @@
   @include emboss();
 }
 
+.stacked-board-buttons {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
 .text-button-panel {
   display: flex;
   flex-grow: 1;
