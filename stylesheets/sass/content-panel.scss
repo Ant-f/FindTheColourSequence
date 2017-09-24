@@ -19,10 +19,15 @@
 .control-label {
   align-items: center;
   display: flex;
+  justify-content: space-between;
 }
 
 .label-target {
-  margin-left: 0.6em;
+  width: 10em;
+}
+
+.new-game-options-container {
+  width: 52em;
 }
 
 .noise-overlay {

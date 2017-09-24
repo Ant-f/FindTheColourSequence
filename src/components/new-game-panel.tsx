@@ -19,7 +19,7 @@ export default class extends React.PureComponent<NewGamePanelProps, INewGamePara
         <div className={classes(lettering.defaultText, lettering.titleBadge)}>
           <h2>Start new game? All progress will be lost!</h2>
 
-          <div>
+          <div className={panelStyles.newGameOptionsContainer}>
             <label className={panelStyles.controlLabel}>
               Allow duplicates in hidden colour sequence?
               <input
