@@ -7,25 +7,30 @@ $inverse-gradient-angle: $gradient-angle + 180deg;
 $none-opacity: 0.1;
 
 @mixin wrapper($highlight, $lowlight) {
-  @include board-token($large-token);
+  @include board-token($large-token, 0em);
   background-image: linear-gradient($gradient-angle, $highlight, $lowlight);
-  display: flex;
-  justify-content: center;
-  margin: 0em;
   padding: 0em;
+  position: absolute;
+  top: 0em;
 }
 
 @mixin inner($highlight, $lowlight) {
-  @include board-token($large-token - 0.5em);
+  @include board-token($large-token - 0.5em, 0em);
   background-image: linear-gradient($inverse-gradient-angle, $highlight, $lowlight);
   filter: blur(0.1em);
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
 }
 
 .colour-button {
-  @include board-token($large-token);
+  @include board-token($large-token, 0.25em);
   background: transparent;
-  margin: 0.25em;
+  display: flex;
+  justify-content: center;
   padding: 0em;
+  position: relative;
 }
 
 .colour-panel {
