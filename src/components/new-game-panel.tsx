@@ -50,7 +50,7 @@ export default class extends React.PureComponent<NewGamePanelProps, INewGamePara
               }
               <input
                 className={panelStyles.labelTarget}
-                max={10}
+                max={12}
                 min={8}
                 onChange={this.onAvailableColourCountChange}
                 type="range"

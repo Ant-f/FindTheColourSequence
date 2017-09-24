@@ -108,8 +108,16 @@ $animation-duration: 0.5s;
   @include pulsing-board-token($blue-highlight, $blue-lowlight);
 }
 
+.dark-blue {
+  @include pulsing-board-token($dark-blue-highlight, $dark-blue-lowlight);
+}
+
 .dark-green {
   @include pulsing-board-token($dark-green-highlight, $dark-green-lowlight);
+}
+
+.dark-red {
+  @include pulsing-board-token($dark-red-highlight, $dark-red-lowlight);
 }
 
 .green {

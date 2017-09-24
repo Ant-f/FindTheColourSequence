@@ -6,7 +6,9 @@ import * as sequenceSegments from "./sass/sequence-segments.scss";
 export const sequenceSegmentsMap = Map<Colour, string>({
   [Colour.Black]: sequenceSegments.black,
   [Colour.Blue]: sequenceSegments.blue,
+  [Colour.DarkBlue]: sequenceSegments.darkBlue,
   [Colour.DarkGreen]: sequenceSegments.darkGreen,
+  [Colour.DarkRed]: sequenceSegments.darkRed,
   [Colour.Green]: sequenceSegments.green,
   [Colour.LightBlue]: sequenceSegments.lightBlue,
   [Colour.None]: sequenceSegments.none,
@@ -20,7 +22,9 @@ export const sequenceSegmentsMap = Map<Colour, string>({
 export const colourSelectWrapperMap = Map<Colour, string>({
   [Colour.Black]: colourSelect.blackWrapper,
   [Colour.Blue]: colourSelect.blueWrapper,
+  [Colour.DarkBlue]: colourSelect.darkBlueWrapper,
   [Colour.DarkGreen]: colourSelect.darkGreenWrapper,
+  [Colour.DarkRed]: colourSelect.darkRedWrapper,
   [Colour.Green]: colourSelect.greenWrapper,
   [Colour.LightBlue]: colourSelect.lightBlueWrapper,
   [Colour.None]: colourSelect.noneWrapper,
@@ -34,7 +38,9 @@ export const colourSelectWrapperMap = Map<Colour, string>({
 export const colourSelectInnerMap = Map<Colour, string>({
   [Colour.Black]: colourSelect.blackInner,
   [Colour.Blue]: colourSelect.blueInner,
+  [Colour.DarkBlue]: colourSelect.darkBlueInner,
   [Colour.DarkGreen]: colourSelect.darkGreenInner,
+  [Colour.DarkRed]: colourSelect.darkRedInner,
   [Colour.Green]: colourSelect.greenInner,
   [Colour.LightBlue]: colourSelect.lightBlueInner,
   [Colour.None]: colourSelect.noneInner,
