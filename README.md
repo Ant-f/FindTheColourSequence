@@ -16,7 +16,9 @@ to play; rules are provided within the game.
 
 ## Known Issues
 
-* Internet Explorer 11 is not supported: game board does not render correctly
+* Browsers that do not support the CSS transform-style `preserve-3d` (this
+includes Internet Explorer 11) will not render the board correctly, and are not
+supported. 
 
 * Edge: game board may not be rendered correctly;
 [CSS blur filter is not applied when inside an element with preserve-3d](https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/13570128/)
