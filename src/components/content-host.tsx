@@ -1,11 +1,18 @@
+/// <reference types="modernizr"/>
+
 import * as React from "react";
+import * as modernizrConfig from "../../.modernizrrc.json";
 import { version } from "../../package.json";
 import * as fontStyles from "../../stylesheets/sass/font-lettering.scss";
 import * as pageStyles from "../../stylesheets/sass/page-background.scss";
 import * as context from "../context/content-host-context";
 import classes from "../helpers/classes";
+import Unsupported from "./unsupported";
+
+const modernizr = modernizrConfig as ModernizrStatic;
 
 interface IContentHostState {
+  canDismissModal: boolean;
   modalContent: JSX.Element;
 }
 
@@ -13,13 +20,26 @@ export default class ContentHost extends React.Component<null, IContentHostState
   public static childContextTypes = context.ContentHostContextTypes;
 
   public componentWillMount() {
-    this.setState({});
+    if (modernizr.preserve3d) {
+      this.setState({
+        canDismissModal: true,
+      });
+    }
+    else {
+      this.setState({
+        canDismissModal: false,
+        modalContent: <Unsupported/>,
+      });
+    }
   }
 
   public getChildContext(): context.IContentHostContext {
     return {
       modalContentSetter: (content: JSX.Element): void => {
-        this.setState({ modalContent: content });
+        this.setState({
+          canDismissModal: true,
+          modalContent: content,
+        });
       },
     };
   }
@@ -52,7 +72,12 @@ export default class ContentHost extends React.Component<null, IContentHostState
             <div
               className={pageStyles.modalHost}
               onClick={() => {
-                this.setState({ modalContent: null });
+                if (this.state.canDismissModal) {
+                  this.setState({
+                    canDismissModal: true,
+                    modalContent: null,
+                  });
+                }
               }}>
 
               {this.state.modalContent}

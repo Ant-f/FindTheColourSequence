@@ -1,12 +1,12 @@
 @import "partials/colours";
 @import "partials/dimensions";
 
-@mixin board-token($diameter) {
+@mixin board-token($diameter, $margin: $token-margin) {
   border: none;
   border-radius: 50%;
   font-size: 16px;
   height: $diameter;
-  margin: $token-margin;
+  margin: $margin;
   outline: none;
   transition-timing-function: linear;
   width: $diameter;

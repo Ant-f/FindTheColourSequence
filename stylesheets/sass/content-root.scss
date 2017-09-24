@@ -1,7 +1,10 @@
+$transition-duration: 2s;
+
 .content-container {
-  height: 29em;
+  // height varies depending on number of colours in sequence
   perspective: 90em;
   position: relative;
+  transition: height $transition-duration;
   width: 64em;
 }
 
@@ -9,7 +12,7 @@
   height: 100%;
   position: absolute;
   transform-style: preserve-3d;
-  transition: transform 2s;
+  transition: transform $transition-duration;
   width: 100%;
 
   & .rotating-panel-face {
@@ -23,6 +26,7 @@
 
 .front-panel-host {
   @extend .rotating-panel-face;
+  transform: rotateY(0deg);
   z-index: 2;
 }
 
@@ -44,8 +48,4 @@
 
 .show-back-panel-vertical {
   transform: rotateX(-180deg);
-}
-
-.hide {
-  display: none;
 }

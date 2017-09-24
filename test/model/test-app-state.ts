@@ -6,6 +6,7 @@ import { given } from "mocha-testdata";
 import * as TypeMoq from "typemoq";
 import AppState from "../../src/model/app-state";
 import { Colour } from "../../src/model/colour";
+import { defaultParameters, INewGameParameters } from "../../src/model/new-game-parameters";
 
 describe("AppState", function() {
   it("allows maxAttemptsCount to be set", function() {
@@ -118,14 +119,13 @@ describe("AppState", function() {
 
     const appStateModule = require("inject-loader!../../src/model/app-state");
 
-    const sequenceGeneratorMock: TypeMoq.IMock<(n: number, d: boolean) => List<Colour>>
-      = TypeMoq.Mock.ofInstance((n: number, d: boolean) => List<Colour>());
+    const sequenceGeneratorMock: TypeMoq.IMock<(p: INewGameParameters) => List<Colour>>
+      = TypeMoq.Mock.ofInstance((p: INewGameParameters) => List<Colour>());
 
     const targetSequence = List<Colour>([Colour.Yellow, Colour.Blue, Colour.Red]);
 
     sequenceGeneratorMock
       .setup((tsg) => tsg(
-        TypeMoq.It.isAnyNumber(),
         TypeMoq.It.isAny()))
       .returns(() => targetSequence);
 
@@ -137,14 +137,17 @@ describe("AppState", function() {
 
     // Act
 
-    const appState = new AppStateWithInjection(null, allowDuplicates) as AppState;
+    const appState = new AppStateWithInjection(null, {
+      allowDuplicatesInTargetSequence: allowDuplicates,
+      colourSequenceLength: targetSequence.size,
+    }) as AppState;
 
     // Assert
 
     sequenceGeneratorMock
       .verify((tsg) => tsg(
-        TypeMoq.It.isAnyNumber(),
-        TypeMoq.It.isValue(allowDuplicates)),
+        TypeMoq.It.is<INewGameParameters>((p: INewGameParameters) =>
+          p.allowDuplicatesInTargetSequence === allowDuplicates)),
       TypeMoq.Times.once());
 
     expect(appState.targetSequence).to.equal(targetSequence);
@@ -174,7 +177,7 @@ describe("AppState", function() {
     expect(updatedState.isGameLost).to.equal(arg.isLost);
   });
 
-  it("sets isGameWon true if gameState has sequence matching target sequence", function() {
+  it("sets isGameWon false if gameState has sequence matching target sequence at currentAttempt", function() {
 
     // Arrange
 
@@ -194,6 +197,33 @@ describe("AppState", function() {
       .setColourAtCurrentPosition(Colour.Green)
       .setCurrentAttemptSegment(3)
       .setColourAtCurrentPosition(Colour.Yellow));
+
+    // Assert
+
+    expect(updatedState.isGameWon).to.equal(false);
+  });
+
+  it("sets isGameWon true if gameState has sequence matching target sequence before currentAttempt", function() {
+
+    // Arrange
+
+    const state = new AppState();
+    const setupState = state.setTargetSequence(
+      List([Colour.Red, Colour.Blue, Colour.Green, Colour.Yellow]));
+
+    // Act
+
+    const updatedState = setupState.setProperties((appState) => appState
+      .setCurrentAttempt(3)
+      .setCurrentAttemptSegment(0)
+      .setColourAtCurrentPosition(Colour.Red)
+      .setCurrentAttemptSegment(1)
+      .setColourAtCurrentPosition(Colour.Blue)
+      .setCurrentAttemptSegment(2)
+      .setColourAtCurrentPosition(Colour.Green)
+      .setCurrentAttemptSegment(3)
+      .setColourAtCurrentPosition(Colour.Yellow)
+      .setCurrentAttempt(4));
 
     // Assert
 
@@ -231,5 +261,23 @@ describe("AppState", function() {
     // Assert
 
     expect(updatedState.getAttemptDataFeedback(attempt)).to.equal(feedback);
+  });
+
+  it("allows availableColourCount to be set from constructor", function() {
+
+    // Arrange
+
+    const colourCount = 5;
+
+    // Act
+
+    const state = new AppState(null, {
+      ...defaultParameters,
+      availableColourCount: colourCount,
+    });
+
+    // Assert
+
+    expect(state.availableColourCount).to.equal(colourCount);
   });
 });

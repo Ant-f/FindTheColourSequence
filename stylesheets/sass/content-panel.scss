@@ -16,6 +16,21 @@
   margin-top: 1.2em;
 }
 
+.control-label {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.label-target {
+  width: 10em;
+}
+
+.new-game-options-container {
+  margin: 0.8em 0em 0em 0em;
+  width: 52em;
+}
+
 .noise-overlay {
   align-items: center;
   background-image: url("../../images/noise150.png");

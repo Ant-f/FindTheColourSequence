@@ -1,0 +1,6 @@
+{
+	"minify": true,
+	"feature-detects": [
+		"css/transformstylepreserve3d"
+	]
+}

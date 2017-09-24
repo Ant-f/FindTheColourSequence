@@ -1,5 +1,7 @@
+import { INewGameParameters } from "../model/new-game-parameters";
+
 export interface IDispatchProps {
-  onResetCurrentGame: (allowDuplicatesInTargetSequence: boolean) => void;
+  onResetCurrentGame: (newGameParameters: INewGameParameters) => void;
 }
 
 export interface IOwnProps {

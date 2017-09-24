@@ -1,8 +1,7 @@
-const CleanWebpackPlugin = require("clean-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const webpack = require('webpack');
+const webpack = require("webpack");
 
-module.exports = function (isProduction) {
+module.exports = function (cssLoaderOptions, sassLoaderOptions) {
   return {
     entry: "./src/index.tsx",
   
@@ -25,15 +24,10 @@ module.exports = function (isProduction) {
         use: ExtractTextPlugin.extract({
           use: [{
             loader: "typings-for-css-modules-loader",
-            options: {
-              camelCase: true,
-              modules: true,
-              minimize: isProduction,
-              namedExport: true,
-              scss: true
-            }
+            options: cssLoaderOptions
           }, {
-            loader: "sass-loader"
+            loader: "sass-loader",
+            options: sassLoaderOptions
           }]
         })
       }, {
@@ -48,16 +42,17 @@ module.exports = function (isProduction) {
         }, {
           loader: "image-webpack-loader"
         }]
+      }, {
+        test: /\.modernizrrc\.json$/,
+        use: [{
+          loader: "modernizr-loader"
+        }, {
+          loader: "json-loader"
+        }]
       }]
     },
 
     plugins: [
-      new CleanWebpackPlugin(['dist'], {
-        root: __dirname
-      }),
-      new webpack.WatchIgnorePlugin([
-        /css\.d\.ts$/
-      ]),
       new ExtractTextPlugin("stylesheets/main.css")
     ]
   }

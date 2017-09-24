@@ -2,6 +2,7 @@ import * as React from "react";
 import * as buttons from "../../../stylesheets/sass/buttons.scss";
 import * as panel from "../../../stylesheets/sass/content-panel.scss";
 import * as lettering from "../../../stylesheets/sass/font-lettering.scss";
+import * as general from "../../../stylesheets/sass/general.scss";
 import * as styles from "../../../stylesheets/sass/how-to-play.scss";
 import classes from "../../helpers/classes";
 import { IOwnProps } from "../../props/how-to-play-panel-props";
@@ -59,7 +60,10 @@ export default class extends React.PureComponent<IOwnProps, IHowToPlayPanelState
                 className={classes(
                   buttons.boardButton,
                   lettering.defaultText,
-                  styles.transportButton)}
+                  styles.transportButton,
+                  this.state.currentPage > 1
+                    ? null
+                    : general.disabled)}
                 onClick={this.prevPage}>
 
                 &lt; Prev
@@ -70,7 +74,10 @@ export default class extends React.PureComponent<IOwnProps, IHowToPlayPanelState
                 className={classes(
                   buttons.boardButton,
                   lettering.defaultText,
-                  styles.transportButton)}
+                  styles.transportButton,
+                  this.state.currentPage < this.maxHelpPageCount
+                    ? null
+                    : general.disabled)}
                 onClick={this.nextPage}>
 
                 Next &gt;

@@ -1,8 +1,10 @@
 import { fromJS, List, Map, Range } from "immutable";
 import generateTargetSequence from "../helpers/target-sequence-generator";
+import { defaultParameters, INewGameParameters } from "../model/new-game-parameters";
 import { Colour } from "./colour";
 import ISequenceAttemptData from "./sequence-attempt-data";
 
+const availableColourCountKey = "availableColourCount";
 const currentAttemptKey = "currentAttempt";
 const currentAttemptSegmentKey = "currentAttemptSegment";
 const feedbackKey = "feedback";
@@ -10,8 +12,7 @@ const gameStateKey = "gameState";
 const inputKey = "input";
 const targetSequenceKey = "targetSequence";
 
-const defaultMaxAttemptsCount = 12;
-const defaultSequenceColourCount = 4;
+const defaultMaxAttemptsCount: number = 12;
 
 type GameState = List<ISequenceAttemptData>;
 type StateMap = Map<string, any>;
@@ -44,20 +45,19 @@ const initializeGameState = (maxAttemptsCount: number, sequenceColourCount: numb
 export default class AppState {
   private stateMap = Map<string, any>();
 
-  constructor(rawState: StateMap = null, allowDuplicatesInTarget: boolean = false) {
+  constructor(rawState: StateMap = null, parameters: INewGameParameters = defaultParameters) {
     if (rawState) {
       this.stateMap = rawState;
     }
     else {
       this.stateMap = fromJS({
+        [availableColourCountKey]: parameters.availableColourCount,
         [currentAttemptKey]: 0,
         [currentAttemptSegmentKey]: 0,
         [gameStateKey]: initializeGameState(
           defaultMaxAttemptsCount,
-          defaultSequenceColourCount),
-        [targetSequenceKey]: generateTargetSequence(
-          defaultSequenceColourCount,
-          allowDuplicatesInTarget),
+          parameters.colourSequenceLength),
+        [targetSequenceKey]: generateTargetSequence(parameters),
       });
     }
   }
@@ -143,8 +143,14 @@ export default class AppState {
   }
 
   get isGameWon(): boolean {
-    const won = this.stateMap.get(gameStateKey).some((s: Map<string, List<Colour>>) =>
-      s.get(inputKey).equals(this.targetSequence));
+    const winSequenceIndex = this.stateMap
+      .get(gameStateKey)
+      .findIndex((s: Map<string, List<Colour>>) =>
+        s.get(inputKey).equals(this.targetSequence));
+
+    const won =
+      winSequenceIndex > -1 &&
+      this.currentAttempt > winSequenceIndex;
 
     return won;
   }
@@ -165,5 +171,9 @@ export default class AppState {
   public getAttemptDataInput(attempt: number): List<Colour> {
     const input = this.stateMap.getIn([gameStateKey, attempt, inputKey]);
     return input;
+  }
+
+  get availableColourCount(): number {
+    return this.stateMap.get(availableColourCountKey);
   }
 }

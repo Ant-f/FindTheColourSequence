@@ -47,7 +47,11 @@ export default class extends React.Component<CombinedProps> {
             {
               this.props.data.map((d, inputIndex) =>
                 <div key={`input-${inputIndex}`} className={boardStyles.columnSet}>
-                  <div className={boardStyles.columnContent}>
+                  <div className={classes(
+                    boardStyles.columnContent,
+                    inputIndex > this.props.activeAttemptId
+                      ? boardStyles.fade
+                      : null)}>
 
                     <SequenceAttempt
                       attemptId={inputIndex}
@@ -95,29 +99,31 @@ export default class extends React.Component<CombinedProps> {
                   letteringStyles.defaultText)}
                 onClick={this.props.onCheckSequence}>
 
-                Check
+                  Check
 
-            </button>
+              </button>
 
-              <button
-                className={classes(
-                  buttonStyles.boardButton,
-                  letteringStyles.defaultText)}
-                onClick={this.props.onHowToPlay}>
+              <div className={boardStyles.stackedBoardButtons}>
+                <button
+                  className={classes(
+                    buttonStyles.boardButton,
+                    letteringStyles.defaultText)}
+                  onClick={this.props.onHowToPlay}>
 
-                How to Play
+                    How to Play
 
-            </button>
+                </button>
 
-              <button
-                className={getNewGameButtonClasses(
-                  this.props.isGameLost,
-                  this.props.isGameWon)}
-                onClick={this.props.onNewGamePrompt}>
+                <button
+                  className={getNewGameButtonClasses(
+                    this.props.isGameLost,
+                    this.props.isGameWon)}
+                  onClick={this.props.onNewGamePrompt}>
 
-                New Game
+                    New Game
 
-            </button>
+                </button>
+              </div>
             </div>
           </div>
         </div>

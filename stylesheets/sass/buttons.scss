@@ -3,7 +3,9 @@
 .board-button {
   background: transparent;
   border-width: 0em;
+  margin: 0.15em 0em;
   outline: none;
+  transition: opacity 0.5s;
 
   &:hover{
     text-shadow: 0em 0em 1em $accent

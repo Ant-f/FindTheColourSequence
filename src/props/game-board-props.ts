@@ -5,6 +5,7 @@ export interface IDispatchProps {
 }
 
 export interface IStateProps {
+  activeAttemptId: number;
   data: ISequenceAttemptData[];
   isGameLost: boolean;
   isGameWon: boolean;

@@ -12,6 +12,10 @@
   flex-direction: row;
 }
 
+.fade {
+  opacity: 0.25;
+}
+
 .feedback-section {
   display: flex;
   flex-wrap: wrap;
@@ -21,6 +25,12 @@
 
 .separator {
   @include emboss();
+}
+
+.stacked-board-buttons {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .text-button-panel {

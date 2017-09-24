@@ -7,6 +7,7 @@ import ModalProviderProps from "../props/modal-provider-props";
 
 const mapStateToProps = (state: AppState): IStateProps => {
   return {
+    activeAttemptId: state.currentAttempt,
     data: state.attemptData,
     isGameLost: state.isGameLost,
     isGameWon: state.isGameWon,

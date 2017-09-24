@@ -1,5 +1,6 @@
 import * as Actions from "../action/actions";
 import { Colour } from "../model/colour";
+import { INewGameParameters } from "../model/new-game-parameters";
 import { ActionTypes } from "./action-types";
 
 export const onCheckSequence = (): Actions.ICheckSequence => {
@@ -22,9 +23,9 @@ export const onPositionSelected = (attempt: number, segment: number): Actions.IP
   };
 };
 
-export const onResetCurrentGame = (allowDuplicates: boolean): Actions.IResetCurrentGame => {
+export const onResetCurrentGame = (newGameParameters: INewGameParameters): Actions.IResetCurrentGame => {
   return {
-    payload: allowDuplicates,
+    payload: newGameParameters,
     type: ActionTypes.ResetCurrentGame,
   };
 };
